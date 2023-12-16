@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">WheelCam</string>
+    <string name="splash_group">REAT group3</string>
+    <string name="title_camera">Camera</string>
+    <string name="title_adjust">Adjust</string>
+    <string name="title_bluetooth">Bluetooth</string>
+    <string name="title_gallery">Gallery</string>
+
+    <string name="bluetooth_no_support">Device doesn\'t support Bluetooth</string>
+    <string name="bluetooth_disabled">BLUETOOTH DISABLED</string>
+    <string name="bluetooth_select">SELECT A DEVICE</string>
+    <string name="bluetooth_no_device">NO DEVICES FOUND</string>
+    <string name="bluetooth_connect_fail">Connection Failed \n Please try again</string>
+
+
+    <string name="camera_photo_action">TAKE PHOTO</string>
+
+</resources>

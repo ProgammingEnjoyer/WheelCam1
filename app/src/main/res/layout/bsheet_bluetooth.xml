@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/deviceLinearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/bluetooth_dia_paddingH"
+        android:layout_marginStart="@dimen/bluetooth_dia_paddingH">
+
+        <ImageView
+            android:id="@+id/bluetoothLogo"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:srcCompat="@drawable/bluetooth_trans" />
+
+        <TextView
+            android:id="@+id/btDevice"
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/darkBlue"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:paddingBottom="@dimen/bluetooth_dia_paddingH" />
+
+        <ProgressBar
+            android:id="@+id/bt_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="@dimen/button_padding"
+            android:visibility="invisible" />
+    </LinearLayout>
+            <ListView
+                    android:id="@+id/device_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+            </ListView>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/button_margin">
+
+                <Button
+                    android:id="@+id/bt_cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/white"
+                    android:padding="@dimen/button_padding"
+                    android:text="Cancel"
+                    android:textColor="@color/jade_dark"
+                    android:layout_marginRight="50dp"/>
+
+
+        <!--        <ImageView-->
+        <!--            android:id="@+id/bt_connected_icon"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:src="@drawable/ic_done"-->
+        <!--            android:paddingRight="@dimen/button_padding"-->
+        <!--            android:visibility="gone"-->
+        <!--            />-->
+                <Button
+                    android:id="@+id/bt_connect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Connect"
+                    android:padding="@dimen/button_padding"/>
+            </LinearLayout>
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:id="@+id/download"-->
+<!--        android:background="?android:attr/selectableItemBackground"-->
+<!--        android:padding="8dp">-->
+
+<!--        <ImageView-->
+<!--            android:layout_width="24dp"-->
+<!--            android:layout_height="24dp"-->
+<!--            android:src="@drawable/ic_nav_bluetooth_grey"-->
+<!--            android:layout_margin="8dp"/>-->
+
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Download File"-->
+<!--            android:layout_gravity="center_vertical"-->
+<!--            android:padding="8dp"/>-->
+<!--    </LinearLayout>-->
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:id="@+id/shareLinearLayout"-->
+<!--        android:background="?android:attr/selectableItemBackground"-->
+<!--        android:padding="8dp">-->
+
+<!--        <ImageView-->
+<!--            android:layout_width="24dp"-->
+<!--            android:layout_height="24dp"-->
+<!--            android:src="@drawable/ic_nav_bluetooth_grey"-->
+<!--            android:layout_margin="8dp"/>-->
+
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Share"-->
+<!--            android:layout_gravity="center_vertical"-->
+<!--            android:padding="8dp"/>-->
+
+<!--    </LinearLayout>-->
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:id="@+id/uploadLinearLayout"-->
+<!--        android:background="?android:attr/selectableItemBackground"-->
+<!--        android:padding="8dp">-->
+
+<!--        <ImageView-->
+<!--            android:layout_width="24dp"-->
+<!--            android:layout_height="24dp"-->
+<!--            android:src="@drawable/ic_nav_bluetooth_grey"-->
+<!--            android:layout_margin="8dp"/>-->
+
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Upload To Google Drive"-->
+<!--            android:layout_gravity="center_vertical"-->
+<!--            android:padding="8dp"/>-->
+
+<!--    </LinearLayout>-->
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:id="@+id/copyLinearLayout"-->
+<!--        android:background="?android:attr/selectableItemBackground"-->
+<!--        android:padding="8dp">-->
+
+<!--        <ImageView-->
+<!--            android:layout_width="24dp"-->
+<!--            android:layout_height="24dp"-->
+<!--            android:src="@drawable/ic_nav_bluetooth_grey"-->
+<!--            android:layout_margin="8dp"/>-->
+
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Copy Link"-->
+<!--            android:layout_gravity="center_vertical"-->
+<!--            android:padding="8dp"/>-->
+<!--    </LinearLayout>-->
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:id="@+id/delete"-->
+<!--        android:background="?android:attr/selectableItemBackground"-->
+<!--        android:padding="8dp">-->
+
+<!--        <ImageView-->
+<!--            android:layout_width="24dp"-->
+<!--            android:layout_height="24dp"-->
+<!--            android:src="@drawable/ic_nav_bluetooth_grey"-->
+<!--            android:layout_margin="8dp"/>-->
+
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Delete File Selection"-->
+<!--            android:layout_gravity="center_vertical"-->
+<!--            android:padding="8dp"/>-->
+<!--    </LinearLayout>-->
+</LinearLayout>

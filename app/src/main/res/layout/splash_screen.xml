@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FDFDFD">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerVertical="true">
+    <ImageView
+        android:id="@+id/splash_wheel"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        app:srcCompat="@drawable/wheelchair_mount7"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/splash_logomargin"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:text="@string/app_name"
+            android:textColor="#4E588F"
+            android:textSize="40dp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:paddingTop="@dimen/splash_textmargin"
+            android:layout_marginLeft="@dimen/splash_framemargin"
+            android:layout_marginRight="@dimen/splash_framemargin"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-thin"
+            android:text="@string/splash_group"
+            android:textColor="#B2B4BF"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:layout_gravity="right"
+            android:paddingTop="@dimen/splash_textmargin"
+            android:layout_marginLeft="@dimen/splash_framemargin"
+            android:layout_marginRight="@dimen/splash_framemargin"/>
+
+        <ImageButton
+            android:id="@+id/splash_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_next"
+            android:background="@color/white_trans"
+            android:paddingTop="@dimen/splash_logomargin"
+            android:layout_marginRight="@dimen/splash_textmargin"
+            android:layout_gravity="end"/>
+    </LinearLayout>
+
+
+</RelativeLayout>

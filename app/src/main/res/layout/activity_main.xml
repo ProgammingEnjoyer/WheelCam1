@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/jade_dark">
+
+        <Button
+            android:id="@+id/gridBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/button_selector"
+            android:drawableTop="@drawable/ic_grid"
+            android:text="grid on"
+            android:textSize="12sp"
+            android:textColor="@color/mint"/>
+        <Button
+            android:id="@+id/centerBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/button_selector"
+            android:drawableTop="@drawable/ic_center"
+            android:layout_weight="1"
+            android:text="center"
+            android:textSize="12sp"
+            android:textColor="@color/mint" />
+        <Button
+            android:id="@+id/bluetooth"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/button_selector"
+            android:drawableTop="@drawable/ic_bluetooth_disabled"
+            android:layout_weight="1"
+            android:text="bluetooth"
+            android:textSize="12sp"
+            android:textColor="@color/mint"/>
+
+    </LinearLayout>
+
+    <androidx.camera.view.PreviewView
+        android:id="@+id/previewView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/topBar">
+
+    </androidx.camera.view.PreviewView>
+    <LinearLayout
+        android:id="@+id/centerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_below="@id/topBar"
+        android:layout_above="@id/bottomBar">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_cross_with_border"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/gridLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_below="@id/topBar"
+        android:layout_above="@id/bottomBar"
+        android:visibility="gone">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/gridA"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:background="@drawable/grid_selector"
+                app:backgroundTint="@null"
+                android:text="A"
+                android:layout_weight="1"
+                android:shadowColor="@color/jade_darker"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="2"/>
+            <Button
+                android:id="@+id/gridB"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:background="@drawable/grid_selector"
+                app:backgroundTint="@null"
+                android:text="B"
+                android:layout_weight="1"
+                android:shadowColor="@color/jade_darker"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="2"/>
+            <Button
+                android:id="@+id/gridC"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:background="@drawable/grid_selector"
+                app:backgroundTint="@null"
+                android:text="C"
+                android:layout_weight="1"
+                android:shadowColor="@color/jade_darker"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="2"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/gridD"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:background="@drawable/grid_selector"
+                app:backgroundTint="@null"
+                android:text="D"
+                android:layout_weight="1"
+                android:shadowColor="@color/jade_darker"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="2"/>
+            <Button
+                android:id="@+id/gridE"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:background="@drawable/grid_selector"
+                app:backgroundTint="@null"
+
+                android:layout_weight="1"
+                android:shadowColor="@color/jade_darker"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="2"/>
+            <Button
+                android:id="@+id/gridF"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:background="@drawable/grid_selector"
+                app:backgroundTint="@null"
+                android:text="F"
+                android:layout_weight="1"
+                android:shadowColor="@color/jade_darker"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="2"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <Button
+                android:id="@+id/gridG"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:background="@drawable/grid_selector"
+                app:backgroundTint="@null"
+                android:text="G"
+                android:layout_weight="1"
+                android:shadowColor="@color/jade_darker"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="2"/>
+            <Button
+                android:id="@+id/gridH"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:background="@drawable/grid_selector"
+                app:backgroundTint="@null"
+                android:text="H"
+                android:layout_weight="1"
+                android:shadowColor="@color/jade_darker"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="2"/>
+            <Button
+                android:id="@+id/gridI"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:background="@drawable/grid_selector"
+                app:backgroundTint="@null"
+                android:text="I"
+                android:layout_weight="1"
+                android:shadowColor="@color/jade_darker"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="2"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/bottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:layout_alignBottom="@+id/previewView"
+        android:background="@color/black_halftrans"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/directionLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/arrowBtn_Left"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/button_selector"
+                android:paddingHorizontal="@dimen/arrow_padding"
+                android:src="@drawable/ic_arrow"
+                android:contentDescription="Left"/>
+
+            <ImageButton
+                android:id="@+id/arrowBtn_Up"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/button_selector"
+                android:paddingHorizontal="@dimen/arrow_padding"
+                android:rotation="90"
+                android:src="@drawable/ic_arrow"
+                android:contentDescription="Up" />
+
+            <ImageButton
+                android:id="@+id/arrowBtn_Down"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/button_selector"
+                android:paddingHorizontal="@dimen/arrow_padding"
+                android:rotation="270"
+                android:src="@drawable/ic_arrow"
+                android:contentDescription="Down" />
+
+            <ImageButton
+                android:id="@+id/arrowBtn_Right"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/button_selector"
+                android:paddingHorizontal="@dimen/arrow_padding"
+                android:rotation="180"
+                android:src="@drawable/ic_arrow"
+                android:contentDescription="Right" />
+
+            <Button
+                android:id="@+id/rotateBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/button_selector"
+                android:drawableLeft="@drawable/ic_screen_rotate"
+                android:paddingHorizontal="@dimen/arrow_padding"
+                android:textColor="@color/white_trans"
+                android:textSize="1dp"
+                android:text="rotate"
+                android:contentDescription="Rotate" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/levelLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/moveDir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/button_selector"
+                android:text="LEFT"
+                android:textColor="@color/mint"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/moveLevel1"
+                android:layout_width="55dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/button_selector"
+                android:text="1"
+                android:textSize="20dp" />
+
+            <Button
+                android:id="@+id/moveLevel2"
+                android:layout_width="55dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/button_selector"
+                android:text="2"
+                android:textSize="20dp" />
+
+            <Button
+                android:id="@+id/moveLevel3"
+                android:layout_width="55dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/button_selector"
+                android:text="3"
+                android:textSize="20dp" />
+
+            <Button
+                android:id="@+id/moveLevel4"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/button_selector"
+                android:text="4"
+                android:textSize="20dp" />
+
+            <Button
+                android:id="@+id/moveDone"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_selector"
+                android:text="done"
+                android:textSize="13dp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/orientationLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/modeTV"
+                android:layout_width="65dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/direction_margin"
+                android:background="@drawable/button_selector"
+                android:text="ROTATE"
+                android:textColor="@color/mint"
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+
+            <Button
+                android:id="@+id/clockwiseBtn"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/direction_margin"
+                android:background="@drawable/button_selector"
+                android:drawableTop="@drawable/ic_clockwise"
+                android:text="clockwise"
+                android:contentDescription="clockwise"
+                android:textSize="0.1dp" />
+
+            <Button
+                android:id="@+id/anticlockwiseBtn"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="@dimen/direction_margin"
+                android:background="@drawable/button_selector"
+                android:drawableTop="@drawable/ic_anticlockwise"
+                android:text="anticlockwise"
+                android:contentDescription="anticlockwise"
+                android:textSize="0.1dp" />
+
+            <Button
+                android:id="@+id/modeDone"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/button_selector"
+                android:text="done"
+                android:textSize="13dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="5dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/galleryBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_selector"
+                android:drawableTop="@drawable/ic_nav_gallery"
+                android:drawablePadding="-15dp"
+                android:elegantTextHeight="false"
+                android:freezesText="false"
+                android:text="Gallery"
+                android:textAlignment="gravity"
+                android:textSize="11sp" />
+
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/capture"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:contentDescription="@string/camera_photo_action"
+                android:src="@drawable/ic_nav_camera" />
+
+            <Button
+                android:id="@+id/flipBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_selector"
+                android:drawableTop="@drawable/ic_flip_camera"
+                android:text="flip"
+                android:textSize="11dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

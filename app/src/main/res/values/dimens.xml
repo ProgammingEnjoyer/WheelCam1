@@ -1,0 +1,19 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="bluetooth_dia_paddingH">10dp</dimen>
+    <dimen name="bluetooth_dia_padding_item">8dp</dimen>
+
+    <dimen name="button_padding">12dp</dimen>
+    <dimen name="button_margin">10dp</dimen>
+
+    <dimen name="direction_margin">20dp</dimen>
+    <dimen name="direction_layout_margin">10dp</dimen>
+    <dimen name="arrow_padding">18dp</dimen>
+    <dimen name="land_topbar_margin">40dp</dimen>
+
+    <dimen name="splash_textmargin">20dp</dimen>
+    <dimen name="splash_logomargin">50dp</dimen>
+    <dimen name="splash_framemargin">30dp</dimen>
+</resources>
