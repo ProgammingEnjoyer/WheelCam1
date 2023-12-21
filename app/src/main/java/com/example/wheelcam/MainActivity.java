@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageCapture imageCapture;
     private FloatingActionButton captureBtn;
     private ImageButton arrowBtnR, arrowBtnUp, arrowBtnDown, arrowBtnL;
-    private Button grid_Btn, bluetooth_Btn, center_Btn, moveDoneBtn, orientBtn, modeDoneBtn, flipBtn, galleryBtn;
+    private Button bluetooth_Btn, center_Btn, moveDoneBtn, orientBtn, modeDoneBtn, flipBtn, galleryBtn;
     private Button grid_A, grid_B, grid_C, grid_D, grid_E, grid_F, grid_G, grid_H, grid_I;
     private Button motorBtn_1, motorBtn_2, motorBtn_3, motorBtn_4, clkwiseBtn, antiClkBtn;
     private PreviewView previewView;
@@ -157,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
         arrowBtnUp = findViewById(R.id.arrowBtn_Up);
         arrowBtnDown = findViewById(R.id.arrowBtn_Down);
         arrowBtnR = findViewById(R.id.arrowBtn_Right);
-        grid_Btn = findViewById(R.id.gridBtn);
+      // grid_Btn = findViewById(R.id.gridBtn);
         bluetooth_Btn = findViewById(R.id.bluetooth);
         center_Btn = findViewById(R.id.centerBtn);
         directionLO = findViewById(R.id.directionLayout);
@@ -174,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
         clkwiseBtn = findViewById(R.id.clockwiseBtn);
         antiClkBtn = findViewById(R.id.anticlockwiseBtn);
         gridLO = findViewById(R.id.gridLayout);
-        grid_Btn.setText("grid on");
+       // grid_Btn.setText("grid on");
         flipBtn = findViewById(R.id.flipBtn);
         galleryBtn = findViewById(R.id.galleryBtn);
         grid_A = findViewById(R.id.gridA);
@@ -219,60 +219,52 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-         arrowBtnL.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View view) {
-                 controlCenter.setBtnClicked("LEFT");
-                 if (grid_Btn.getText() == "grid on") {
-                 directionLO.setVisibility(View.GONE);
-                 moveDirTV.setText("LEFT");
-                 levelLO.setVisibility(View.VISIBLE);
-             }else {
-                 controlCenter.setMoveExtent(1);
-             }
-             }
-         });
+        arrowBtnL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                controlCenter.setBtnClicked("LEFT");
+                // since gridBtn is removed，do "grid on" directly
+                directionLO.setVisibility(View.GONE);
+                moveDirTV.setText("LEFT");
+                levelLO.setVisibility(View.VISIBLE);
+            }
+        });
+
 
         arrowBtnR.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 controlCenter.setBtnClicked("RIGHT");
-                if (grid_Btn.getText() == "grid on") {
-                    directionLO.setVisibility(View.GONE);
-                    moveDirTV.setText("RIGHT");
-                    levelLO.setVisibility(View.VISIBLE);
-                }else {
-                    controlCenter.setMoveExtent(1);
-                }
+                // Since grid is always on. modified
+                directionLO.setVisibility(View.GONE);
+                moveDirTV.setText("RIGHT");
+                levelLO.setVisibility(View.VISIBLE);
             }
         });
+
         arrowBtnUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 controlCenter.setBtnClicked("UP");
-                if (grid_Btn.getText() == "grid on") {
-                    directionLO.setVisibility(View.GONE);
-                    moveDirTV.setText("UP");
-                    levelLO.setVisibility(View.VISIBLE);
-                }else {
-                    controlCenter.setMoveExtent(1);
-                }
+                // Since grid is always on，modified
+                directionLO.setVisibility(View.GONE);
+                moveDirTV.setText("UP");
+                levelLO.setVisibility(View.VISIBLE);
             }
         });
+
 
         arrowBtnDown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 controlCenter.setBtnClicked("DOWN");
-                if (grid_Btn.getText() == "grid on") {
-                    directionLO.setVisibility(View.GONE);
-                    moveDirTV.setText("DOWN");
-                    levelLO.setVisibility(View.VISIBLE);
-                }else{
-                    controlCenter.setMoveExtent(1);
-                }
+                //Since grid is always on, modified
+                directionLO.setVisibility(View.GONE);
+                moveDirTV.setText("DOWN");
+                levelLO.setVisibility(View.VISIBLE);
             }
         });
+
 
         moveDoneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -356,7 +348,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        grid_Btn.setOnClickListener(new View.OnClickListener() {
+     /*   grid_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (grid_Btn.getText() == "grid on"){
@@ -367,7 +359,7 @@ public class MainActivity extends AppCompatActivity {
                     gridLO.setVisibility(View.GONE);
                 }
             }
-        });
+        }); no longer needed*/
 
         flipBtn.setOnClickListener(new View.OnClickListener() {
             @Override
