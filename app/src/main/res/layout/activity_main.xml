@@ -21,6 +21,26 @@
             android:textSize="12sp"
             android:textColor="@color/mint" />
         <Button
+            android:id="@+id/flashBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/button_selector"
+            android:drawableTop="@drawable/ic_flash_on"
+            android:layout_weight="1"
+            android:text="Flash"
+            android:textSize="12sp"
+            android:textColor="@color/mint" />
+        <Button
+            android:id="@+id/zoomBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/button_selector"
+            android:drawableTop="@drawable/ic_zoom_in"
+            android:layout_weight="1"
+            android:text="Zoom"
+            android:textSize="12sp"
+            android:textColor="@color/mint" />
+        <Button
             android:id="@+id/bluetooth"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -30,6 +50,16 @@
             android:text="bluetooth"
             android:textSize="12sp"
             android:textColor="@color/mint"/>
+        <Button
+            android:id="@+id/settingsBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/button_selector"
+            android:drawableTop="@drawable/ic_settings"
+            android:layout_weight="1"
+            android:text="Settings"
+            android:textSize="12sp"
+            android:textColor="@color/mint" />
 
     </LinearLayout>
 
@@ -261,17 +291,7 @@
                 android:src="@drawable/ic_arrow"
                 android:contentDescription="Right" />
 
-            <Button
-                android:id="@+id/rotateBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="@drawable/button_selector"
-                android:drawableLeft="@drawable/ic_screen_rotate"
-                android:paddingHorizontal="@dimen/arrow_padding"
-                android:textColor="@color/white_trans"
-                android:textSize="1dp"
-                android:text="rotate"
-                android:contentDescription="Rotate" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -413,7 +433,7 @@
                 android:freezesText="false"
                 android:text="Gallery"
                 android:textAlignment="gravity"
-                android:textSize="11sp" />
+                android:textSize="17sp" />
 
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -425,6 +445,7 @@
                 android:layout_marginRight="30dp"
                 android:contentDescription="@string/camera_photo_action"
                 android:src="@drawable/ic_nav_camera" />
+            <!-- Ideally this button should be CENTERED and BIGGER than the others-->
 
             <Button
                 android:id="@+id/flipBtn"
@@ -433,7 +454,16 @@
                 android:background="@drawable/button_selector"
                 android:drawableTop="@drawable/ic_flip_camera"
                 android:text="flip"
-                android:textSize="11dp" />
+                android:textSize="17sp" />
+            <Button
+                android:id="@+id/rotateBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/button_selector"
+                android:drawableTop="@drawable/ic_screen_rotate"
+                android:textSize="17sp"
+                android:text="rotate"
+                android:contentDescription="Rotate" />
 
         </LinearLayout>
 
