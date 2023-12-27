@@ -68,8 +68,9 @@ public class MainActivity extends AppCompatActivity {
     public static OutputStream btOutputStream;
     public static InputStream btInputStream;
     boolean isBtConnected = false;
+    boolean isFlashedEnabled = false;
 
-    Drawable btOffImg, btOnImg;
+    Drawable btOffImg, btOnImg, flashOnImg, flashOffImg;
     private ArrayList<BluetoothDevice> listItems = new ArrayList<>();
     private ArrayAdapter<BluetoothDevice> listAdapter;
 
@@ -78,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageCapture imageCapture;
     private FloatingActionButton captureBtn;
     private ImageButton arrowBtnR, arrowBtnUp, arrowBtnDown, arrowBtnL;
-    private Button bluetooth_Btn, center_Btn, moveDoneBtn, orientBtn, modeDoneBtn, flipBtn, galleryBtn;
+    private Button bluetooth_Btn, center_Btn, moveDoneBtn, orientBtn, modeDoneBtn, flipBtn, galleryBtn, settingsBtn, flash_Btn, zoomBtn;
     private Button grid_A, grid_B, grid_C, grid_D, grid_E, grid_F, grid_G, grid_H, grid_I;
     private Button motorBtn_1, motorBtn_2, motorBtn_3, motorBtn_4, clkwiseBtn, antiClkBtn;
     private PreviewView previewView;
@@ -160,6 +161,9 @@ public class MainActivity extends AppCompatActivity {
       // grid_Btn = findViewById(R.id.gridBtn);
         bluetooth_Btn = findViewById(R.id.bluetooth);
         center_Btn = findViewById(R.id.centerBtn);
+        flash_Btn = findViewById(R.id.flashBtn);
+        zoomBtn = findViewById(R.id.zoomBtn);
+        settingsBtn = findViewById(R.id.settingsBtn);
         directionLO = findViewById(R.id.directionLayout);
         levelLO = findViewById(R.id.levelLayout);
         orientLO = findViewById(R.id.orientationLayout);
@@ -188,13 +192,14 @@ public class MainActivity extends AppCompatActivity {
         grid_I = findViewById(R.id.gridI);
         btOffImg= this.getResources().getDrawable( R.drawable.ic_bluetooth_disabled);
         btOnImg= this.getResources().getDrawable( R.drawable.ic_bluetooth);
+        flashOnImg=this.getResources().getDrawable(R.drawable.ic_flash_on);
+        flashOffImg=this.getResources().getDrawable(R.drawable.ic_flash_off);
     }
 
-    void setUI(){
+    void setUI(){ //This updates the User Interface
         if (isBtConnected){
             bluetooth_Btn.setCompoundDrawablesRelativeWithIntrinsicBounds(null, btOnImg, null, null);
         }else{
-
             bluetooth_Btn.setCompoundDrawablesRelativeWithIntrinsicBounds(null, btOffImg, null, null);
         }
 
@@ -204,6 +209,11 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 capturePhoto();
             }
+        });
+
+        flash_Btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {toggleFlash(); }
         });
 
         cameraProviderFuture = ProcessCameraProvider.getInstance(this);
@@ -218,6 +228,7 @@ public class MainActivity extends AppCompatActivity {
                 showBottomSheetDialog();
             }
         });
+
 
         arrowBtnL.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -282,7 +293,7 @@ public class MainActivity extends AppCompatActivity {
                 controlCenter.setBtnClicked("ROTATE");
             }
         });
-
+        
         modeDoneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -474,6 +485,21 @@ public class MainActivity extends AppCompatActivity {
 
         cameraProvider.bindToLifecycle((LifecycleOwner) this, cameraSelector, preview, imageCapture);
 
+    }
+    // Toggle flash when the flash_Btn is clicked
+    private void toggleFlash(){
+        //Toggle flash state
+        isFlashedEnabled=!isFlashedEnabled; // When clicked, becomes the opposite
+        if (isFlashedEnabled){
+            flash_Btn.setCompoundDrawablesRelativeWithIntrinsicBounds(null, flashOnImg, null, null);
+        }
+        else {
+            flash_Btn.setCompoundDrawablesRelativeWithIntrinsicBounds(null, flashOffImg, null, null);
+        };
+        // Set flash mode for the ImageCapture use case
+        imageCapture.setFlashMode(
+                isFlashedEnabled ? ImageCapture.FLASH_MODE_ON:ImageCapture.FLASH_MODE_OFF
+        );
     }
 
     private void capturePhoto() {
