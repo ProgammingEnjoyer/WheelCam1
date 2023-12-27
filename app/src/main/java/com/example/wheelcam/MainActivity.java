@@ -79,11 +79,11 @@ public class MainActivity extends AppCompatActivity {
     private ImageCapture imageCapture;
     private FloatingActionButton captureBtn;
     private ImageButton arrowBtnR, arrowBtnUp, arrowBtnDown, arrowBtnL;
-    private Button bluetooth_Btn, center_Btn, moveDoneBtn, orientBtn, modeDoneBtn, flipBtn, galleryBtn, settingsBtn, flash_Btn, zoomBtn;
+    private Button bluetooth_Btn, center_Btn, moveDoneBtn, orientBtn, modeDoneBtn, flipBtn, galleryBtn, settingsBtn, flash_Btn;
     private Button grid_A, grid_B, grid_C, grid_D, grid_E, grid_F, grid_G, grid_H, grid_I;
     private Button motorBtn_1, motorBtn_2, motorBtn_3, motorBtn_4, clkwiseBtn, antiClkBtn;
     private PreviewView previewView;
-    private LinearLayout directionLO, levelLO, orientLO, gridLO;
+    private LinearLayout directionLO, levelLO, orientLO, gridLO,zoomLO, modeLO;
     private TextView moveDirTV;
 
     // camera
@@ -162,11 +162,12 @@ public class MainActivity extends AppCompatActivity {
         bluetooth_Btn = findViewById(R.id.bluetooth);
         center_Btn = findViewById(R.id.centerBtn);
         flash_Btn = findViewById(R.id.flashBtn);
-        zoomBtn = findViewById(R.id.zoomBtn);
         settingsBtn = findViewById(R.id.settingsBtn);
         directionLO = findViewById(R.id.directionLayout);
         levelLO = findViewById(R.id.levelLayout);
         orientLO = findViewById(R.id.orientationLayout);
+        zoomLO=findViewById(R.id.zoomLayout);
+        modeLO=findViewById(R.id.modeLayout);
         moveDoneBtn = findViewById(R.id.moveDone);
         moveDirTV = findViewById(R.id.moveDir);
         orientBtn = findViewById(R.id.rotateBtn);
@@ -229,7 +230,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+/*
         arrowBtnL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -275,12 +276,14 @@ public class MainActivity extends AppCompatActivity {
                 levelLO.setVisibility(View.VISIBLE);
             }
         });
-
+*/
 
         moveDoneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                directionLO.setVisibility(View.VISIBLE);
+                //directionLO.setVisibility(View.VISIBLE);
+                zoomLO.setVisibility(View.VISIBLE);
+                modeLO.setVisibility(View.VISIBLE);
                 levelLO.setVisibility(View.GONE);
             }
         });
@@ -288,16 +291,21 @@ public class MainActivity extends AppCompatActivity {
         orientBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                directionLO.setVisibility(View.GONE);
+                //directionLO.setVisibility(View.GONE);
+                zoomLO.setVisibility(View.GONE);
+                modeLO.setVisibility(View.GONE);
+
                 orientLO.setVisibility(View.VISIBLE);
                 controlCenter.setBtnClicked("ROTATE");
             }
         });
-        
+
         modeDoneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                directionLO.setVisibility(View.VISIBLE);
+                //directionLO.setVisibility(View.VISIBLE);
+                zoomLO.setVisibility(View.VISIBLE);
+                modeLO.setVisibility(View.VISIBLE);
                 orientLO.setVisibility(View.GONE);
             }
         });
@@ -306,7 +314,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 controlCenter.setMoveExtent(1);
-                directionLO.setVisibility(View.VISIBLE);
+                //directionLO.setVisibility(View.VISIBLE);
+                zoomLO.setVisibility(View.VISIBLE);
+                modeLO.setVisibility(View.VISIBLE);
                 levelLO.setVisibility(View.GONE);
 
             }
@@ -316,7 +326,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 controlCenter.setMoveExtent(2);
-                directionLO.setVisibility(View.VISIBLE);
+                //directionLO.setVisibility(View.VISIBLE);
+                zoomLO.setVisibility(View.VISIBLE);
+                modeLO.setVisibility(View.VISIBLE);
                 levelLO.setVisibility(View.GONE);
 
             }
@@ -326,7 +338,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 controlCenter.setMoveExtent(3);
-                directionLO.setVisibility(View.VISIBLE);
+                //directionLO.setVisibility(View.VISIBLE);
+                zoomLO.setVisibility(View.VISIBLE);
+                modeLO.setVisibility(View.VISIBLE);
                 levelLO.setVisibility(View.GONE);
 
             }
@@ -336,7 +350,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 controlCenter.setMoveExtent(4);
-                directionLO.setVisibility(View.VISIBLE);
+                //directionLO.setVisibility(View.VISIBLE);
+                zoomLO.setVisibility(View.VISIBLE);
+                modeLO.setVisibility(View.VISIBLE);
                 levelLO.setVisibility(View.GONE);
 
             }
@@ -345,7 +361,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 controlCenter.setMoveExtent(1);
-                directionLO.setVisibility(View.VISIBLE);
+                //directionLO.setVisibility(View.VISIBLE);
+                zoomLO.setVisibility(View.VISIBLE);
+                modeLO.setVisibility(View.VISIBLE);
                 orientLO.setVisibility(View.GONE);
 
             }
@@ -354,7 +372,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 controlCenter.setMoveExtent(2);
-                directionLO.setVisibility(View.VISIBLE);
+                //directionLO.setVisibility(View.VISIBLE);
+                zoomLO.setVisibility(View.VISIBLE);
+                modeLO.setVisibility(View.VISIBLE);
                 orientLO.setVisibility(View.GONE);
 
             }
