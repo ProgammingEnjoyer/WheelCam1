@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Pressed state -->
+    <item android:state_pressed="true"  android:drawable="@drawable/button_circle_video">
+    </item>
+    <!-- Default state -->
+    <item>
+        <shape>
+            <corners  android:radius="70dp"/>
+            <solid android:color="@color/jade_dark_trans"></solid>
+        </shape>
+    </item>
+</selector>
