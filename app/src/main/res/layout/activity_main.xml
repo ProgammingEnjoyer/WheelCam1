@@ -9,57 +9,78 @@
         android:id="@+id/topBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
         android:background="@color/jade_dark">
-        <Button
-            android:id="@+id/centerBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@drawable/button_selector"
-            android:drawableTop="@drawable/ic_center"
-            android:layout_weight="1"
-            android:text="center"
-            android:textSize="12sp"
-            android:textColor="@color/mint" />
+
         <Button
             android:id="@+id/flashBtn"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@drawable/button_selector"
-            android:drawableTop="@drawable/ic_flash_on"
             android:layout_weight="1"
+            android:background="@drawable/button_selector"
+            android:drawableTop="@drawable/ic_flash_off"
             android:text="Flash"
-            android:textSize="12sp"
-            android:textColor="@color/mint" />
+            android:textColor="@color/mint"
+            android:textSize="12dp"
+            android:contentDescription="Flash"/>
+
         <Button
+            android:id="@+id/centerBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/button_selector"
+            android:drawableTop="@drawable/ic_center"
+            android:textSize="10dp"
+            android:textColor="@color/mint"
+            android:text="Center"
+            android:contentDescription="Center" />
+
+        <!--<Button
             android:id="@+id/zoomBtn"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:background="@drawable/button_selector"
             android:drawableTop="@drawable/ic_zoom_in"
-            android:layout_weight="1"
             android:text="Zoom"
-            android:textSize="12sp"
-            android:textColor="@color/mint" />
+            android:textColor="@color/mint"
+            android:textSize="12dp" />
+            -->
+        <Button
+            android:id="@+id/rotateBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/button_selector"
+            android:drawableTop="@drawable/ic_screen_rotate"
+            android:textSize="12dp"
+            android:textColor="@color/mint"
+            android:text="rotate"
+            android:contentDescription="Rotate" />
+
         <Button
             android:id="@+id/bluetooth"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:background="@drawable/button_selector"
             android:drawableTop="@drawable/ic_bluetooth_disabled"
-            android:layout_weight="1"
-            android:text="bluetooth"
-            android:textSize="12sp"
-            android:textColor="@color/mint"/>
+            android:text="BT"
+            android:textColor="@color/mint"
+            android:textSize="12dp"
+            android:contentDescription="Bluetooth"/>
+
         <Button
             android:id="@+id/settingsBtn"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:background="@drawable/button_selector"
             android:drawableTop="@drawable/ic_settings"
-            android:layout_weight="1"
+            android:contentDescription="Settings"
             android:text="Settings"
-            android:textSize="12sp"
-            android:textColor="@color/mint" />
+            android:textColor="@color/mint"
+            android:textSize="10dp"/>
 
     </LinearLayout>
 
@@ -234,14 +255,16 @@
 
     </LinearLayout>
 
+
     <LinearLayout
         android:id="@+id/bottomBar"
         android:layout_width="match_parent"
-        android:layout_height="160dp"
+        android:layout_height="180dp"
         android:layout_alignBottom="@+id/previewView"
         android:background="@color/black_halftrans"
         android:orientation="vertical">
 
+        <!--
         <LinearLayout
             android:id="@+id/directionLayout"
             android:layout_width="wrap_content"
@@ -293,6 +316,87 @@
 
 
         </LinearLayout>
+-->
+
+        <LinearLayout
+            android:id="@+id/zoomLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+            <Button
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text=".05x"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/button_selector"
+                />
+
+            <Button
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="1x"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/button_selector"
+
+                />
+            <Button
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="1.5x"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/button_selector"
+                />
+            <Button
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="2x"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/button_selector"
+                />
+            <Button
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:text="3x"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/button_selector"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/modeLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="2dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="VIDEO"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/button_selector_mode"
+                />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PHOTO"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/button_selector_mode"
+                />
+        </LinearLayout>
+
 
         <LinearLayout
             android:id="@+id/levelLayout"
@@ -455,7 +559,7 @@
                 android:drawableTop="@drawable/ic_flip_camera"
                 android:text="flip"
                 android:textSize="17sp" />
-            <Button
+            <!--<Button
                 android:id="@+id/rotateBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -464,6 +568,7 @@
                 android:textSize="17sp"
                 android:text="rotate"
                 android:contentDescription="Rotate" />
+                -->
 
         </LinearLayout>
 
