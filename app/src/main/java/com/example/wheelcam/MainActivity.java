@@ -3,7 +3,11 @@ package com.example.wheelcam;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.camera.core.CameraControl;
+import androidx.camera.core.CameraInfo;
 import androidx.camera.core.CameraSelector;
+import androidx.camera.core.CameraX;
+import androidx.camera.core.VideoCapture;
 import androidx.camera.core.ImageCapture;
 import androidx.camera.core.ImageCaptureException;
 import androidx.camera.core.Preview;
@@ -45,6 +49,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.common.util.concurrent.ListenableFuture;
@@ -57,6 +62,9 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 
 public class MainActivity extends AppCompatActivity {
+    private CameraControl cameraControl;
+    private VideoCapture videoCapture;
+    private boolean isRecording = false;
     final private String TAG = "MainActivity";
     private final static int REQUEST_ENABLE_BT = 1;
     private final static int PERMISSION_REQUEST_CODE = 200;
@@ -69,18 +77,23 @@ public class MainActivity extends AppCompatActivity {
     public static InputStream btInputStream;
     boolean isBtConnected = false;
     boolean isFlashedEnabled = false;
+    boolean isVideoMode = false;
 
-    Drawable btOffImg, btOnImg, flashOnImg, flashOffImg;
+    Drawable btOffImg, btOnImg, flashOnImg, flashOffImg, videoStartImg, videoEndImg;
     private ArrayList<BluetoothDevice> listItems = new ArrayList<>();
     private ArrayAdapter<BluetoothDevice> listAdapter;
 
     //initialise UI in main activity layout
     private ListenableFuture<ProcessCameraProvider> cameraProviderFuture;
     private ImageCapture imageCapture;
-    private FloatingActionButton captureBtn;
+    private FloatingActionButton capturePhoto_Btn;
+    private FloatingActionButton startVideo_Btn;
+    private FloatingActionButton stopVideo_Btn;
     private ImageButton arrowBtnR, arrowBtnUp, arrowBtnDown, arrowBtnL;
     private Button bluetooth_Btn, center_Btn, moveDoneBtn, orientBtn, modeDoneBtn, flipBtn, galleryBtn, settingsBtn, flash_Btn;
     private Button grid_A, grid_B, grid_C, grid_D, grid_E, grid_F, grid_G, grid_H, grid_I;
+    private Button zoom05_Btn, zoom1_Btn, zoom15_Btn, zoom2_Btn, zoom3_Btn;
+    private Button video_Btn, photo_Btn;
     private Button motorBtn_1, motorBtn_2, motorBtn_3, motorBtn_4, clkwiseBtn, antiClkBtn;
     private PreviewView previewView;
     private LinearLayout directionLO, levelLO, orientLO, gridLO,zoomLO, modeLO;
@@ -94,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
     //control
     ControlCenter controlCenter = ControlCenter.getInstance(this);
 
-    @Override
+     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -153,7 +166,9 @@ public class MainActivity extends AppCompatActivity {
 
     void initialiseUI(){
         previewView = findViewById(R.id.previewView);
-        captureBtn = findViewById(R.id.capture);
+        capturePhoto_Btn = findViewById(R.id.capture_photo);
+        startVideo_Btn = findViewById(R.id.startVideo_Btn);
+        stopVideo_Btn = findViewById(R.id.stopVideo_Btn);
         arrowBtnL = findViewById(R.id.arrowBtn_Left);
         arrowBtnUp = findViewById(R.id.arrowBtn_Up);
         arrowBtnDown = findViewById(R.id.arrowBtn_Down);
@@ -191,10 +206,20 @@ public class MainActivity extends AppCompatActivity {
         grid_G = findViewById(R.id.gridG);
         grid_H = findViewById(R.id.gridH);
         grid_I = findViewById(R.id.gridI);
+        zoom05_Btn=findViewById(R.id.zoom05_Btn);
+        zoom1_Btn=findViewById(R.id.zoom1_Btn);
+        zoom15_Btn=findViewById(R.id.zoom15_Btn);
+        zoom2_Btn=findViewById(R.id.zoom2_Btn);
+        zoom3_Btn=findViewById(R.id.zoom3_Btn);
+        video_Btn=findViewById(R.id.video_Btn);
+        photo_Btn=findViewById(R.id.photo_Btn);
         btOffImg= this.getResources().getDrawable( R.drawable.ic_bluetooth_disabled);
         btOnImg= this.getResources().getDrawable( R.drawable.ic_bluetooth);
         flashOnImg=this.getResources().getDrawable(R.drawable.ic_flash_on);
         flashOffImg=this.getResources().getDrawable(R.drawable.ic_flash_off);
+        videoStartImg=this.getResources().getDrawable(R.drawable.ic_video_start);
+        videoEndImg=this.getResources().getDrawable(R.drawable.ic_video_stop);
+
     }
 
     void setUI(){ //This updates the User Interface
@@ -205,17 +230,60 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //camera
-        captureBtn.setOnClickListener(new View.OnClickListener() {
+        capturePhoto_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 capturePhoto();
             }
         });
 
+        if(isVideoMode == false) {
+            photo_Btn.setSelected(true); //By default, start in photo mode
+        };
+
         flash_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {toggleFlash(); }
         });
+
+        //If video mode is selected, show the start video icon and activate isVideoMode
+        video_Btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //directionLO.setVisibility(View.VISIBLE);
+                capturePhoto_Btn.setVisibility(View.GONE);
+                startVideo_Btn.setVisibility(View.VISIBLE);
+                isVideoMode=true;
+                // If the button is now selected, change its background to the selected state
+                video_Btn.setSelected(true);
+                photo_Btn.setSelected(false);
+            }
+        });
+
+        //If photo mode is selected, show the capture photo icon and inactivate isVideoMode
+        photo_Btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                capturePhoto_Btn.setVisibility(View.VISIBLE);
+                startVideo_Btn.setVisibility(View.GONE);
+                isVideoMode=false;
+                photo_Btn.setSelected(true);
+                video_Btn.setSelected(false);
+            }
+        });
+
+        /*video_Btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {setVideoMode(); }
+        });*/
+
+        /*zoom2_Btn.setOnClickListener((new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cameraControl.setZoomRatio(2.0f);
+            }
+        }));*/
+
 
         cameraProviderFuture = ProcessCameraProvider.getInstance(this);
         cameraProviderFuture.addListener(() -> {
@@ -521,6 +589,10 @@ public class MainActivity extends AppCompatActivity {
                 isFlashedEnabled ? ImageCapture.FLASH_MODE_ON:ImageCapture.FLASH_MODE_OFF
         );
     }
+
+    /*private void setVideoMode(){
+        captureVideo_Btn.setCompoundDrawablesRelativeWithIntrinsicBounds(null, videoStartImg, null, null);
+    }*/
 
     private void capturePhoto() {
         long timestamp = System.currentTimeMillis();
