@@ -19,6 +19,9 @@
     <color name="jade_dark">#08605C</color>
     <color name="jade_darker">#064A47</color>
     <color name="jade_dark_trans">#4108605C</color>
+    <color name="jade_light">#06D5CB</color>
+    <color name="jade_light_trans">#B006D5CB</color>
+
     <color name="mint">#FFB9DFC6</color>
     <color name="mint_trans">#A491CF99</color>
 
