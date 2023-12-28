@@ -378,9 +378,6 @@
 
         </LinearLayout>
 -->
-
-
-
         <LinearLayout
             android:id="@+id/modeLayout"
             android:layout_width="wrap_content"
@@ -411,7 +408,7 @@
                 android:layout_marginStart="15dp"
                 />
         </LinearLayout>
-
+        
 
         <LinearLayout
             android:id="@+id/levelLayout"

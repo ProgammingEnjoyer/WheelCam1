@@ -236,6 +236,22 @@ public class MainActivity extends AppCompatActivity {
                 capturePhoto();
             }
         });
+        startVideo_Btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                captureVideo();
+            }
+        });
+
+        stopVideo_Btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                capturePhoto_Btn.setVisibility(View.GONE);
+                stopVideo_Btn.setVisibility(View.GONE);
+                startVideo_Btn.setVisibility(View.VISIBLE);
+                modeLO.setVisibility(View.VISIBLE);
+            }
+        });
 
         if(isVideoMode == false) {
             photo_Btn.setSelected(true); //By default, start in photo mode
@@ -253,6 +269,8 @@ public class MainActivity extends AppCompatActivity {
                 //directionLO.setVisibility(View.VISIBLE);
                 capturePhoto_Btn.setVisibility(View.GONE);
                 startVideo_Btn.setVisibility(View.VISIBLE);
+                stopVideo_Btn.setVisibility(View.GONE);
+                modeLO.setVisibility(View.VISIBLE);
                 isVideoMode=true;
                 // If the button is now selected, change its background to the selected state
                 video_Btn.setSelected(true);
@@ -266,6 +284,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 capturePhoto_Btn.setVisibility(View.VISIBLE);
                 startVideo_Btn.setVisibility(View.GONE);
+                stopVideo_Btn.setVisibility(View.GONE);
+                modeLO.setVisibility(View.VISIBLE);
                 isVideoMode=false;
                 photo_Btn.setSelected(true);
                 video_Btn.setSelected(false);
@@ -629,6 +649,12 @@ public class MainActivity extends AppCompatActivity {
         Executor getExecutor() {
             return ContextCompat.getMainExecutor(this);
         }
+    private void captureVideo(){
+        startVideo_Btn.setVisibility(View.GONE);
+        capturePhoto_Btn.setVisibility(View.GONE);
+        stopVideo_Btn.setVisibility(View.VISIBLE);
+        modeLO.setVisibility(View.GONE);
+    }
     void showBottomSheetDialog(){
         //for bluetooth connection
         final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
