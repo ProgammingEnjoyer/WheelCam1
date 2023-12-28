@@ -1,13 +1,25 @@
-<?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- Pressed state -->
-    <item android:state_pressed="true"  android:drawable="@drawable/button_circle_video">
+    <item android:state_pressed="true">
+        <shape>
+            <corners android:radius="70dp"/>
+            <solid android:color="@color/cardview_dark_background"/>
+        </shape>
     </item>
+
+    <!-- Selected state -->
+    <item android:state_selected="true">
+        <shape>
+            <corners android:radius="70dp"/>
+            <solid android:color="@color/jade_light_trans"/>
+        </shape>
+    </item>
+
     <!-- Default state -->
     <item>
         <shape>
-            <corners  android:radius="70dp"/>
-            <solid android:color="@color/jade_dark_trans"></solid>
+            <corners android:radius="70dp"/>
+            <solid android:color="@color/jade_dark_trans"/>
         </shape>
     </item>
 </selector>
