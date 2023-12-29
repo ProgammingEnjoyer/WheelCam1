@@ -82,10 +82,10 @@
             android:layout_weight="1"
             android:background="@drawable/button_selector"
             android:drawableTop="@drawable/ic_settings"
-            android:contentDescription="Settings"
             android:text="Settings"
             android:textColor="@color/mint"
-            android:textSize="8dp"/>
+            android:textSize="8dp"
+            android:contentDescription="Settings"/>
 
     </LinearLayout>
 
@@ -117,7 +117,8 @@
         android:orientation="vertical"
         android:layout_below="@id/topBar"
         android:layout_above="@id/bottomBar"
-        android:visibility="visible">
+        android:visibility="visible"
+        android:contentDescription="Grid">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -136,7 +137,8 @@
                 android:shadowColor="@color/jade_darker"
                 android:shadowDx="2"
                 android:shadowDy="2"
-                android:shadowRadius="2"/>
+                android:shadowRadius="2"
+                android:contentDescription="Grid A"/>
             <Button
                 android:id="@+id/gridB"
                 android:layout_width="wrap_content"
@@ -149,7 +151,8 @@
                 android:shadowColor="@color/jade_darker"
                 android:shadowDx="2"
                 android:shadowDy="2"
-                android:shadowRadius="2"/>
+                android:shadowRadius="2"
+                android:contentDescription="Grid B"/>
             <Button
                 android:id="@+id/gridC"
                 android:layout_width="wrap_content"
@@ -162,7 +165,8 @@
                 android:shadowColor="@color/jade_darker"
                 android:shadowDx="2"
                 android:shadowDy="2"
-                android:shadowRadius="2"/>
+                android:shadowRadius="2"
+                android:contentDescription="Grid C"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -182,7 +186,8 @@
                 android:shadowColor="@color/jade_darker"
                 android:shadowDx="2"
                 android:shadowDy="2"
-                android:shadowRadius="2"/>
+                android:shadowRadius="2"
+                android:contentDescription="Grid D"/>
             <Button
                 android:id="@+id/gridE"
                 android:layout_width="wrap_content"
@@ -195,7 +200,8 @@
                 android:shadowColor="@color/jade_darker"
                 android:shadowDx="2"
                 android:shadowDy="2"
-                android:shadowRadius="2"/>
+                android:shadowRadius="2"
+                android:contentDescription="Grid E"/>
             <Button
                 android:id="@+id/gridF"
                 android:layout_width="wrap_content"
@@ -208,7 +214,8 @@
                 android:shadowColor="@color/jade_darker"
                 android:shadowDx="2"
                 android:shadowDy="2"
-                android:shadowRadius="2"/>
+                android:shadowRadius="2"
+                android:contentDescription="Grid F"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -228,7 +235,8 @@
                 android:shadowColor="@color/jade_darker"
                 android:shadowDx="2"
                 android:shadowDy="2"
-                android:shadowRadius="2"/>
+                android:shadowRadius="2"
+                android:contentDescription="Grid G"/>
             <Button
                 android:id="@+id/gridH"
                 android:layout_width="wrap_content"
@@ -241,7 +249,8 @@
                 android:shadowColor="@color/jade_darker"
                 android:shadowDx="2"
                 android:shadowDy="2"
-                android:shadowRadius="2"/>
+                android:shadowRadius="2"
+                android:contentDescription="Grid H"/>
             <Button
                 android:id="@+id/gridI"
                 android:layout_width="wrap_content"
@@ -254,7 +263,8 @@
                 android:shadowColor="@color/jade_darker"
                 android:shadowDx="2"
                 android:shadowDy="2"
-                android:shadowRadius="2"/>
+                android:shadowRadius="2"
+                android:contentDescription="Grid I"/>
         </LinearLayout>
 
 
@@ -276,6 +286,7 @@
             android:textAlignment="center"
             android:textColor="#FFFFFF"
             android:background="@drawable/button_selector"
+            android:contentDescription="Zoom .05"
             />
 
         <Button
@@ -286,6 +297,7 @@
             android:textAlignment="center"
             android:textColor="#FFFFFF"
             android:background="@drawable/button_selector"
+            android:contentDescription="Zoom 1"
 
             />
         <Button
@@ -296,6 +308,7 @@
             android:textAlignment="center"
             android:textColor="#FFFFFF"
             android:background="@drawable/button_selector"
+            android:contentDescription="Zoom 1.5"
             />
         <Button
             android:id="@+id/zoom2_Btn"
@@ -305,6 +318,7 @@
             android:textAlignment="center"
             android:textColor="#FFFFFF"
             android:background="@drawable/button_selector"
+            android:contentDescription="Zoom 2"
             />
         <Button
             android:id="@+id/zoom3_Btn"
@@ -314,6 +328,7 @@
             android:textAlignment="center"
             android:textColor="#FFFFFF"
             android:background="@drawable/button_selector"
+            android:contentDescription="Zoom 3"
             />
     </LinearLayout>
 
@@ -396,6 +411,7 @@
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
                 android:background="@drawable/button_selector_mode"
+                android:contentDescription="Video Mode"
                 />
             <Button
                 android:id="@+id/photo_Btn"
@@ -406,9 +422,10 @@
                 android:textColor="#FFFFFF"
                 android:background="@drawable/button_selector_mode"
                 android:layout_marginStart="15dp"
+                android:contentDescription="Photo Mode"
                 />
         </LinearLayout>
-        
+
 
         <LinearLayout
             android:id="@+id/levelLayout"
@@ -469,7 +486,9 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_selector"
                 android:text="done"
-                android:textSize="13dp" />
+                android:textSize="13dp"
+                android:contentDescription="Done"
+                />
 
 
         </LinearLayout>
@@ -493,7 +512,7 @@
                 android:background="@drawable/button_selector"
                 android:text="ROTATE"
                 android:textColor="@color/mint"
-                android:textSize="18dp"
+                android:textSize="15dp"
                 android:textStyle="bold" />
 
 
@@ -528,7 +547,8 @@
                 android:layout_gravity="center"
                 android:background="@drawable/button_selector"
                 android:text="done"
-                android:textSize="13dp" />
+                android:textSize="13dp"
+                android:contentDescription="Done"/>
         </LinearLayout>
 
         <LinearLayout
@@ -550,7 +570,8 @@
                 android:text="Gallery"
                 android:textAlignment="gravity"
                 android:textSize="17sp"
-                android:textColor="@color/mint"/>
+                android:textColor="@color/mint"
+                android:contentDescription="Gallery"/>
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/capture_photo"
@@ -595,7 +616,8 @@
                 android:drawableTop="@drawable/ic_flip_camera"
                 android:text="flip"
                 android:textSize="17sp"
-                android:textColor="@color/mint"/>
+                android:textColor="@color/mint"
+                android:contentDescription="Flip"/>
             <!--<Button
                 android:id="@+id/rotateBtn"
                 android:layout_width="wrap_content"
