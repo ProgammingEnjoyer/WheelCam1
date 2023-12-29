@@ -426,6 +426,27 @@
                 />
         </LinearLayout>
 
+        <!--This is just so that the gallery, capture anf flip buttons don't shift up during recording mode.
+        We can later use this space to set the recording time -->
+        <LinearLayout
+            android:id="@+id/recordingLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="7dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Recording in process"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:contentDescription="Recording in process"
+                android:visibility="gone"
+                />
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/levelLayout"
@@ -556,22 +577,23 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="5dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="@id/bottomBar">
 
             <Button
                 android:id="@+id/galleryBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/button_selector"
+                android:contentDescription="Gallery"
                 android:drawableTop="@drawable/ic_nav_gallery"
                 android:drawablePadding="-15dp"
                 android:elegantTextHeight="false"
                 android:freezesText="false"
                 android:text="Gallery"
                 android:textAlignment="gravity"
-                android:textSize="17sp"
                 android:textColor="@color/mint"
-                android:contentDescription="Gallery"/>
+                android:textSize="17sp" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/capture_photo"
@@ -581,7 +603,7 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
                 android:contentDescription="@string/camera_photo_action"
-                android:src="@drawable/ic_nav_camera"/>
+                android:src="@drawable/ic_nav_camera" />
 
             <!-- Ideally this button should be CENTERED and BIGGER than the others-->
 
@@ -594,7 +616,7 @@
                 android:layout_marginRight="30dp"
                 android:contentDescription="START RECORDING"
                 android:src="@drawable/ic_video_start"
-                android:visibility="gone"/>
+                android:visibility="gone" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/stopVideo_Btn"
@@ -605,7 +627,7 @@
                 android:layout_marginRight="30dp"
                 android:contentDescription="STOP RECORDING"
                 android:src="@drawable/ic_video_stop"
-                android:visibility="gone"/>
+                android:visibility="gone" />
 
             <Button
                 android:id="@+id/flipBtn"
@@ -613,11 +635,11 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/button_selector"
+                android:contentDescription="Flip"
                 android:drawableTop="@drawable/ic_flip_camera"
                 android:text="flip"
-                android:textSize="17sp"
                 android:textColor="@color/mint"
-                android:contentDescription="Flip"/>
+                android:textSize="17sp" />
             <!--<Button
                 android:id="@+id/rotateBtn"
                 android:layout_width="wrap_content"

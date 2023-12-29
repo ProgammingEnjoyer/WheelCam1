@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
     private Button video_Btn, photo_Btn;
     private Button motorBtn_1, motorBtn_2, motorBtn_3, motorBtn_4, clkwiseBtn, antiClkBtn;
     private PreviewView previewView;
-    private LinearLayout directionLO, levelLO, orientLO, gridLO,zoomLO, modeLO;
+    private LinearLayout directionLO, levelLO, orientLO, gridLO,zoomLO, modeLO, recordingLO;
     private TextView moveDirTV;
 
     // camera
@@ -183,6 +183,7 @@ public class MainActivity extends AppCompatActivity {
         orientLO = findViewById(R.id.orientationLayout);
         zoomLO=findViewById(R.id.zoomLayout);
         modeLO=findViewById(R.id.modeLayout);
+        recordingLO=findViewById(R.id.recordingLayout);
         moveDoneBtn = findViewById(R.id.moveDone);
         moveDirTV = findViewById(R.id.moveDir);
         orientBtn = findViewById(R.id.rotateBtn);
@@ -250,6 +251,8 @@ public class MainActivity extends AppCompatActivity {
                 stopVideo_Btn.setVisibility(View.GONE);
                 startVideo_Btn.setVisibility(View.VISIBLE);
                 modeLO.setVisibility(View.VISIBLE);
+                recordingLO.setVisibility(View.GONE);
+
             }
         });
 
@@ -654,6 +657,7 @@ public class MainActivity extends AppCompatActivity {
         capturePhoto_Btn.setVisibility(View.GONE);
         stopVideo_Btn.setVisibility(View.VISIBLE);
         modeLO.setVisibility(View.GONE);
+        recordingLO.setVisibility(View.VISIBLE);
     }
     void showBottomSheetDialog(){
         //for bluetooth connection
