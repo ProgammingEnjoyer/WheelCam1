@@ -48,6 +48,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.view.animation.Animation;
 
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -59,9 +60,27 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executor;
+import java.util.concurrent.Executor;import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.os.Handler;
+import android.view.KeyEvent;
+import android.widget.Button;
+import java.util.ArrayList;import android.view.animation.AnimationUtils;
+
 
 public class MainActivity extends AppCompatActivity {
+    private Runnable highlightRunnable = new Runnable() {
+        @Override
+        public void run() {
+            Log.d(TAG, "Highlighting button at index: " + currentButtonIndex);
+            highlightButton(currentButtonIndex);
+            currentButtonIndex = (currentButtonIndex + 1) % highlightableButtons.size();
+            highlightHandler.postDelayed(this, 3000);
+        }
+    };
+    private ArrayList<View> highlightableButtons;
+    private Handler highlightHandler = new Handler();
+    private int currentButtonIndex = 0;
     private CameraControl cameraControl;
     private VideoCapture videoCapture;
     private boolean isRecording = false;
@@ -111,6 +130,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+         initialiseHighlightableButtons();
+         highlightHandler.postDelayed(highlightRunnable, 3000);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         if (!checkPermission())
@@ -145,10 +166,88 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+    private void initialiseHighlightableButtons() {
+        highlightableButtons = new ArrayList<>();
+        highlightableButtons.add((View) findViewById(R.id.flashBtn));
+        highlightableButtons.add((View) findViewById(R.id.centerBtn));
+        highlightableButtons.add((View) findViewById(R.id.rotateBtn));
+        highlightableButtons.add((View) findViewById(R.id.bluetooth));
+        highlightableButtons.add((View) findViewById(R.id.settingsBtn));
+        highlightableButtons.add((View) findViewById(R.id.gridA));
+        highlightableButtons.add((View) findViewById(R.id.gridB));
+        highlightableButtons.add((View) findViewById(R.id.gridC));
+        highlightableButtons.add((View) findViewById(R.id.gridD));
+        highlightableButtons.add((View) findViewById(R.id.gridE));
+        highlightableButtons.add((View) findViewById(R.id.gridF));
+        highlightableButtons.add((View) findViewById(R.id.gridG));
+        highlightableButtons.add((View) findViewById(R.id.gridH));
+        highlightableButtons.add((View) findViewById(R.id.gridI));
+        highlightableButtons.add((View) findViewById(R.id.zoom05_Btn));
+        highlightableButtons.add((View) findViewById(R.id.zoom1_Btn));
+        highlightableButtons.add((View) findViewById(R.id.zoom15_Btn));
+        highlightableButtons.add((View) findViewById(R.id.zoom2_Btn));
+        highlightableButtons.add((View) findViewById(R.id.zoom3_Btn));
+        highlightableButtons.add((View) findViewById(R.id.video_Btn));
+        highlightableButtons.add((View) findViewById(R.id.photo_Btn));
+        highlightableButtons.add((View) findViewById(R.id.galleryBtn));
+        highlightableButtons.add((View) findViewById(R.id.capture_photo));
+        highlightableButtons.add((View) findViewById(R.id.flipBtn));
+
+        //add more buttons
+    }
+    private void highlightButton(int index) {
+        for (int i = 0; i < highlightableButtons.size(); i++) {
+            View view = highlightableButtons.get(i);
+
+            if (i == index) {
+                // begin anime
+                Animation blinkAnimation = AnimationUtils.loadAnimation(this, R.anim.blink_animation);
+                view.startAnimation(blinkAnimation);
+            } else {
+                // stop anime
+                view.clearAnimation();
+            }
+        }
+    }
+
+
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
+
+            int indexToSelect = currentButtonIndex;
+
+            if (indexToSelect == 0) {
+                indexToSelect = highlightableButtons.size() - 1;
+            } else {
+                indexToSelect -= 1;
+            }
+            selectHighlightedButton(indexToSelect);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    private void selectHighlightedButton(int indexToSelect) {
+
+        View selectedView = highlightableButtons.get(indexToSelect);
+
+        if (selectedView instanceof Button) {
+            Button selectedButton = (Button) selectedView;
+            selectedButton.performClick();
+        }
+    }
+
+
     @Override
+
     protected void onResume() {
         checkBtEnabled();
         super.onResume();
+        highlightHandler.postDelayed(highlightRunnable, 3000);
+    }
+    protected void onPause() {
+        super.onPause();
+        highlightHandler.removeCallbacks(highlightRunnable);
     }
 
     public boolean checkBtEnabled() {
