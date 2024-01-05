@@ -11,6 +11,8 @@
     <color name="black_halftrans">#A6000000</color>
     <color name="white_halftrans">#4AFFFFFF</color>
 
+    <color name="highlight_color">#FFC107</color> <!-- highlight color -->
+    <color name="normal_color">#FFFFFF</color> <!-- normal color -->
 
     <color name="orange">#FFF68A4C</color>
     <color name="apricot">#FFFEC64D</color>
