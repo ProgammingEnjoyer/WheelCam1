@@ -69,15 +69,39 @@ import java.util.ArrayList;import android.view.animation.AnimationUtils;
 
 
 public class MainActivity extends AppCompatActivity {
+    private boolean isRotating = false;
+    private void completeRotation() {
+        Log.d(TAG, "Exiting rotation mode");
+        // reset isrotating
+        isRotating = false;
+
+        highlightHandler.removeCallbacks(highlightRunnable);
+
+        initialiseHighlightableButtons();
+
+
+        // reset currentButtonIndex
+        currentButtonIndex = 0;
+        highlightButton(currentButtonIndex);
+        highlightHandler.postDelayed(highlightRunnable, 3000);
+    }
+
     private Runnable highlightRunnable = new Runnable() {
         @Override
         public void run() {
-            Log.d(TAG, "Highlighting button at index: " + currentButtonIndex);
+            // check if rotating
+            Log.d(TAG, "Running highlightRunnable, currentButtonIndex: " + currentButtonIndex);
             highlightButton(currentButtonIndex);
-            currentButtonIndex = (currentButtonIndex + 1) % highlightableButtons.size();
+            if (isRotating) {
+                currentButtonIndex = (currentButtonIndex + 1) % 2; //rotate mode
+            }
+            else{
+                currentButtonIndex = (currentButtonIndex + 1) % highlightableButtons.size();//not rotating
+            }
             highlightHandler.postDelayed(this, 3000);
         }
     };
+
     private ArrayList<View> highlightableButtons;
     private Handler highlightHandler = new Handler();
     private int currentButtonIndex = 0;
@@ -166,6 +190,17 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+    private void updateHighlightableButtonsForRotation() {
+        Log.d(TAG, "Entering rotation mode");
+        highlightHandler.removeCallbacks(highlightRunnable);
+        highlightableButtons.clear();
+        highlightableButtons.add(findViewById(R.id.clockwiseBtn));
+        highlightableButtons.add(findViewById(R.id.anticlockwiseBtn));
+        isRotating = true;
+        currentButtonIndex = 0;
+        highlightButton(currentButtonIndex);
+        highlightHandler.postDelayed(highlightRunnable, 3000);
+    }
     private void initialiseHighlightableButtons() {
         highlightableButtons = new ArrayList<>();
         highlightableButtons.add((View) findViewById(R.id.flashBtn));
@@ -196,6 +231,7 @@ public class MainActivity extends AppCompatActivity {
         //add more buttons
     }
     private void highlightButton(int index) {
+        Log.d(TAG, "Highlighting button at index: " + index);
         for (int i = 0; i < highlightableButtons.size(); i++) {
             View view = highlightableButtons.get(i);
 
@@ -294,7 +330,7 @@ public class MainActivity extends AppCompatActivity {
         clkwiseBtn = findViewById(R.id.clockwiseBtn);
         antiClkBtn = findViewById(R.id.anticlockwiseBtn);
         gridLO = findViewById(R.id.gridLayout);
-       // grid_Btn.setText("grid on");
+       // grid_Btn.setText("grid on")
         flipBtn = findViewById(R.id.flipBtn);
         galleryBtn = findViewById(R.id.galleryBtn);
         grid_A = findViewById(R.id.gridA);
@@ -487,8 +523,14 @@ public class MainActivity extends AppCompatActivity {
 
                 orientLO.setVisibility(View.VISIBLE);
                 controlCenter.setBtnClicked("ROTATE");
+                updateHighlightableButtonsForRotation();
+                currentButtonIndex = 0;
+                highlightButton(currentButtonIndex);
+                highlightHandler.removeCallbacks(highlightRunnable);
+                highlightHandler.postDelayed(highlightRunnable, 3000);
             }
         });
+
 
         modeDoneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -555,6 +597,7 @@ public class MainActivity extends AppCompatActivity {
                 zoomLO.setVisibility(View.VISIBLE);
                 modeLO.setVisibility(View.VISIBLE);
                 orientLO.setVisibility(View.GONE);
+                completeRotation();
 
             }
         });
@@ -566,6 +609,7 @@ public class MainActivity extends AppCompatActivity {
                 zoomLO.setVisibility(View.VISIBLE);
                 modeLO.setVisibility(View.VISIBLE);
                 orientLO.setVisibility(View.GONE);
+                completeRotation();
 
             }
         });
