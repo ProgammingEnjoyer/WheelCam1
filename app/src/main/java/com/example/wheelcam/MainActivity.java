@@ -3,6 +3,8 @@ package com.example.wheelcam;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import android.util.DisplayMetrics;
+import android.view.WindowManager;
 import androidx.camera.core.CameraControl;
 import androidx.camera.core.CameraInfo;
 import androidx.camera.core.CameraSelector;
@@ -70,6 +72,7 @@ import java.util.ArrayList;import android.view.animation.AnimationUtils;
 
 public class MainActivity extends AppCompatActivity {
     private boolean isRotating = false;
+
     private void completeRotation() {
         Log.d(TAG, "Exiting rotation mode");
         // reset isrotating
@@ -146,6 +149,7 @@ public class MainActivity extends AppCompatActivity {
     private CameraSelector lensFacing = CameraSelector.DEFAULT_BACK_CAMERA;
     ProcessCameraProvider cameraProvider;
     Uri ImageUri;
+
 
     //control
     ControlCenter controlCenter = ControlCenter.getInstance(this);
@@ -280,6 +284,9 @@ public class MainActivity extends AppCompatActivity {
         checkBtEnabled();
         super.onResume();
         highlightHandler.postDelayed(highlightRunnable, 3000);
+        if (cameraProvider != null) {
+            startCameraX(cameraProvider);
+        }
     }
     protected void onPause() {
         super.onPause();
@@ -658,7 +665,8 @@ public class MainActivity extends AppCompatActivity {
         center_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ControlCenter.setCenter();
+                Intent intent = new Intent(MainActivity.this, OldMainActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -666,52 +674,304 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ControlCenter.setGridA();
+
+                // acquire size of screen
+                DisplayMetrics displayMetrics = new DisplayMetrics();
+                getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+                int screenHeight = displayMetrics.heightPixels;
+                int screenWidth = displayMetrics.widthPixels;
+
+                // calculate height of top and bottom
+                View topBar = findViewById(R.id.topBar);
+                View bottomBar = findViewById(R.id.bottomBar);
+
+                topBar.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        int topBarHeight = topBar.getHeight();
+                        int bottomBarHeight = bottomBar.getHeight(); // 140dp in pixels
+
+                        // Calculate height of grid
+                        int gridHeight = screenHeight - topBarHeight - bottomBarHeight;
+
+                        // calculate central point of gridA
+                        float centerX = ((float) screenWidth / 6) - ((float) screenWidth / 2);
+                        float centerY = ((float) gridHeight / 2) - ((float) gridHeight / 6);
+
+
+                        Toast.makeText(MainActivity.this, "Grid A Center: (" + centerX + ", " + centerY + ")", Toast.LENGTH_LONG).show();
+                    }
+                });
             }
         });
+
         grid_B.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ControlCenter.setGridB();
+
+                // acquire size of screen
+                DisplayMetrics displayMetrics = new DisplayMetrics();
+                getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+                int screenHeight = displayMetrics.heightPixels;
+                int screenWidth = displayMetrics.widthPixels;
+
+                // calculate height of top and bottom
+                View topBar = findViewById(R.id.topBar);
+                View bottomBar = findViewById(R.id.bottomBar);
+
+                topBar.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        int topBarHeight = topBar.getHeight();
+                        int bottomBarHeight = bottomBar.getHeight(); // 140dp in pixels
+
+                        // Calculate height of grid
+                        int gridHeight = screenHeight - topBarHeight - bottomBarHeight;
+
+                        // calculate central point of gridB
+                        float centerX = 0;
+                        float centerY = ((float) gridHeight / 2) - ((float) gridHeight / 6);
+
+                        Toast.makeText(MainActivity.this, "Grid B Center: (" + centerX + ", " + centerY + ")", Toast.LENGTH_LONG).show();
+                    }
+                });
             }
         });
+
 
         grid_C.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ControlCenter.setGridC();
+                ControlCenter.setGridA();
+
+                // acquire size of screen
+                DisplayMetrics displayMetrics = new DisplayMetrics();
+                getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+                int screenHeight = displayMetrics.heightPixels;
+                int screenWidth = displayMetrics.widthPixels;
+
+                // calculate height of top and bottom
+                View topBar = findViewById(R.id.topBar);
+                View bottomBar = findViewById(R.id.bottomBar);
+
+                topBar.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        int topBarHeight = topBar.getHeight();
+                        int bottomBarHeight = bottomBar.getHeight(); // 140dp in pixels
+
+                        // Calculate height of grid
+                        int gridHeight = screenHeight - topBarHeight - bottomBarHeight;
+
+                        // calculate central point of gridA
+                        float centerX = ((float) screenWidth / 2) - ((float) screenWidth / 6);
+                        float centerY = ((float) gridHeight / 2) - ((float) gridHeight / 6);
+
+                        Toast.makeText(MainActivity.this, "Grid C Center: (" + centerX + ", " + centerY + ")", Toast.LENGTH_LONG).show();
+                    }
+                });
             }
         });
 
         grid_D.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ControlCenter.setGridD();
+                ControlCenter.setGridA();
+
+                // acquire size of screen
+                DisplayMetrics displayMetrics = new DisplayMetrics();
+                getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+                int screenHeight = displayMetrics.heightPixels;
+                int screenWidth = displayMetrics.widthPixels;
+
+                // calculate height of top and bottom
+                View topBar = findViewById(R.id.topBar);
+                View bottomBar = findViewById(R.id.bottomBar);
+
+                topBar.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        int topBarHeight = topBar.getHeight();
+                        int bottomBarHeight = bottomBar.getHeight(); // 140dp in pixels
+
+                        // Calculate height of grid
+                        int gridHeight = screenHeight - topBarHeight - bottomBarHeight;
+
+                        // calculate central point of gridA
+                        float centerX = ((float) screenWidth / 6) - ((float) screenWidth / 2);
+                        float centerY = 0;
+
+                        Toast.makeText(MainActivity.this, "Grid D Center: (" + centerX + ", " + centerY + ")", Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+        });
+        grid_E.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ControlCenter.setGridA();
+
+                // acquire size of screen
+                DisplayMetrics displayMetrics = new DisplayMetrics();
+                getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+                int screenHeight = displayMetrics.heightPixels;
+                int screenWidth = displayMetrics.widthPixels;
+
+                // calculate height of top and bottom
+                View topBar = findViewById(R.id.topBar);
+                View bottomBar = findViewById(R.id.bottomBar);
+
+                topBar.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        int topBarHeight = topBar.getHeight();
+                        int bottomBarHeight = bottomBar.getHeight(); // 140dp in pixels
+
+                        // Calculate height of grid
+                        int gridHeight = screenHeight - topBarHeight - bottomBarHeight;
+
+                        // calculate central point of gridA
+                        float centerX = 0;
+                        float centerY = 0;
+
+                        Toast.makeText(MainActivity.this, "Grid E Center: (" + centerX + ", " + centerY + ")", Toast.LENGTH_LONG).show();
+                    }
+                });
             }
         });
         grid_F.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ControlCenter.setGridF();
+                ControlCenter.setGridA();
+
+                // acquire size of screen
+                DisplayMetrics displayMetrics = new DisplayMetrics();
+                getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+                int screenHeight = displayMetrics.heightPixels;
+                int screenWidth = displayMetrics.widthPixels;
+
+                // calculate height of top and bottom
+                View topBar = findViewById(R.id.topBar);
+                View bottomBar = findViewById(R.id.bottomBar);
+
+                topBar.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        int topBarHeight = topBar.getHeight();
+                        int bottomBarHeight = bottomBar.getHeight(); // 140dp in pixels
+
+                        // Calculate height of grid
+                        int gridHeight = screenHeight - topBarHeight - bottomBarHeight;
+
+                        // calculate central point of gridA
+                        float centerX = ((float) screenWidth / 2) - ((float) screenWidth / 6);
+                        float centerY = 0;
+
+                        Toast.makeText(MainActivity.this, "Grid F Center: (" + centerX + ", " + centerY + ")", Toast.LENGTH_LONG).show();
+                    }
+                });
             }
         });
         grid_G.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ControlCenter.setGridG();
+                ControlCenter.setGridA();
+
+                // acquire size of screen
+                DisplayMetrics displayMetrics = new DisplayMetrics();
+                getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+                int screenHeight = displayMetrics.heightPixels;
+                int screenWidth = displayMetrics.widthPixels;
+
+                // calculate height of top and bottom
+                View topBar = findViewById(R.id.topBar);
+                View bottomBar = findViewById(R.id.bottomBar);
+
+                topBar.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        int topBarHeight = topBar.getHeight();
+                        int bottomBarHeight = bottomBar.getHeight(); // 140dp in pixels
+
+                        // Calculate height of grid
+                        int gridHeight = screenHeight - topBarHeight - bottomBarHeight;
+
+                        // calculate central point of gridA
+                        float centerX = ((float) screenWidth / 6) - ((float) screenWidth / 2);
+                        float centerY = ((float) gridHeight / 6) - ((float) gridHeight / 2);
+
+                        Toast.makeText(MainActivity.this, "Grid G Center: (" + centerX + ", " + centerY + ")", Toast.LENGTH_LONG).show();
+                    }
+                });
             }
         });
 
         grid_H.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ControlCenter.setGridH();
+                ControlCenter.setGridA();
+
+                // acquire size of screen
+                DisplayMetrics displayMetrics = new DisplayMetrics();
+                getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+                int screenHeight = displayMetrics.heightPixels;
+                int screenWidth = displayMetrics.widthPixels;
+
+                // calculate height of top and bottom
+                View topBar = findViewById(R.id.topBar);
+                View bottomBar = findViewById(R.id.bottomBar);
+
+                topBar.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        int topBarHeight = topBar.getHeight();
+                        int bottomBarHeight = bottomBar.getHeight(); // 140dp in pixels
+
+                        // Calculate height of grid
+                        int gridHeight = screenHeight - topBarHeight - bottomBarHeight;
+
+                        // calculate central point of gridA
+                        float centerX = ((float) screenWidth / 6) - ((float) screenWidth / 2);
+                        float centerY = 0;
+
+                        Toast.makeText(MainActivity.this, "Grid H Center: (" + centerX + ", " + centerY + ")", Toast.LENGTH_LONG).show();
+                    }
+                });
             }
         });
 
         grid_I.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ControlCenter.setGridI();
+                ControlCenter.setGridA();
+
+                // acquire size of screen
+                DisplayMetrics displayMetrics = new DisplayMetrics();
+                getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+                int screenHeight = displayMetrics.heightPixels;
+                int screenWidth = displayMetrics.widthPixels;
+
+                // calculate height of top and bottom
+                View topBar = findViewById(R.id.topBar);
+                View bottomBar = findViewById(R.id.bottomBar);
+
+                topBar.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        int topBarHeight = topBar.getHeight();
+                        int bottomBarHeight = bottomBar.getHeight(); // 140dp in pixels
+
+                        // Calculate height of grid
+                        int gridHeight = screenHeight - topBarHeight - bottomBarHeight;
+
+                        // calculate central point of gridA
+                        float centerX = ((float) screenWidth / 2) - ((float) screenWidth / 6);
+                        float centerY = ((float) gridHeight / 6) - ((float) gridHeight / 2);
+
+                        Toast.makeText(MainActivity.this, "Grid I Center: (" + centerX + ", " + centerY + ")", Toast.LENGTH_LONG).show();
+                    }
+                });
             }
         });
     }
