@@ -28,6 +28,9 @@
             android:label="@string/app_name">
         </activity>
 
+        <activity android:name=".OldMainActivity">
+        </activity>
+
         <activity android:name=".SplashActivity"
             android:exported="true"
             android:screenOrientation="portrait"

@@ -64,18 +64,15 @@ public class ControlCenter {
     public static void setGridA(){
         panDegree = angleChange(panDegree, 10, maxPan, minPan);
         tiltDegree = angleChange(tiltDegree, 13, maxTilt, minTilt);
-        sendSignal_specific("#PAN: " + panDegree);
         delayhandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                sendSignal_specific("#TILT: " + tiltDegree);
             }
         }, 1500);
     }
     public static void setGridB(){
         //panDegree = 135;
         tiltDegree = angleChange(tiltDegree, 13, maxTilt, minTilt);
-        sendSignal_specific("#TILT: " + tiltDegree);
 //        sendSignal_specific("#PAN: " + panDegree);
 //        delayhandler.postDelayed(new Runnable() {
 //            @Override
@@ -86,13 +83,9 @@ public class ControlCenter {
     }
 
     public static void setGridC(){
-        panDegree = angleChange(panDegree, -10, maxPan, minPan);
-        tiltDegree = angleChange(tiltDegree, 13, maxTilt, minTilt);
-        sendSignal_specific("#PAN: " + panDegree);
         delayhandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                sendSignal_specific("#TILT: " + tiltDegree);
             }
         }, 1500);
     }
@@ -100,7 +93,16 @@ public class ControlCenter {
     public static void setGridD(){
         panDegree = angleChange(panDegree, 13, maxPan, minPan);
         //tiltDegree = 135;
-        sendSignal_specific("#PAN: " + panDegree);
+//        delayhandler.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                sendSignal_specific("#TILT: " + tiltDegree);
+//            }
+//        }, 1500);
+    }
+    public static void setGridE(){
+        panDegree = angleChange(panDegree, -10, maxPan, minPan);
+//        tiltDegree = 135;
 //        delayhandler.postDelayed(new Runnable() {
 //            @Override
 //            public void run() {
@@ -111,7 +113,6 @@ public class ControlCenter {
     public static void setGridF(){
         panDegree = angleChange(panDegree, -10, maxPan, minPan);
 //        tiltDegree = 135;
-        sendSignal_specific("#PAN: " + panDegree);
 //        delayhandler.postDelayed(new Runnable() {
 //            @Override
 //            public void run() {
@@ -122,11 +123,10 @@ public class ControlCenter {
     public static void setGridG(){
         panDegree = angleChange(panDegree, 12, maxPan, minPan);
         tiltDegree = angleChange(tiltDegree, -14, maxTilt, minTilt);
-        sendSignal_specific("#PAN: " + panDegree);
         delayhandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                sendSignal_specific("#TILT: " + tiltDegree);
+
             }
         }, 1500);
     }
@@ -134,11 +134,11 @@ public class ControlCenter {
     public static void setGridH(){
         panDegree = angleChange(panDegree, 2, maxPan, minPan);
         tiltDegree = angleChange(tiltDegree, -14, maxTilt, minTilt);
-        sendSignal_specific("#PAN: " + panDegree);
+
         delayhandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                sendSignal_specific("#TILT: " + tiltDegree);
+
             }
         }, 1500);
     }
@@ -146,11 +146,10 @@ public class ControlCenter {
     public static void setGridI(){
         panDegree = angleChange(panDegree, -8, maxPan, minPan);
         tiltDegree = angleChange(tiltDegree, -14, maxTilt, minTilt);
-        sendSignal_specific("#PAN: " + panDegree);
         delayhandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                sendSignal_specific("#TILT: " + tiltDegree);
+
             }
         }, 1500);
     }
