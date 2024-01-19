@@ -15,7 +15,8 @@ import androidx.core.content.ContextCompat;
 import androidx.lifecycle.LifecycleOwner;
 import com.google.common.util.concurrent.ListenableFuture;
 import androidx.camera.view.PreviewView;
-import androidx.annotation.NonNull;import android.content.pm.PackageManager;import java.util.concurrent.ExecutionException;
+import androidx.annotation.NonNull;import android.content.pm.PackageManager;import java.util.concurrent.ExecutionException;import android.view.ViewTreeObserver;
+
 
 
 
@@ -33,10 +34,19 @@ public class OldMainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.old_activity_main);
-
         customView = findViewById(R.id.customView);
         previewView = findViewById(R.id.previewView);
         controlButton = findViewById(R.id.controlButton);
+
+        customView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                // 移除监听器，以避免重复调用
+                customView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                // 开始横线动画
+                startMovingLine(true);
+            }
+        });
 
         // check permission of camera
         if (allPermissionsGranted()) {
@@ -44,7 +54,7 @@ public class OldMainActivity extends AppCompatActivity {
         } else {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, REQUEST_CODE_PERMISSIONS);
         }
-
+        // Start moving horizontal line immediately
 
         controlButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,31 +62,22 @@ public class OldMainActivity extends AppCompatActivity {
                 clickCount++;
                 switch (clickCount) {
                     case 1:
-                        startMovingLine(true);
-                        break;
-                    case 2:
                         if (horizontalAnimator != null) {
                             horizontalAnimator.cancel(); // stop horizontal line
                         }
+                        startMovingLine(false); // start vertical line
                         break;
-                    case 3:
-                        startMovingLine(false);
-                        break;
-                    case 4:
+                    case 2:
                         if (verticalAnimator != null) {
                             verticalAnimator.cancel(); // stop vertical line
                         }
-                        float[] intersection = customView.getIntersectionPoint();
-                        showToast("Point: X=" + intersection[0] + ", Y=" + intersection[1]);
-                        customView.setVisibility(View.GONE); // set CustomView as invisible
-                        Log.d("OldMainActivity", "Click count: " + clickCount);
-                        clickCount = 0;
-                        finish();
+                        finish(); // exit the activity
                         break;
                 }
             }
         });
     }
+
 
     private void startMovingLine(boolean isHorizontal) {
         float startValue = 0;

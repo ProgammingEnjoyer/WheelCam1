@@ -4,17 +4,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!--  PreviewView used for camera -->
+    <!-- CustomView is on PreviewView -->
     <androidx.camera.view.PreviewView
         android:id="@+id/previewView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
-    <!-- CustomView is on PreviewView -->
     <com.example.wheelcam.CustomView
         android:id="@+id/customView"
         android:layout_width="0dp"
