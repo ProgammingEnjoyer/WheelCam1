@@ -101,6 +101,7 @@ public class MainActivity extends AppCompatActivity {
             else{
                 currentButtonIndex = (currentButtonIndex + 1) % highlightableButtons.size();//not rotating
             }
+            Log.d(TAG, "New currentButtonIndex: " + currentButtonIndex);
             highlightHandler.postDelayed(this, 3000);
         }
     };
@@ -231,7 +232,7 @@ public class MainActivity extends AppCompatActivity {
         highlightableButtons.add((View) findViewById(R.id.galleryBtn));
         highlightableButtons.add((View) findViewById(R.id.capture_photo));
         highlightableButtons.add((View) findViewById(R.id.flipBtn));
-
+        Log.d(TAG, "Total number of highlightable buttons: " + highlightableButtons.size());
         //add more buttons
     }
     private void highlightButton(int index) {
@@ -243,9 +244,11 @@ public class MainActivity extends AppCompatActivity {
                 // begin anime
                 Animation blinkAnimation = AnimationUtils.loadAnimation(this, R.anim.blink_animation);
                 view.startAnimation(blinkAnimation);
+                Log.d(TAG, "Button at index " + i + " started animation.");
             } else {
                 // stop anime
                 view.clearAnimation();
+                Log.d(TAG, "Button at index " + i + " cleared animation.");
             }
         }
     }
