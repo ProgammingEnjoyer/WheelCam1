@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton startVideo_Btn;
     private FloatingActionButton stopVideo_Btn;
     private ImageButton arrowBtnR, arrowBtnUp, arrowBtnDown, arrowBtnL;
-    private Button bluetooth_Btn, center_Btn, moveDoneBtn, orientBtn, modeDoneBtn, flipBtn, galleryBtn, settingsBtn, flash_Btn;
+    private Button bluetooth_Btn, scanCenter_Btn, moveDoneBtn, orientBtn, modeDoneBtn, flipBtn, galleryBtn, /*settingsBtn,*/ flash_Btn;
     private Button grid_A, grid_B, grid_C, grid_D, grid_E, grid_F, grid_G, grid_H, grid_I;
     private Button zoom05_Btn, zoom1_Btn, zoom15_Btn, zoom2_Btn, zoom3_Btn;
     private Button video_Btn, photo_Btn;
@@ -206,13 +206,14 @@ public class MainActivity extends AppCompatActivity {
         highlightButton(currentButtonIndex);
         highlightHandler.postDelayed(highlightRunnable, 3000);
     }
+
     private void initialiseHighlightableButtons() {
         highlightableButtons = new ArrayList<>();
         highlightableButtons.add((View) findViewById(R.id.flashBtn));
-        highlightableButtons.add((View) findViewById(R.id.centerBtn));
+        highlightableButtons.add((View) findViewById(R.id.scanCenterBtn));
         highlightableButtons.add((View) findViewById(R.id.rotateBtn));
         highlightableButtons.add((View) findViewById(R.id.bluetooth));
-        highlightableButtons.add((View) findViewById(R.id.settingsBtn));
+        //highlightableButtons.add((View) findViewById(R.id.settingsBtn));
         highlightableButtons.add((View) findViewById(R.id.gridA));
         highlightableButtons.add((View) findViewById(R.id.gridB));
         highlightableButtons.add((View) findViewById(R.id.gridC));
@@ -320,9 +321,9 @@ public class MainActivity extends AppCompatActivity {
         arrowBtnR = findViewById(R.id.arrowBtn_Right);
       // grid_Btn = findViewById(R.id.gridBtn);
         bluetooth_Btn = findViewById(R.id.bluetooth);
-        center_Btn = findViewById(R.id.centerBtn);
+        scanCenter_Btn = findViewById(R.id.scanCenterBtn);
         flash_Btn = findViewById(R.id.flashBtn);
-        settingsBtn = findViewById(R.id.settingsBtn);
+        //settingsBtn = findViewById(R.id.settingsBtn);
         directionLO = findViewById(R.id.directionLayout);
         levelLO = findViewById(R.id.levelLayout);
         orientLO = findViewById(R.id.orientationLayout);
@@ -665,7 +666,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        center_Btn.setOnClickListener(new View.OnClickListener() {
+        scanCenter_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, OldMainActivity.class);

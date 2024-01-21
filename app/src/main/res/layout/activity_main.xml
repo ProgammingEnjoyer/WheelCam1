@@ -26,7 +26,7 @@
             android:contentDescription="Flash"/>
 
         <Button
-            android:id="@+id/centerBtn"
+            android:id="@+id/scanCenterBtn"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
@@ -35,8 +35,8 @@
             android:drawableTop="@drawable/ic_center"
             android:textSize="11dp"
             android:textColor="@color/mint"
-            android:text="Center"
-            android:contentDescription="Center" />
+            android:text="Scan Center"
+            android:contentDescription="Scan Center Mode" />
 
         <!--<Button
             android:id="@+id/zoomBtn"
@@ -49,6 +49,18 @@
             android:textColor="@color/mint"
             android:textSize="12dp" />
             -->
+        <Button
+            android:id="@+id/gridCenterBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_selector"
+            android:drawableTop="@drawable/ic_grid"
+            android:text="Grid Center"
+            android:textColor="@color/mint"
+            android:textSize="12dp"
+            android:contentDescription="Grid Center Mode"/>
         <Button
             android:id="@+id/rotateBtn"
             android:layout_width="wrap_content"
@@ -74,18 +86,7 @@
             android:textSize="12dp"
             android:contentDescription="Bluetooth"/>
 
-        <Button
-            android:id="@+id/settingsBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/button_selector"
-            android:drawableTop="@drawable/ic_settings"
-            android:text="Settings"
-            android:textColor="@color/mint"
-            android:textSize="8dp"
-            android:contentDescription="Settings"/>
+
 
     </LinearLayout>
 
