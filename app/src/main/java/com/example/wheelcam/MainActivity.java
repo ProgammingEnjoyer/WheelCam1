@@ -78,18 +78,18 @@ public class MainActivity extends AppCompatActivity {
         // reset isrotating
         isRotating = false;
 
-        highlightHandler.removeCallbacks(highlightRunnable);
+        //highlightHandler.removeCallbacks(highlightRunnable);
 
-        initialiseHighlightableButtons();
+        //initialiseHighlightableButtons();
 
 
         // reset currentButtonIndex
         currentButtonIndex = 0;
-        highlightButton(currentButtonIndex);
-        highlightHandler.postDelayed(highlightRunnable, 3000);
+        //highlightButton(currentButtonIndex);
+        //highlightHandler.postDelayed(highlightRunnable, 3000);
     }
 
-    private Runnable highlightRunnable = new Runnable() {
+    /*private Runnable highlightRunnable = new Runnable() {
         @Override
         public void run() {
             // check if rotating
@@ -104,10 +104,10 @@ public class MainActivity extends AppCompatActivity {
             Log.d(TAG, "New currentButtonIndex: " + currentButtonIndex);
             highlightHandler.postDelayed(this, 3000);
         }
-    };
+    };*/
 
-    private ArrayList<View> highlightableButtons;
-    private Handler highlightHandler = new Handler();
+    //private ArrayList<View> highlightableButtons;
+    //private Handler highlightHandler = new Handler();
     private int currentButtonIndex = 0;
     private CameraControl cameraControl;
     private VideoCapture videoCapture;
@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton startVideo_Btn;
     private FloatingActionButton stopVideo_Btn;
     private ImageButton arrowBtnR, arrowBtnUp, arrowBtnDown, arrowBtnL;
-    private Button bluetooth_Btn, center_Btn, moveDoneBtn, orientBtn, modeDoneBtn, flipBtn, galleryBtn, settingsBtn, flash_Btn;
+    private Button bluetooth_Btn, scanCenter_Btn, gridCenter_Btn, moveDoneBtn, orientBtn, modeDoneBtn, flipBtn, galleryBtn, /*settingsBtn,*/ flash_Btn;
     private Button grid_A, grid_B, grid_C, grid_D, grid_E, grid_F, grid_G, grid_H, grid_I;
     private Button zoom05_Btn, zoom1_Btn, zoom15_Btn, zoom2_Btn, zoom3_Btn;
     private Button video_Btn, photo_Btn;
@@ -159,8 +159,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-         initialiseHighlightableButtons();
-         highlightHandler.postDelayed(highlightRunnable, 3000);
+
+        //initialiseHighlightableButtons();
+        //highlightHandler.postDelayed(highlightRunnable, 3000);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         if (!checkPermission())
@@ -175,6 +176,8 @@ public class MainActivity extends AppCompatActivity {
         setFilter();
         initialiseUI();
         setUI();
+
+        gridLO.setVisibility(View.GONE);
 
         if (isFinishing()){
             if (bluetoothSocket!= null) {
@@ -195,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-    private void updateHighlightableButtonsForRotation() {
+    /*private void updateHighlightableButtonsForRotation() {
         Log.d(TAG, "Entering rotation mode");
         highlightHandler.removeCallbacks(highlightRunnable);
         highlightableButtons.clear();
@@ -205,14 +208,16 @@ public class MainActivity extends AppCompatActivity {
         currentButtonIndex = 0;
         highlightButton(currentButtonIndex);
         highlightHandler.postDelayed(highlightRunnable, 3000);
-    }
-    private void initialiseHighlightableButtons() {
+    }*/
+
+    /*private void initialiseHighlightableButtons() {
         highlightableButtons = new ArrayList<>();
         highlightableButtons.add((View) findViewById(R.id.flashBtn));
-        highlightableButtons.add((View) findViewById(R.id.centerBtn));
+        highlightableButtons.add((View) findViewById(R.id.scanCenterBtn));
+        highlightableButtons.add((View) findViewById(R.id.gridCenterBtn));
         highlightableButtons.add((View) findViewById(R.id.rotateBtn));
         highlightableButtons.add((View) findViewById(R.id.bluetooth));
-        highlightableButtons.add((View) findViewById(R.id.settingsBtn));
+        //highlightableButtons.add((View) findViewById(R.id.settingsBtn));
         highlightableButtons.add((View) findViewById(R.id.gridA));
         highlightableButtons.add((View) findViewById(R.id.gridB));
         highlightableButtons.add((View) findViewById(R.id.gridC));
@@ -234,8 +239,8 @@ public class MainActivity extends AppCompatActivity {
         highlightableButtons.add((View) findViewById(R.id.flipBtn));
         Log.d(TAG, "Total number of highlightable buttons: " + highlightableButtons.size());
         //add more buttons
-    }
-    private void highlightButton(int index) {
+    }*/
+    /*private void highlightButton(int index) {
         Log.d(TAG, "Highlighting button at index: " + index);
         for (int i = 0; i < highlightableButtons.size(); i++) {
             View view = highlightableButtons.get(i);
@@ -251,10 +256,10 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "Button at index " + i + " cleared animation.");
             }
         }
-    }
+    }*/
 
 
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
+    /*public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) {
 
             int indexToSelect = currentButtonIndex;
@@ -268,9 +273,9 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         return super.onKeyDown(keyCode, event);
-    }
+    }*/
 
-    private void selectHighlightedButton(int indexToSelect) {
+    /*private void selectHighlightedButton(int indexToSelect) {
 
         View selectedView = highlightableButtons.get(indexToSelect);
 
@@ -278,7 +283,7 @@ public class MainActivity extends AppCompatActivity {
             Button selectedButton = (Button) selectedView;
             selectedButton.performClick();
         }
-    }
+    }*/
 
 
     @Override
@@ -286,14 +291,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         checkBtEnabled();
         super.onResume();
-        highlightHandler.postDelayed(highlightRunnable, 3000);
+        // highlightHandler.postDelayed(highlightRunnable, 3000);
         if (cameraProvider != null) {
             startCameraX(cameraProvider);
         }
     }
     protected void onPause() {
         super.onPause();
-        highlightHandler.removeCallbacks(highlightRunnable);
+        //highlightHandler.removeCallbacks(highlightRunnable);
     }
 
     public boolean checkBtEnabled() {
@@ -318,11 +323,11 @@ public class MainActivity extends AppCompatActivity {
         arrowBtnUp = findViewById(R.id.arrowBtn_Up);
         arrowBtnDown = findViewById(R.id.arrowBtn_Down);
         arrowBtnR = findViewById(R.id.arrowBtn_Right);
-      // grid_Btn = findViewById(R.id.gridBtn);
         bluetooth_Btn = findViewById(R.id.bluetooth);
-        center_Btn = findViewById(R.id.centerBtn);
+        scanCenter_Btn = findViewById(R.id.scanCenterBtn);
+        gridCenter_Btn = findViewById(R.id.gridCenterBtn);
         flash_Btn = findViewById(R.id.flashBtn);
-        settingsBtn = findViewById(R.id.settingsBtn);
+        //settingsBtn = findViewById(R.id.settingsBtn);
         directionLO = findViewById(R.id.directionLayout);
         levelLO = findViewById(R.id.levelLayout);
         orientLO = findViewById(R.id.orientationLayout);
@@ -340,7 +345,7 @@ public class MainActivity extends AppCompatActivity {
         clkwiseBtn = findViewById(R.id.clockwiseBtn);
         antiClkBtn = findViewById(R.id.anticlockwiseBtn);
         gridLO = findViewById(R.id.gridLayout);
-       // grid_Btn.setText("grid on")
+        //gridCenter_Btn.setText("grid on");
         flipBtn = findViewById(R.id.flipBtn);
         galleryBtn = findViewById(R.id.galleryBtn);
         grid_A = findViewById(R.id.gridA);
@@ -521,6 +526,14 @@ public class MainActivity extends AppCompatActivity {
                 zoomLO.setVisibility(View.VISIBLE);
                 modeLO.setVisibility(View.VISIBLE);
                 levelLO.setVisibility(View.GONE);
+                flash_Btn.setVisibility(View.VISIBLE);
+                scanCenter_Btn.setVisibility(View.VISIBLE);
+                bluetooth_Btn.setVisibility(View.VISIBLE);
+                gridCenter_Btn.setVisibility(View.VISIBLE);
+                orientBtn.setVisibility(View.VISIBLE);
+                galleryBtn.setVisibility(View.VISIBLE);
+                flipBtn.setVisibility(View.VISIBLE);
+                modeLO.setVisibility(View.VISIBLE);
             }
         });
 
@@ -530,14 +543,23 @@ public class MainActivity extends AppCompatActivity {
                 //directionLO.setVisibility(View.GONE);
                 zoomLO.setVisibility(View.GONE);
                 modeLO.setVisibility(View.GONE);
+                flash_Btn.setVisibility(View.GONE);
+                scanCenter_Btn.setVisibility(View.GONE);
+                bluetooth_Btn.setVisibility(View.GONE);
+                gridCenter_Btn.setVisibility(View.GONE);
+                orientBtn.setVisibility(View.GONE);
+                galleryBtn.setVisibility(View.GONE);
+                flipBtn.setVisibility(View.GONE);
+                modeLO.setVisibility(View.GONE);
 
                 orientLO.setVisibility(View.VISIBLE);
                 controlCenter.setBtnClicked("ROTATE");
-                updateHighlightableButtonsForRotation();
+
+                //updateHighlightableButtonsForRotation();
                 currentButtonIndex = 0;
-                highlightButton(currentButtonIndex);
-                highlightHandler.removeCallbacks(highlightRunnable);
-                highlightHandler.postDelayed(highlightRunnable, 3000);
+                //highlightButton(currentButtonIndex);
+                //highlightHandler.removeCallbacks(highlightRunnable);
+                //highlightHandler.postDelayed(highlightRunnable, 3000);
             }
         });
 
@@ -549,6 +571,15 @@ public class MainActivity extends AppCompatActivity {
                 zoomLO.setVisibility(View.VISIBLE);
                 modeLO.setVisibility(View.VISIBLE);
                 orientLO.setVisibility(View.GONE);
+
+                flash_Btn.setVisibility(View.VISIBLE);
+                scanCenter_Btn.setVisibility(View.VISIBLE);
+                bluetooth_Btn.setVisibility(View.VISIBLE);
+                gridCenter_Btn.setVisibility(View.VISIBLE);
+                orientBtn.setVisibility(View.VISIBLE);
+                galleryBtn.setVisibility(View.VISIBLE);
+                flipBtn.setVisibility(View.VISIBLE);
+                modeLO.setVisibility(View.VISIBLE);
             }
         });
 
@@ -609,6 +640,15 @@ public class MainActivity extends AppCompatActivity {
                 orientLO.setVisibility(View.GONE);
                 completeRotation();
 
+                flash_Btn.setVisibility(View.VISIBLE);
+                scanCenter_Btn.setVisibility(View.VISIBLE);
+                bluetooth_Btn.setVisibility(View.VISIBLE);
+                gridCenter_Btn.setVisibility(View.VISIBLE);
+                orientBtn.setVisibility(View.VISIBLE);
+                galleryBtn.setVisibility(View.VISIBLE);
+                flipBtn.setVisibility(View.VISIBLE);
+                modeLO.setVisibility(View.VISIBLE);
+
             }
         });
         antiClkBtn.setOnClickListener(new View.OnClickListener() {
@@ -621,20 +661,51 @@ public class MainActivity extends AppCompatActivity {
                 orientLO.setVisibility(View.GONE);
                 completeRotation();
 
+                flash_Btn.setVisibility(View.VISIBLE);
+                scanCenter_Btn.setVisibility(View.VISIBLE);
+                bluetooth_Btn.setVisibility(View.VISIBLE);
+                gridCenter_Btn.setVisibility(View.VISIBLE);
+                orientBtn.setVisibility(View.VISIBLE);
+                galleryBtn.setVisibility(View.VISIBLE);
+                flipBtn.setVisibility(View.VISIBLE);
+                modeLO.setVisibility(View.VISIBLE);
+
             }
         });
-     /*   grid_Btn.setOnClickListener(new View.OnClickListener() {
+        gridCenter_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (grid_Btn.getText() == "grid on"){
-                    grid_Btn.setText("grid off");
+                if ("Grid Center".equals(gridCenter_Btn.getText().toString())) {
+                    gridCenter_Btn.setText("Grid off");
                     gridLO.setVisibility(View.VISIBLE);
-                }else {
-                    grid_Btn.setText("grid on");
+
+                    modeLO.setVisibility(View.GONE);
+                    flash_Btn.setVisibility(View.GONE);
+                    scanCenter_Btn.setVisibility(View.GONE);
+                    orientBtn.setVisibility(View.GONE);
+                    bluetooth_Btn.setVisibility(View.GONE);
+                    galleryBtn.setVisibility(View.GONE);
+                    flipBtn.setVisibility(View.GONE);
+                    zoomLO.setVisibility(View.GONE);
+
+
+
+                } else {
+                    gridCenter_Btn.setText("Grid Center");
                     gridLO.setVisibility(View.GONE);
+
+                    modeLO.setVisibility(View.VISIBLE);
+                    flash_Btn.setVisibility(View.VISIBLE);
+                    scanCenter_Btn.setVisibility(View.VISIBLE);
+                    orientBtn.setVisibility(View.VISIBLE);
+                    bluetooth_Btn.setVisibility(View.VISIBLE);
+                    galleryBtn.setVisibility(View.VISIBLE);
+                    flipBtn.setVisibility(View.VISIBLE);
+                    zoomLO.setVisibility(View.VISIBLE);
                 }
             }
-        }); no longer needed*/
+        });
+
 
         flipBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -665,7 +736,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        center_Btn.setOnClickListener(new View.OnClickListener() {
+        scanCenter_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, OldMainActivity.class);
