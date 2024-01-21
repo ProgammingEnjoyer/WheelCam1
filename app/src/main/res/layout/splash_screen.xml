@@ -35,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-thin"
-            android:text="@string/splash_group"
+            android:text="REAT Group 2"
             android:textColor="#B2B4BF"
             android:textSize="20dp"
             android:textStyle="bold"
