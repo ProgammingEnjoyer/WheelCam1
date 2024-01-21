@@ -526,6 +526,14 @@ public class MainActivity extends AppCompatActivity {
                 zoomLO.setVisibility(View.VISIBLE);
                 modeLO.setVisibility(View.VISIBLE);
                 levelLO.setVisibility(View.GONE);
+                flash_Btn.setVisibility(View.VISIBLE);
+                scanCenter_Btn.setVisibility(View.VISIBLE);
+                bluetooth_Btn.setVisibility(View.VISIBLE);
+                gridCenter_Btn.setVisibility(View.VISIBLE);
+                orientBtn.setVisibility(View.VISIBLE);
+                galleryBtn.setVisibility(View.VISIBLE);
+                flipBtn.setVisibility(View.VISIBLE);
+                modeLO.setVisibility(View.VISIBLE);
             }
         });
 
@@ -535,9 +543,18 @@ public class MainActivity extends AppCompatActivity {
                 //directionLO.setVisibility(View.GONE);
                 zoomLO.setVisibility(View.GONE);
                 modeLO.setVisibility(View.GONE);
+                flash_Btn.setVisibility(View.GONE);
+                scanCenter_Btn.setVisibility(View.GONE);
+                bluetooth_Btn.setVisibility(View.GONE);
+                gridCenter_Btn.setVisibility(View.GONE);
+                orientBtn.setVisibility(View.GONE);
+                galleryBtn.setVisibility(View.GONE);
+                flipBtn.setVisibility(View.GONE);
+                modeLO.setVisibility(View.GONE);
 
                 orientLO.setVisibility(View.VISIBLE);
                 controlCenter.setBtnClicked("ROTATE");
+
                 //updateHighlightableButtonsForRotation();
                 currentButtonIndex = 0;
                 //highlightButton(currentButtonIndex);
@@ -554,6 +571,15 @@ public class MainActivity extends AppCompatActivity {
                 zoomLO.setVisibility(View.VISIBLE);
                 modeLO.setVisibility(View.VISIBLE);
                 orientLO.setVisibility(View.GONE);
+
+                flash_Btn.setVisibility(View.VISIBLE);
+                scanCenter_Btn.setVisibility(View.VISIBLE);
+                bluetooth_Btn.setVisibility(View.VISIBLE);
+                gridCenter_Btn.setVisibility(View.VISIBLE);
+                orientBtn.setVisibility(View.VISIBLE);
+                galleryBtn.setVisibility(View.VISIBLE);
+                flipBtn.setVisibility(View.VISIBLE);
+                modeLO.setVisibility(View.VISIBLE);
             }
         });
 
@@ -614,6 +640,15 @@ public class MainActivity extends AppCompatActivity {
                 orientLO.setVisibility(View.GONE);
                 completeRotation();
 
+                flash_Btn.setVisibility(View.VISIBLE);
+                scanCenter_Btn.setVisibility(View.VISIBLE);
+                bluetooth_Btn.setVisibility(View.VISIBLE);
+                gridCenter_Btn.setVisibility(View.VISIBLE);
+                orientBtn.setVisibility(View.VISIBLE);
+                galleryBtn.setVisibility(View.VISIBLE);
+                flipBtn.setVisibility(View.VISIBLE);
+                modeLO.setVisibility(View.VISIBLE);
+
             }
         });
         antiClkBtn.setOnClickListener(new View.OnClickListener() {
@@ -625,6 +660,15 @@ public class MainActivity extends AppCompatActivity {
                 modeLO.setVisibility(View.VISIBLE);
                 orientLO.setVisibility(View.GONE);
                 completeRotation();
+
+                flash_Btn.setVisibility(View.VISIBLE);
+                scanCenter_Btn.setVisibility(View.VISIBLE);
+                bluetooth_Btn.setVisibility(View.VISIBLE);
+                gridCenter_Btn.setVisibility(View.VISIBLE);
+                orientBtn.setVisibility(View.VISIBLE);
+                galleryBtn.setVisibility(View.VISIBLE);
+                flipBtn.setVisibility(View.VISIBLE);
+                modeLO.setVisibility(View.VISIBLE);
 
             }
         });
