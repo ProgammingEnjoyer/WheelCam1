@@ -8,9 +8,10 @@
     <LinearLayout
         android:id="@+id/topBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="90dp"
         android:layout_alignParentEnd="true"
-        android:background="@color/jade_dark">
+        android:background="@color/jade_dark"
+        >
 
         <Button
             android:id="@+id/flashBtn"
@@ -24,7 +25,6 @@
             android:textColor="@color/mint"
             android:textSize="12dp"
             android:contentDescription="Flash"/>
-
         <Button
             android:id="@+id/scanCenterBtn"
             android:layout_width="wrap_content"
@@ -37,7 +37,6 @@
             android:textColor="@color/mint"
             android:text="Scan Center"
             android:contentDescription="Scan Center Mode" />
-
         <!--<Button
             android:id="@+id/zoomBtn"
             android:layout_width="wrap_content"
@@ -66,13 +65,13 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
+
             android:background="@drawable/button_selector"
             android:drawableTop="@drawable/ic_screen_rotate"
             android:textSize="11dp"
             android:textColor="@color/mint"
             android:text="rotate"
             android:contentDescription="Rotate" />
-
         <Button
             android:id="@+id/bluetooth"
             android:layout_width="wrap_content"
@@ -86,9 +85,7 @@
             android:textSize="12dp"
             android:contentDescription="Bluetooth"/>
 
-
-
-    </LinearLayout>
+    </LinearLayout> <!--End of top bar-->
 
     <androidx.camera.view.PreviewView
         android:id="@+id/previewView"
@@ -110,7 +107,7 @@
             android:src="@drawable/ic_cross_with_border"
             android:layout_gravity="center"/>
 
-    </LinearLayout>
+    </LinearLayout> <!--End of centerLO-->
     <LinearLayout
         android:id="@+id/gridLayout"
         android:layout_width="match_parent"
@@ -268,15 +265,14 @@
                 android:contentDescription="Grid I"/>
         </LinearLayout>
 
-
-    </LinearLayout>
+    </LinearLayout> <!--End of grid Layout-->
     <LinearLayout
         android:id="@+id/zoomLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_alignBottom="@+id/gridLayout"
+        android:layout_alignBottom="@+id/centerLayout"
         android:orientation="horizontal"
         android:gravity="center">
         <Button
@@ -289,7 +285,6 @@
             android:background="@drawable/button_selector"
             android:contentDescription="Zoom .05"
             />
-
         <Button
             android:id="@+id/zoom1_Btn"
             android:layout_width="80dp"
@@ -331,7 +326,7 @@
             android:background="@drawable/button_selector"
             android:contentDescription="Zoom 3"
             />
-    </LinearLayout>
+    </LinearLayout> <!-- End of zoom layout-->
 
     <LinearLayout
         android:id="@+id/bottomBar"
@@ -339,9 +334,8 @@
         android:layout_height="140dp"
         android:layout_alignBottom="@+id/previewView"
         android:background="@color/black_halftrans"
-        android:orientation="vertical">
-
-
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/centerLayout">
         <LinearLayout
             android:id="@+id/directionLayout"
             android:layout_width="wrap_content"
@@ -393,8 +387,7 @@
                 android:contentDescription="Right" />
 
 
-        </LinearLayout>
-
+        </LinearLayout> <!--End of direction layout. we are not using this-->
         <LinearLayout
             android:id="@+id/modeLayout"
             android:layout_width="wrap_content"
@@ -403,7 +396,10 @@
             android:layout_marginTop="1dp"
             android:layout_marginBottom="7dp"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            app:layout_constraintTop_toTopOf="@id/zoomLayout"
+            app:layout_constraintBottom_toTopOf="@id/bottomCaptureLayout"
+            >
 
             <Button
                 android:id="@+id/video_Btn"
@@ -426,7 +422,7 @@
                 android:layout_marginStart="15dp"
                 android:contentDescription="Photo Mode"
                 />
-        </LinearLayout>
+        </LinearLayout> <!--Enf od mode (PHOTO/VIDEO layout)-->
 
         <!--This is just so that the gallery, capture anf flip buttons don't shift up during recording mode.
         We can later use this space to set the recording time -->
@@ -524,7 +520,8 @@
             android:layout_marginBottom="5dp"
             android:layout_weight="1"
             android:orientation="horizontal"
-            android:visibility="gone">
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="@id/bottomBar">
 
             <TextView
                 android:id="@+id/modeTV"
@@ -575,6 +572,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/bottomCaptureLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

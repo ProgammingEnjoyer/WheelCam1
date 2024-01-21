@@ -177,6 +177,8 @@ public class MainActivity extends AppCompatActivity {
         initialiseUI();
         setUI();
 
+        gridLO.setVisibility(View.GONE);
+
         if (isFinishing()){
             if (bluetoothSocket!= null) {
                 try {
@@ -629,15 +631,37 @@ public class MainActivity extends AppCompatActivity {
         gridCenter_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (gridCenter_Btn.getText() == "Grid Center"){
-                    gridCenter_Btn.setText("grid off");
+                if ("Grid Center".equals(gridCenter_Btn.getText().toString())) {
+                    gridCenter_Btn.setText("Grid off");
                     gridLO.setVisibility(View.VISIBLE);
-                }else {
+
+                    modeLO.setVisibility(View.GONE);
+                    flash_Btn.setVisibility(View.GONE);
+                    scanCenter_Btn.setVisibility(View.GONE);
+                    orientBtn.setVisibility(View.GONE);
+                    bluetooth_Btn.setVisibility(View.GONE);
+                    galleryBtn.setVisibility(View.GONE);
+                    flipBtn.setVisibility(View.GONE);
+                    zoomLO.setVisibility(View.GONE);
+
+
+
+                } else {
                     gridCenter_Btn.setText("Grid Center");
                     gridLO.setVisibility(View.GONE);
+
+                    modeLO.setVisibility(View.VISIBLE);
+                    flash_Btn.setVisibility(View.VISIBLE);
+                    scanCenter_Btn.setVisibility(View.VISIBLE);
+                    orientBtn.setVisibility(View.VISIBLE);
+                    bluetooth_Btn.setVisibility(View.VISIBLE);
+                    galleryBtn.setVisibility(View.VISIBLE);
+                    flipBtn.setVisibility(View.VISIBLE);
+                    zoomLO.setVisibility(View.VISIBLE);
                 }
             }
         });
+
 
         flipBtn.setOnClickListener(new View.OnClickListener() {
             @Override
