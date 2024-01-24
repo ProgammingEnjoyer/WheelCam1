@@ -9,7 +9,6 @@ import androidx.camera.core.CameraControl;
 import androidx.camera.core.CameraInfo;
 import androidx.camera.core.CameraSelector;
 import androidx.camera.core.CameraX;
-import androidx.camera.core.VideoCapture;
 import androidx.camera.core.ImageCapture;
 import androidx.camera.core.ImageCaptureException;
 import androidx.camera.core.Preview;
@@ -110,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
     //private Handler highlightHandler = new Handler();
     private int currentButtonIndex = 0;
     private CameraControl cameraControl;
-    private VideoCapture videoCapture;
+    // private VideoCapture videoCapture;
     private boolean isRecording = false;
     final private String TAG = "MainActivity";
     private final static int REQUEST_ENABLE_BT = 1;
@@ -143,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
     private Button video_Btn, photo_Btn;
     private Button motorBtn_1, motorBtn_2, motorBtn_3, motorBtn_4, clkwiseBtn, antiClkBtn;
     private PreviewView previewView;
-    private LinearLayout directionLO, levelLO, orientLO, gridLO,zoomLO, modeLO, recordingLO;
+    private LinearLayout directionLO, levelLO, orientLO, gridLO, zoomLO, modeLO, recordingLO;
     private TextView moveDirTV;
 
     // camera
