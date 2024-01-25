@@ -1,5 +1,6 @@
 package com.example.wheelcam;
 import android.Manifest;
+import android.bluetooth.BluetoothSocket;
 import android.util.Log;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -15,14 +16,18 @@ import androidx.core.content.ContextCompat;
 import androidx.lifecycle.LifecycleOwner;
 import com.google.common.util.concurrent.ListenableFuture;
 import androidx.camera.view.PreviewView;
-import androidx.annotation.NonNull;import android.content.pm.PackageManager;import java.util.concurrent.ExecutionException;import android.view.ViewTreeObserver;
+import androidx.annotation.NonNull;import android.content.pm.PackageManager;
+
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.concurrent.ExecutionException;import android.view.ViewTreeObserver;
 
 
 
 
 
 public class OldMainActivity extends AppCompatActivity {
-    private static final int REQUEST_CODE_PERMISSIONS = 1001; // 可以是任何唯一的整数
+    private static final int REQUEST_CODE_PERMISSIONS = 1001;
     private CustomView customView;
     private Button controlButton;
     private int clickCount = 0;
@@ -41,9 +46,9 @@ public class OldMainActivity extends AppCompatActivity {
         customView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
-                // 移除监听器，以避免重复调用
+
                 customView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                // 开始横线动画
+                // starting
                 startMovingLine(true);
             }
         });
@@ -71,6 +76,10 @@ public class OldMainActivity extends AppCompatActivity {
                         if (verticalAnimator != null) {
                             verticalAnimator.cancel(); // stop vertical line
                         }
+                        float[] intersection = customView.getIntersectionPoint();
+                        showToast("Intersection X: " + intersection[0] + ", Y: " + intersection[1]);
+                        String result = "x" + intersection[0]+ "y" + intersection[1];
+                        sendIntersectionPoint(result);
                         finish(); // exit the activity
                         break;
                 }
@@ -78,13 +87,34 @@ public class OldMainActivity extends AppCompatActivity {
         });
     }
 
+    BluetoothSocket bluetoothSocket;
+
+    private void sendIntersectionPoint(String result) {
+        MainActivity mainActivity = MainActivity.getInstance();
+        if (mainActivity != null && mainActivity.bluetoothSocket != null && mainActivity.bluetoothSocket.isConnected()) {
+            try {
+                OutputStream outputStream = mainActivity.bluetoothSocket.getOutputStream();
+                outputStream.write(result.getBytes());
+                showToast("Data sent: " + result);
+            } catch (IOException e) {
+                Log.e("OldMainActivity", "Error sending data", e);
+                showToast("Error sending data");
+            }
+        } else {
+            showToast("Bluetooth is not connected or MainActivity is not available");
+        }
+    }
+
+
 
     private void startMovingLine(boolean isHorizontal) {
         float startValue = 0;
         float endValue = isHorizontal ? customView.getHeight() : customView.getWidth();
 
         ValueAnimator animator = ValueAnimator.ofFloat(startValue, endValue);
-        animator.setDuration(30000); // 30 seconds
+        animator.setDuration(7000); // 7 seconds
+        animator.setRepeatCount(ValueAnimator.INFINITE);
+        animator.setRepeatMode(ValueAnimator.RESTART);
         animator.addUpdateListener(animation -> {
             float value = (float) animation.getAnimatedValue();
             if (isHorizontal) {
@@ -102,6 +132,7 @@ public class OldMainActivity extends AppCompatActivity {
             verticalAnimator = animator;
         }
     }
+
 
     private void startCamera() {
         ListenableFuture<ProcessCameraProvider> cameraProviderFuture = ProcessCameraProvider.getInstance(this);

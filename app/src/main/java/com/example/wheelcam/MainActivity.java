@@ -72,6 +72,12 @@ import java.util.ArrayList;import android.view.animation.AnimationUtils;
 
 public class MainActivity extends AppCompatActivity {
     private boolean isRotating = false;
+    private static MainActivity instance;
+    public BluetoothSocket bluetoothSocket; // 确保这是一个成员变量
+
+    public static MainActivity getInstance() {
+        return instance;
+    }
 
     private void completeRotation() {
         Log.d(TAG, "Exiting rotation mode");
@@ -119,7 +125,6 @@ public class MainActivity extends AppCompatActivity {
     BluetoothDevice selectedBTDevice = null;
     BluetoothDevice  connectedBTDevice = null;
     BluetoothAdapter bluetoothAdapter;
-    BluetoothSocket bluetoothSocket;
     public static OutputStream btOutputStream;
     public static InputStream btInputStream;
     boolean isBtConnected = false;
@@ -155,9 +160,12 @@ public class MainActivity extends AppCompatActivity {
     //control
     ControlCenter controlCenter = ControlCenter.getInstance(this);
 
+
      @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+         instance = this;
         setContentView(R.layout.activity_main);
 
         //initialiseHighlightableButtons();
@@ -197,6 +205,10 @@ public class MainActivity extends AppCompatActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+    protected void onDestroy() {
+        super.onDestroy();
+        instance = null; // 清除引用
     }
     /*private void updateHighlightableButtonsForRotation() {
         Log.d(TAG, "Entering rotation mode");
@@ -771,7 +783,16 @@ public class MainActivity extends AppCompatActivity {
                         // calculate central point of gridA
                         float centerX = ((float) screenWidth / 6) - ((float) screenWidth / 2);
                         float centerY = ((float) gridHeight / 2) - ((float) gridHeight / 6);
-
+                        String result = "x" + centerX + "y" + centerY;
+                        if (bluetoothSocket != null)
+                        {
+                            try {
+                                OutputStream outputStream = bluetoothSocket.getOutputStream();
+                                outputStream.write(result.getBytes());
+                            }catch(IOException e){
+                                e.printStackTrace();
+                            }
+                        }
 
                         Toast.makeText(MainActivity.this, "Grid A Center: (" + centerX + ", " + centerY + ")", Toast.LENGTH_LONG).show();
                     }
@@ -806,7 +827,16 @@ public class MainActivity extends AppCompatActivity {
                         // calculate central point of gridB
                         float centerX = 0;
                         float centerY = ((float) gridHeight / 2) - ((float) gridHeight / 6);
-
+                        String result = "x" + centerX + "y" + centerY;
+                        if (bluetoothSocket != null)
+                        {
+                            try {
+                                OutputStream outputStream = bluetoothSocket.getOutputStream();
+                                outputStream.write(result.getBytes());
+                            }catch(IOException e){
+                                e.printStackTrace();
+                            }
+                        }
                         Toast.makeText(MainActivity.this, "Grid B Center: (" + centerX + ", " + centerY + ")", Toast.LENGTH_LONG).show();
                     }
                 });
@@ -817,7 +847,7 @@ public class MainActivity extends AppCompatActivity {
         grid_C.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ControlCenter.setGridA();
+                ControlCenter.setGridC();
 
                 // acquire size of screen
                 DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -841,7 +871,16 @@ public class MainActivity extends AppCompatActivity {
                         // calculate central point of gridA
                         float centerX = ((float) screenWidth / 2) - ((float) screenWidth / 6);
                         float centerY = ((float) gridHeight / 2) - ((float) gridHeight / 6);
-
+                        String result = "x" + centerX + "y" + centerY;
+                        if (bluetoothSocket != null)
+                        {
+                            try {
+                                OutputStream outputStream = bluetoothSocket.getOutputStream();
+                                outputStream.write(result.getBytes());
+                            }catch(IOException e){
+                                e.printStackTrace();
+                            }
+                        }
                         Toast.makeText(MainActivity.this, "Grid C Center: (" + centerX + ", " + centerY + ")", Toast.LENGTH_LONG).show();
                     }
                 });
@@ -851,7 +890,7 @@ public class MainActivity extends AppCompatActivity {
         grid_D.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ControlCenter.setGridA();
+                ControlCenter.setGridD();
 
                 // acquire size of screen
                 DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -875,7 +914,16 @@ public class MainActivity extends AppCompatActivity {
                         // calculate central point of gridA
                         float centerX = ((float) screenWidth / 6) - ((float) screenWidth / 2);
                         float centerY = 0;
-
+                        String result = "x" + centerX + "y" + centerY;
+                        if (bluetoothSocket != null)
+                        {
+                            try {
+                                OutputStream outputStream = bluetoothSocket.getOutputStream();
+                                outputStream.write(result.getBytes());
+                            }catch(IOException e){
+                                e.printStackTrace();
+                            }
+                        }
                         Toast.makeText(MainActivity.this, "Grid D Center: (" + centerX + ", " + centerY + ")", Toast.LENGTH_LONG).show();
                     }
                 });
@@ -884,7 +932,7 @@ public class MainActivity extends AppCompatActivity {
         grid_E.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ControlCenter.setGridA();
+                ControlCenter.setGridE();
 
                 // acquire size of screen
                 DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -908,7 +956,16 @@ public class MainActivity extends AppCompatActivity {
                         // calculate central point of gridA
                         float centerX = 0;
                         float centerY = 0;
-
+                        String result = "x" + centerX + "y" + centerY;
+                        if (bluetoothSocket != null)
+                        {
+                            try {
+                                OutputStream outputStream = bluetoothSocket.getOutputStream();
+                                outputStream.write(result.getBytes());
+                            }catch(IOException e){
+                                e.printStackTrace();
+                            }
+                        }
                         Toast.makeText(MainActivity.this, "Grid E Center: (" + centerX + ", " + centerY + ")", Toast.LENGTH_LONG).show();
                     }
                 });
@@ -917,7 +974,7 @@ public class MainActivity extends AppCompatActivity {
         grid_F.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ControlCenter.setGridA();
+                ControlCenter.setGridF();
 
                 // acquire size of screen
                 DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -941,7 +998,16 @@ public class MainActivity extends AppCompatActivity {
                         // calculate central point of gridA
                         float centerX = ((float) screenWidth / 2) - ((float) screenWidth / 6);
                         float centerY = 0;
-
+                        String result = "x" + centerX + "y" + centerY;
+                        if (bluetoothSocket != null)
+                        {
+                            try {
+                                OutputStream outputStream = bluetoothSocket.getOutputStream();
+                                outputStream.write(result.getBytes());
+                            }catch(IOException e){
+                                e.printStackTrace();
+                            }
+                        }
                         Toast.makeText(MainActivity.this, "Grid F Center: (" + centerX + ", " + centerY + ")", Toast.LENGTH_LONG).show();
                     }
                 });
@@ -950,7 +1016,7 @@ public class MainActivity extends AppCompatActivity {
         grid_G.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ControlCenter.setGridA();
+                ControlCenter.setGridG();
 
                 // acquire size of screen
                 DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -974,7 +1040,16 @@ public class MainActivity extends AppCompatActivity {
                         // calculate central point of gridA
                         float centerX = ((float) screenWidth / 6) - ((float) screenWidth / 2);
                         float centerY = ((float) gridHeight / 6) - ((float) gridHeight / 2);
-
+                        String result = "x" + centerX + "y" + centerY;
+                        if (bluetoothSocket != null)
+                        {
+                            try {
+                                OutputStream outputStream = bluetoothSocket.getOutputStream();
+                                outputStream.write(result.getBytes());
+                            }catch(IOException e){
+                                e.printStackTrace();
+                            }
+                        }
                         Toast.makeText(MainActivity.this, "Grid G Center: (" + centerX + ", " + centerY + ")", Toast.LENGTH_LONG).show();
                     }
                 });
@@ -984,7 +1059,7 @@ public class MainActivity extends AppCompatActivity {
         grid_H.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ControlCenter.setGridA();
+                ControlCenter.setGridH();
 
                 // acquire size of screen
                 DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -1006,9 +1081,18 @@ public class MainActivity extends AppCompatActivity {
                         int gridHeight = screenHeight - topBarHeight - bottomBarHeight;
 
                         // calculate central point of gridA
-                        float centerX = ((float) screenWidth / 6) - ((float) screenWidth / 2);
-                        float centerY = 0;
-
+                        float centerX = 0;
+                        float centerY = ((float) screenWidth / 6) - ((float) screenWidth / 2);
+                        String result = "x" + centerX + "y" + centerY;
+                        if (bluetoothSocket != null)
+                        {
+                            try {
+                                OutputStream outputStream = bluetoothSocket.getOutputStream();
+                                outputStream.write(result.getBytes());
+                            }catch(IOException e){
+                                e.printStackTrace();
+                            }
+                        }
                         Toast.makeText(MainActivity.this, "Grid H Center: (" + centerX + ", " + centerY + ")", Toast.LENGTH_LONG).show();
                     }
                 });
@@ -1018,7 +1102,7 @@ public class MainActivity extends AppCompatActivity {
         grid_I.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ControlCenter.setGridA();
+                ControlCenter.setGridI();
 
                 // acquire size of screen
                 DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -1042,7 +1126,16 @@ public class MainActivity extends AppCompatActivity {
                         // calculate central point of gridA
                         float centerX = ((float) screenWidth / 2) - ((float) screenWidth / 6);
                         float centerY = ((float) gridHeight / 6) - ((float) gridHeight / 2);
-
+                        String result = "x" + centerX + "y" + centerY;
+                        if (bluetoothSocket != null)
+                        {
+                            try {
+                                OutputStream outputStream = bluetoothSocket.getOutputStream();
+                                outputStream.write(result.getBytes());
+                            }catch(IOException e){
+                                e.printStackTrace();
+                            }
+                        }
                         Toast.makeText(MainActivity.this, "Grid I Center: (" + centerX + ", " + centerY + ")", Toast.LENGTH_LONG).show();
                     }
                 });
