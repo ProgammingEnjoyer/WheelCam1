@@ -9,7 +9,6 @@ import androidx.camera.core.CameraControl;
 import androidx.camera.core.CameraInfo;
 import androidx.camera.core.CameraSelector;
 import androidx.camera.core.CameraX;
-import androidx.camera.core.VideoCapture;
 import androidx.camera.core.ImageCapture;
 import androidx.camera.core.ImageCaptureException;
 import androidx.camera.core.Preview;
@@ -115,8 +114,9 @@ public class MainActivity extends AppCompatActivity {
     //private ArrayList<View> highlightableButtons;
     //private Handler highlightHandler = new Handler();
     private int currentButtonIndex = 0;
+    private float currentZoomLevel=1.0f;
     private CameraControl cameraControl;
-    private VideoCapture videoCapture;
+    // private VideoCapture videoCapture;
     private boolean isRecording = false;
     final private String TAG = "MainActivity";
     private final static int REQUEST_ENABLE_BT = 1;
@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
     private Button video_Btn, photo_Btn;
     private Button motorBtn_1, motorBtn_2, motorBtn_3, motorBtn_4, clkwiseBtn, antiClkBtn;
     private PreviewView previewView;
-    private LinearLayout directionLO, levelLO, orientLO, gridLO,zoomLO, modeLO, recordingLO;
+    private LinearLayout directionLO, levelLO, orientLO, gridLO, zoomLO, modeLO, recordingLO;
     private TextView moveDirTV;
 
     // camera
@@ -205,6 +205,13 @@ public class MainActivity extends AppCompatActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        zoom05_Btn.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                setZoomLevel(2.0f);
+            }
+        });
+
     }
     protected void onDestroy() {
         super.onDestroy();
@@ -422,6 +429,59 @@ public class MainActivity extends AppCompatActivity {
             photo_Btn.setSelected(true); //By default, start in photo mode
         };
 
+        zoom05_Btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                zoom05_Btn.setSelected(true);
+                zoom1_Btn.setSelected(false);
+                zoom15_Btn.setSelected(false);
+                zoom2_Btn.setSelected(false);
+                zoom3_Btn.setSelected(false);
+
+            }
+        });
+        zoom1_Btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                zoom05_Btn.setSelected(false);
+                zoom1_Btn.setSelected(true);
+                zoom15_Btn.setSelected(false);
+                zoom2_Btn.setSelected(false);
+                zoom3_Btn.setSelected(false);
+            }
+        });
+        zoom15_Btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                zoom05_Btn.setSelected(false);
+                zoom1_Btn.setSelected(false);
+                zoom15_Btn.setSelected(true);
+                zoom2_Btn.setSelected(false);
+                zoom3_Btn.setSelected(false);
+            }
+        });
+        zoom2_Btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                zoom05_Btn.setSelected(false);
+                zoom1_Btn.setSelected(false);
+                zoom15_Btn.setSelected(false);
+                zoom2_Btn.setSelected(true);
+                zoom3_Btn.setSelected(false);
+
+            }
+        });
+        zoom3_Btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                zoom05_Btn.setSelected(false);
+                zoom1_Btn.setSelected(false);
+                zoom15_Btn.setSelected(false);
+                zoom2_Btn.setSelected(false);
+                zoom3_Btn.setSelected(true);
+            }
+        });
+
         flash_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {toggleFlash(); }
@@ -456,6 +516,9 @@ public class MainActivity extends AppCompatActivity {
                 video_Btn.setSelected(false);
             }
         });
+
+
+
 
         /*video_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1167,6 +1230,23 @@ public class MainActivity extends AppCompatActivity {
         cameraProvider.bindToLifecycle((LifecycleOwner) this, cameraSelector, preview, imageCapture);
 
     }
+
+    private void setZoomLevel(float zoomLevel) {
+        if (cameraControl != null) {
+            CameraInfo cameraInfo = cameraControl.getCameraInfo();
+            float maxZoomRatio = cameraInfo.getZoomState().getValue().getMaxZoomRatio();
+
+            // Ensure zoom level is within valid range (1.0f to maxZoomRatio)
+            zoomLevel = Math.max(1.0f, Math.min(zoomLevel, maxZoomRatio));
+
+            // Update the zoom level
+            cameraControl.setZoomRatio(zoomLevel);
+
+            // Save the current zoom level
+            currentZoomLevel = zoomLevel;
+        }
+    }
+
     // Toggle flash when the flash_Btn is clicked
     private void toggleFlash(){
         //Toggle flash state
