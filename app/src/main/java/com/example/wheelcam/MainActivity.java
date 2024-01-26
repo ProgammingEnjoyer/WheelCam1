@@ -407,10 +407,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         startVideo_Btn.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 captureVideo();
+                zoomLO.setVisibility(View.GONE);
+                modeLO.setVisibility(View.GONE);
+                flash_Btn.setVisibility(View.GONE);
+                scanCenter_Btn.setVisibility(View.GONE);
+                bluetooth_Btn.setVisibility(View.GONE);
+                gridCenter_Btn.setVisibility(View.GONE);
+                orientBtn.setVisibility(View.GONE);
+                galleryBtn.setVisibility(View.GONE);
+
             }
+
         });
 
         stopVideo_Btn.setOnClickListener(new View.OnClickListener() {
@@ -421,6 +432,14 @@ public class MainActivity extends AppCompatActivity {
                 startVideo_Btn.setVisibility(View.VISIBLE);
                 modeLO.setVisibility(View.VISIBLE);
                 recordingLO.setVisibility(View.GONE);
+
+                zoomLO.setVisibility(View.VISIBLE);
+                flash_Btn.setVisibility(View.VISIBLE);
+                scanCenter_Btn.setVisibility(View.VISIBLE);
+                bluetooth_Btn.setVisibility(View.VISIBLE);
+                gridCenter_Btn.setVisibility(View.VISIBLE);
+                orientBtn.setVisibility(View.VISIBLE);
+                galleryBtn.setVisibility(View.VISIBLE);
 
             }
         });
