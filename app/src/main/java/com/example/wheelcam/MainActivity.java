@@ -428,6 +428,7 @@ public class MainActivity extends AppCompatActivity {
         if(isVideoMode == false) {
             photo_Btn.setSelected(true); //By default, start in photo mode
         };
+        zoom1_Btn.setSelected(true);
 
         zoom05_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
