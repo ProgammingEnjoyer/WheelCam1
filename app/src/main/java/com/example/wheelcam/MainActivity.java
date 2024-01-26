@@ -206,11 +206,11 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        zoom05_Btn.setOnClickListener(new View.OnClickListener(){
+        /*zoom05_Btn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 setZoomLevel(2.0f);
             }
-        });
+        });*/
 
     }
     protected void onDestroy() {
@@ -428,6 +428,7 @@ public class MainActivity extends AppCompatActivity {
         if(isVideoMode == false) {
             photo_Btn.setSelected(true); //By default, start in photo mode
         };
+        zoom1_Btn.setSelected(true);
 
         zoom05_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1231,7 +1232,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void setZoomLevel(float zoomLevel) {
+    /*private void setZoomLevel(float zoomLevel) {
         if (cameraControl != null) {
             CameraInfo cameraInfo = cameraControl.getCameraInfo();
             float maxZoomRatio = cameraInfo.getZoomState().getValue().getMaxZoomRatio();
@@ -1245,7 +1246,7 @@ public class MainActivity extends AppCompatActivity {
             // Save the current zoom level
             currentZoomLevel = zoomLevel;
         }
-    }
+    }*/
 
     // Toggle flash when the flash_Btn is clicked
     private void toggleFlash(){
