@@ -142,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton startVideo_Btn;
     private FloatingActionButton stopVideo_Btn;
     private ImageButton arrowBtnR, arrowBtnUp, arrowBtnDown, arrowBtnL;
-    private Button bluetooth_Btn, scanCenter_Btn, gridCenter_Btn, moveDoneBtn, orientBtn, modeDoneBtn, flipBtn, galleryBtn, /*settingsBtn,*/ flash_Btn;
+    private Button bluetooth_Btn, scanCenter_Btn, gridCenter_Btn, resetCenter_Btn, moveDoneBtn, orientBtn, modeDoneBtn, flipBtn, galleryBtn, /*settingsBtn,*/ flash_Btn;
     private Button grid_A, grid_B, grid_C, grid_D, grid_E, grid_F, grid_G, grid_H, grid_I;
     private Button zoom05_Btn, zoom1_Btn, zoom15_Btn, zoom2_Btn, zoom3_Btn;
     private Button video_Btn, photo_Btn;
@@ -345,6 +345,7 @@ public class MainActivity extends AppCompatActivity {
         bluetooth_Btn = findViewById(R.id.bluetooth);
         scanCenter_Btn = findViewById(R.id.scanCenterBtn);
         gridCenter_Btn = findViewById(R.id.gridCenterBtn);
+        resetCenter_Btn = findViewById(R.id.resetCenterBtn);
         flash_Btn = findViewById(R.id.flashBtn);
         //settingsBtn = findViewById(R.id.settingsBtn);
         directionLO = findViewById(R.id.directionLayout);
@@ -417,8 +418,10 @@ public class MainActivity extends AppCompatActivity {
                 scanCenter_Btn.setVisibility(View.GONE);
                 bluetooth_Btn.setVisibility(View.GONE);
                 gridCenter_Btn.setVisibility(View.GONE);
+                resetCenter_Btn.setVisibility(View.GONE);
                 orientBtn.setVisibility(View.GONE);
                 galleryBtn.setVisibility(View.GONE);
+                flipBtn.setVisibility(View.GONE);
 
             }
 
@@ -438,8 +441,10 @@ public class MainActivity extends AppCompatActivity {
                 scanCenter_Btn.setVisibility(View.VISIBLE);
                 bluetooth_Btn.setVisibility(View.VISIBLE);
                 gridCenter_Btn.setVisibility(View.VISIBLE);
+                resetCenter_Btn.setVisibility(View.VISIBLE);
                 orientBtn.setVisibility(View.VISIBLE);
                 galleryBtn.setVisibility(View.VISIBLE);
+                flipBtn.setVisibility(View.VISIBLE);
 
             }
         });
@@ -625,6 +630,7 @@ public class MainActivity extends AppCompatActivity {
                 scanCenter_Btn.setVisibility(View.VISIBLE);
                 bluetooth_Btn.setVisibility(View.VISIBLE);
                 gridCenter_Btn.setVisibility(View.VISIBLE);
+                resetCenter_Btn.setVisibility(View.VISIBLE);
                 orientBtn.setVisibility(View.VISIBLE);
                 galleryBtn.setVisibility(View.VISIBLE);
                 flipBtn.setVisibility(View.VISIBLE);
@@ -642,6 +648,7 @@ public class MainActivity extends AppCompatActivity {
                 scanCenter_Btn.setVisibility(View.GONE);
                 bluetooth_Btn.setVisibility(View.GONE);
                 gridCenter_Btn.setVisibility(View.GONE);
+                resetCenter_Btn.setVisibility(View.GONE);
                 orientBtn.setVisibility(View.GONE);
                 galleryBtn.setVisibility(View.GONE);
                 flipBtn.setVisibility(View.GONE);
@@ -671,6 +678,7 @@ public class MainActivity extends AppCompatActivity {
                 scanCenter_Btn.setVisibility(View.VISIBLE);
                 bluetooth_Btn.setVisibility(View.VISIBLE);
                 gridCenter_Btn.setVisibility(View.VISIBLE);
+                resetCenter_Btn.setVisibility(View.VISIBLE);
                 orientBtn.setVisibility(View.VISIBLE);
                 galleryBtn.setVisibility(View.VISIBLE);
                 flipBtn.setVisibility(View.VISIBLE);
@@ -739,6 +747,7 @@ public class MainActivity extends AppCompatActivity {
                 scanCenter_Btn.setVisibility(View.VISIBLE);
                 bluetooth_Btn.setVisibility(View.VISIBLE);
                 gridCenter_Btn.setVisibility(View.VISIBLE);
+                resetCenter_Btn.setVisibility(View.VISIBLE);
                 orientBtn.setVisibility(View.VISIBLE);
                 galleryBtn.setVisibility(View.VISIBLE);
                 flipBtn.setVisibility(View.VISIBLE);
@@ -760,6 +769,7 @@ public class MainActivity extends AppCompatActivity {
                 scanCenter_Btn.setVisibility(View.VISIBLE);
                 bluetooth_Btn.setVisibility(View.VISIBLE);
                 gridCenter_Btn.setVisibility(View.VISIBLE);
+                resetCenter_Btn.setVisibility(View.VISIBLE);
                 orientBtn.setVisibility(View.VISIBLE);
                 galleryBtn.setVisibility(View.VISIBLE);
                 flipBtn.setVisibility(View.VISIBLE);
@@ -777,6 +787,7 @@ public class MainActivity extends AppCompatActivity {
                     modeLO.setVisibility(View.GONE);
                     flash_Btn.setVisibility(View.GONE);
                     scanCenter_Btn.setVisibility(View.GONE);
+                    resetCenter_Btn.setVisibility(View.GONE);
                     orientBtn.setVisibility(View.GONE);
                     bluetooth_Btn.setVisibility(View.GONE);
                     galleryBtn.setVisibility(View.GONE);
@@ -792,6 +803,7 @@ public class MainActivity extends AppCompatActivity {
                     modeLO.setVisibility(View.VISIBLE);
                     flash_Btn.setVisibility(View.VISIBLE);
                     scanCenter_Btn.setVisibility(View.VISIBLE);
+                    resetCenter_Btn.setVisibility(View.VISIBLE);
                     orientBtn.setVisibility(View.VISIBLE);
                     bluetooth_Btn.setVisibility(View.VISIBLE);
                     galleryBtn.setVisibility(View.VISIBLE);
@@ -806,8 +818,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (lensFacing == CameraSelector.DEFAULT_FRONT_CAMERA) lensFacing = CameraSelector.DEFAULT_BACK_CAMERA;
-                else if (lensFacing == CameraSelector.DEFAULT_BACK_CAMERA) lensFacing = CameraSelector.DEFAULT_FRONT_CAMERA;
-                startCameraX(cameraProvider);
+                else if (lensFacing == CameraSelector.DEFAULT_BACK_CAMERA){
+                    lensFacing = CameraSelector.DEFAULT_FRONT_CAMERA;
+                    flash_Btn.setCompoundDrawablesRelativeWithIntrinsicBounds(null, flashOffImg, null, null);
+
+                } startCameraX(cameraProvider);
             }
         });
 
@@ -838,6 +853,24 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        resetCenter_Btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String resultReset = "Reset servos";
+                if (bluetoothSocket != null)
+                {
+                    try {
+                        OutputStream outputStream = bluetoothSocket.getOutputStream();
+                        outputStream.write(resultReset.getBytes());
+                    }catch(IOException e){
+                        e.printStackTrace();
+                    }
+                }
+                Toast.makeText(MainActivity.this, "Reset Center", Toast.LENGTH_LONG).show();
+            }
+                                           }
+        );
 
         grid_A.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1269,18 +1302,25 @@ public class MainActivity extends AppCompatActivity {
 
     // Toggle flash when the flash_Btn is clicked
     private void toggleFlash(){
-        //Toggle flash state
-        isFlashedEnabled=!isFlashedEnabled; // When clicked, becomes the opposite
-        if (isFlashedEnabled){
-            flash_Btn.setCompoundDrawablesRelativeWithIntrinsicBounds(null, flashOnImg, null, null);
+        if (lensFacing == CameraSelector.DEFAULT_BACK_CAMERA) {
+            //Toggle flash state
+            isFlashedEnabled = !isFlashedEnabled; // When clicked, becomes the opposite
+            if (isFlashedEnabled) {
+                flash_Btn.setCompoundDrawablesRelativeWithIntrinsicBounds(null, flashOnImg, null, null);
+            } else {
+                flash_Btn.setCompoundDrawablesRelativeWithIntrinsicBounds(null, flashOffImg, null, null);
+            }
+            ;
         }
         else {
+            isFlashedEnabled=false;
             flash_Btn.setCompoundDrawablesRelativeWithIntrinsicBounds(null, flashOffImg, null, null);
-        };
-        // Set flash mode for the ImageCapture use case
-        imageCapture.setFlashMode(
-                isFlashedEnabled ? ImageCapture.FLASH_MODE_ON:ImageCapture.FLASH_MODE_OFF
-        );
+        }
+
+            // Set flash mode for the ImageCapture use case
+            imageCapture.setFlashMode(
+                    isFlashedEnabled ? ImageCapture.FLASH_MODE_ON:ImageCapture.FLASH_MODE_OFF
+            );
     }
 
     /*private void setVideoMode(){

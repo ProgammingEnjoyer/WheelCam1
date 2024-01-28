@@ -4,7 +4,68 @@
     <string name="title_camera">Camera</string>
     <string name="title_adjust">Adjust</string>
     <string name="title_bluetooth">Bluetooth</string>
+    <string name="BT">BT</string>
     <string name="title_gallery">Gallery</string>
+    <string name="flash">Flash</string>
+    <string name="scan_center">Scan Center</string>
+    <string name="grid_center">Grid Center</string>
+    <string name="reset_center">Reset Center</string>
+    <string name="title_rotate">Rotate</string>
+
+    <string name="letter_A">A</string>
+    <string name="letter_B">B</string>
+    <string name="letter_C">C</string>
+    <string name="letter_D">D</string>
+    <string name="letter_F">F</string>
+    <string name="letter_G">G</string>
+    <string name="letter_H">H</string>
+    <string name="letter_I">I</string>
+    <string name="grid_A">Grid A</string>
+    <string name="grid_B">Grid B</string>
+    <string name="grid_C">Grid C</string>
+    <string name="grid_D">Grid D</string>
+    <string name="grid_E">Grid E</string>
+    <string name="grid_F">Grid F</string>
+    <string name="grid_G">Grid G</string>
+    <string name="grid_H">Grid H</string>
+    <string name="grid_I">Grid I</string>
+
+    <string name="title_zoom05x">.5x</string>
+    <string name="title_zoom1x">1x</string>
+    <string name="title_zoom15x">1.5x</string>
+    <string name="title_zoom2x">2x</string>
+    <string name="title_zoom3x">3x</string>
+    <string name="zoomfactor_05x">Zoom factor .5</string>
+    <string name="zoomfactor_1x">Zoom factor 1</string>
+    <string name="zoomfactor_15x">Zoom factor 1.5</string>
+    <string name="zoomfactor_2x">Zoom factor 2</string>
+    <string name="zoomfactor_3x">Zoom factor 3</string>
+
+    <string name="PHOTO">PHOTO</string>
+    <string name="VIDEO">VIDEO</string>
+    <string name="photo_mode">Photo Mode</string>
+    <string name="video_mode">VIdeo Mode</string>
+
+    <string name="left">Left</string>
+    <string name="right">Right</string>
+    <string name="up">Up</string>
+    <string name="down">Down</string>
+    <string name="done">Done</string>
+
+    <string name="recording_in_process">Recording in process</string>
+    <string name="center">Center</string>
+    <string name="grid">Grid</string>
+
+    <string name="rotate_uppercase">ROTATE</string>
+    <string name="clockwise">Clockwise</string>
+    <string name="anticlockwise">Anticlockwise</string>
+    <string name="back">Back</string>
+    <string name="flip">Flip</string>
+
+
+
+
+
 
     <string name="bluetooth_no_support">Device doesn\'t support Bluetooth</string>
     <string name="bluetooth_disabled">BLUETOOTH DISABLED</string>
@@ -13,6 +74,9 @@
     <string name="bluetooth_connect_fail">Connection Failed \n Please try again</string>
 
 
+
     <string name="camera_photo_action">TAKE PHOTO</string>
+    <string name="start_recording">START RECORDING</string>
+    <string name="stop_recording">STOP RECORDING</string>
 
 </resources>

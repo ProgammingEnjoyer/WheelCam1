@@ -19,7 +19,7 @@
     <item>
         <shape>
             <corners android:radius="70dp"/>
-            <solid android:color="@color/jade_dark_trans"/>
+            <solid android:color="@color/jade_trans"/>
         </shape>
     </item>
 </selector>
