@@ -8,34 +8,40 @@
     <LinearLayout
         android:id="@+id/topBar"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="80dp"
         android:layout_alignParentEnd="true"
         android:background="@color/jade_dark"
+        android:padding="0dp"
+
         >
 
         <Button
             android:id="@+id/flashBtn"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="1.5"
             android:background="@drawable/button_selector"
-
+            android:layout_marginTop="10dp"
             android:drawableTop="@drawable/ic_flash_off"
-            android:text="Flash"
+            android:text="@string/flash"
             android:textColor="@color/mint"
-            android:textSize="12dp"
-            android:contentDescription="Flash"/>
+            android:textSize="11sp"
+            android:contentDescription="@string/flash"
+            />
         <Button
             android:id="@+id/scanCenterBtn"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+            android:layout_weight="2"
             android:background="@drawable/button_selector"
             android:drawableTop="@drawable/ic_center"
-            android:textSize="11dp"
+            android:textSize="11sp"
             android:textColor="@color/mint"
-            android:text="Scan Center"
-            android:contentDescription="Scan Center Mode" />
+            android:text="@string/scan_center"
+            android:contentDescription="@string/scan_center"/>
         <!--<Button
             android:id="@+id/zoomBtn"
             android:layout_width="wrap_content"
@@ -49,37 +55,59 @@
             -->
         <Button
             android:id="@+id/gridCenterBtn"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+            android:layout_weight="2"
             android:background="@drawable/button_selector"
             android:drawableTop="@drawable/ic_grid"
-            android:text="Grid Center"
+            android:text="@string/scan_center"
             android:textColor="@color/mint"
-            android:textSize="12dp"
-            android:contentDescription="Grid Center Mode"/>
+            android:textSize="11sp"
+            android:contentDescription="@string/scan_center"/>
+
         <Button
             android:id="@+id/rotateBtn"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-
-            android:background="@drawable/button_selector"
-            android:drawableTop="@drawable/ic_screen_rotate"
-            android:textSize="11dp"
-            android:textColor="@color/mint"
-            android:text="rotate"
-            android:contentDescription="Rotate" />
-        <Button
-            android:id="@+id/bluetooth"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
             android:layout_weight="1"
             android:background="@drawable/button_selector"
-            android:drawableTop="@drawable/ic_bluetooth_disabled"
-            android:text="BT"
+            android:drawableTop="@drawable/ic_screen_rotate"
+            android:textSize="11sp"
             android:textColor="@color/mint"
-            android:textSize="12dp"
-            android:contentDescription="Bluetooth"/>
+            android:text="@string/title_rotate"
+            android:contentDescription="@string/title_rotate" />
+
+        <Button
+            android:id="@+id/bluetooth"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_weight="2.6"
+            android:background="@drawable/button_selector"
+            android:drawableTop="@drawable/ic_bluetooth_disabled"
+            android:text="@string/BT"
+            android:textColor="@color/mint"
+            android:textSize="11sp"
+            android:contentDescription="@string/title_bluetooth"/>
+        <Button
+            android:id="@+id/resetCenterBtn"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_weight="2"
+            android:background="@drawable/button_selector"
+            android:drawableTop="@drawable/ic_reset"
+            android:text="@string/reset_center"
+            android:textColor="@color/mint"
+            android:textSize="11sp"
+            android:contentDescription="@string/reset_center"/>
+
 
     </LinearLayout> <!--End of top bar-->
 
@@ -101,6 +129,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:src="@drawable/ic_cross_with_border"
+            android:contentDescription="@string/center"
             android:layout_gravity="center"/>
 
     </LinearLayout> <!--End of centerLO-->
@@ -112,7 +141,7 @@
         android:layout_below="@id/topBar"
         android:layout_above="@id/bottomBar"
         android:visibility="visible"
-        android:contentDescription="Grid">
+        android:contentDescription="@string/grid">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -123,44 +152,42 @@
                 android:id="@+id/gridA"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_centerVertical="true"
                 android:background="@drawable/grid_selector"
                 app:backgroundTint="@null"
-                android:text="A"
+                android:text="@string/letter_A"
                 android:layout_weight="1"
                 android:shadowColor="@color/jade_darker"
                 android:shadowDx="2"
                 android:shadowDy="2"
                 android:shadowRadius="2"
-                android:contentDescription="Grid A"/>
+                android:contentDescription="@string/grid_A"
+                />
             <Button
                 android:id="@+id/gridB"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_centerVertical="true"
                 android:background="@drawable/grid_selector"
                 app:backgroundTint="@null"
-                android:text="B"
+                android:text="@string/letter_B"
                 android:layout_weight="1"
                 android:shadowColor="@color/jade_darker"
                 android:shadowDx="2"
                 android:shadowDy="2"
                 android:shadowRadius="2"
-                android:contentDescription="Grid B"/>
+                android:contentDescription="@string/grid_B"/>
             <Button
                 android:id="@+id/gridC"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_centerVertical="true"
                 android:background="@drawable/grid_selector"
                 app:backgroundTint="@null"
-                android:text="C"
+                android:text="@string/letter_C"
                 android:layout_weight="1"
                 android:shadowColor="@color/jade_darker"
                 android:shadowDx="2"
                 android:shadowDy="2"
                 android:shadowRadius="2"
-                android:contentDescription="Grid C"/>
+                android:contentDescription="@string/grid_C"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -172,21 +199,19 @@
                 android:id="@+id/gridD"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_centerVertical="true"
                 android:background="@drawable/grid_selector"
                 app:backgroundTint="@null"
-                android:text="D"
+                android:text="@string/letter_D"
                 android:layout_weight="1"
                 android:shadowColor="@color/jade_darker"
                 android:shadowDx="2"
                 android:shadowDy="2"
                 android:shadowRadius="2"
-                android:contentDescription="Grid D"/>
+                android:contentDescription="@string/grid_D"/>
             <Button
                 android:id="@+id/gridE"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_centerVertical="true"
                 android:background="@drawable/grid_selector"
                 app:backgroundTint="@null"
 
@@ -195,21 +220,20 @@
                 android:shadowDx="2"
                 android:shadowDy="2"
                 android:shadowRadius="2"
-                android:contentDescription="Grid E"/>
+                android:contentDescription="@string/grid_E"/>
             <Button
                 android:id="@+id/gridF"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_centerVertical="true"
                 android:background="@drawable/grid_selector"
                 app:backgroundTint="@null"
-                android:text="F"
+                android:text="@string/letter_F"
                 android:layout_weight="1"
                 android:shadowColor="@color/jade_darker"
                 android:shadowDx="2"
                 android:shadowDy="2"
                 android:shadowRadius="2"
-                android:contentDescription="Grid F"/>
+                android:contentDescription="@string/grid_F"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -221,44 +245,41 @@
                 android:id="@+id/gridG"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_centerVertical="true"
                 android:background="@drawable/grid_selector"
                 app:backgroundTint="@null"
-                android:text="G"
+                android:text="@string/letter_G"
                 android:layout_weight="1"
                 android:shadowColor="@color/jade_darker"
                 android:shadowDx="2"
                 android:shadowDy="2"
                 android:shadowRadius="2"
-                android:contentDescription="Grid G"/>
+                android:contentDescription="@string/grid_G"/>
             <Button
                 android:id="@+id/gridH"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_centerVertical="true"
                 android:background="@drawable/grid_selector"
                 app:backgroundTint="@null"
-                android:text="H"
+                android:text="@string/letter_H"
                 android:layout_weight="1"
                 android:shadowColor="@color/jade_darker"
                 android:shadowDx="2"
                 android:shadowDy="2"
                 android:shadowRadius="2"
-                android:contentDescription="Grid H"/>
+                android:contentDescription="@string/grid_H"/>
             <Button
                 android:id="@+id/gridI"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_centerVertical="true"
                 android:background="@drawable/grid_selector"
                 app:backgroundTint="@null"
-                android:text="I"
+                android:text="@string/letter_I"
                 android:layout_weight="1"
                 android:shadowColor="@color/jade_darker"
                 android:shadowDx="2"
                 android:shadowDy="2"
                 android:shadowRadius="2"
-                android:contentDescription="Grid I"/>
+                android:contentDescription="@string/grid_I"/>
         </LinearLayout>
 
     </LinearLayout> <!--End of grid Layout-->
@@ -275,295 +296,313 @@
             android:id="@+id/zoom05_Btn"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:text=".05x"
+            android:text="@string/title_zoom05x"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
-            android:background="@drawable/button_selector"
-            android:contentDescription="Zoom .05"
+            android:background="@drawable/button_selector_zoom"
+            android:contentDescription="@string/zoomfactor_05x"
+            app:backgroundTint="@null"
+            android:minHeight="0dp"
             />
         <Button
             android:id="@+id/zoom1_Btn"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:text="1x"
+            android:text="@string/title_zoom1x"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
-            android:background="@drawable/button_selector"
-            android:contentDescription="Zoom 1"
-
+            android:background="@drawable/button_selector_zoom"
+            android:contentDescription="@string/zoomfactor_1x"
+            app:backgroundTint="@null"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
             />
         <Button
             android:id="@+id/zoom15_Btn"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:text="1.5x"
+            android:text="@string/title_zoom15x"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
-            android:background="@drawable/button_selector"
-            android:contentDescription="Zoom 1.5"
+            android:background="@drawable/button_selector_zoom"
+            android:contentDescription="@string/zoomfactor_15x"
+            app:backgroundTint="@null"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
             />
         <Button
             android:id="@+id/zoom2_Btn"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:text="2x"
+            android:text="@string/title_zoom2x"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
-            android:background="@drawable/button_selector"
-            android:contentDescription="Zoom 2"
+            android:background="@drawable/button_selector_zoom"
+            android:contentDescription="@string/zoomfactor_2x"
+            app:backgroundTint="@null"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
             />
         <Button
             android:id="@+id/zoom3_Btn"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:text="3x"
+            android:text="@string/title_zoom3x"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
-            android:background="@drawable/button_selector"
-            android:contentDescription="Zoom 3"
+            android:background="@drawable/button_selector_zoom"
+            android:contentDescription="@string/zoomfactor_3x"
+            app:backgroundTint="@null"
+            android:minHeight="0dp"
+
             />
     </LinearLayout> <!-- End of zoom layout-->
 
     <LinearLayout
         android:id="@+id/bottomBar"
         android:layout_width="match_parent"
-        android:layout_height="130dp"
+        android:layout_height="140dp"
+        android:layout_alignParentBottom="true"
         android:layout_alignBottom="@+id/previewView"
         android:background="@color/black_halftrans"
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@id/centerLayout">
         <LinearLayout
-            android:id="@+id/directionLayout"
+        android:id="@+id/modeLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="1dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="@id/zoomLayout"
+        app:layout_constraintBottom_toTopOf="@id/bottomCaptureLayout"
+        >
+        <Button
+            android:id="@+id/video_Btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="5dp"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:visibility="gone">
+            android:text="@string/VIDEO"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/button_selector_mode"
+            android:contentDescription="@string/video_mode"
+            app:backgroundTint="@null"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
 
-            <ImageButton
-                android:id="@+id/arrowBtn_Left"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="20dp"
-                android:background="@drawable/button_selector"
-                android:paddingHorizontal="@dimen/arrow_padding"
-                android:src="@drawable/ic_arrow"
-                android:contentDescription="Left"/>
-
-            <ImageButton
-                android:id="@+id/arrowBtn_Up"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="@drawable/button_selector"
-                android:paddingHorizontal="@dimen/arrow_padding"
-                android:rotation="90"
-                android:src="@drawable/ic_arrow"
-                android:contentDescription="Up" />
-
-            <ImageButton
-                android:id="@+id/arrowBtn_Down"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="@drawable/button_selector"
-                android:paddingHorizontal="@dimen/arrow_padding"
-                android:rotation="270"
-                android:src="@drawable/ic_arrow"
-                android:contentDescription="Down" />
-
-            <ImageButton
-                android:id="@+id/arrowBtn_Right"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="@drawable/button_selector"
-                android:paddingHorizontal="@dimen/arrow_padding"
-                android:rotation="180"
-                android:src="@drawable/ic_arrow"
-                android:contentDescription="Right" />
-
-
-        </LinearLayout> <!--End of direction layout. we are not using this-->
+            />
+        <Button
+            android:id="@+id/photo_Btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/PHOTO"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/button_selector_mode"
+            android:layout_marginStart="15dp"
+            android:contentDescription="@string/photo_mode"
+            app:backgroundTint="@null"
+            android:minHeight="0dp" android:minWidth="0dp"
+            />
+    </LinearLayout> <!--Enf od mode (PHOTO/VIDEO layout)-->
         <LinearLayout
-            android:id="@+id/modeLayout"
+        android:id="@+id/directionLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="5dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <ImageButton
+            android:id="@+id/arrowBtn_Left"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_height="match_parent"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/button_selector"
+            android:paddingHorizontal="@dimen/arrow_padding"
+            android:src="@drawable/ic_arrow"
+            android:contentDescription="@string/left"/>
 
-            android:orientation="horizontal"
-            app:layout_constraintTop_toTopOf="@id/zoomLayout"
-            app:layout_constraintBottom_toTopOf="@id/bottomCaptureLayout"
-            >
+        <ImageButton
+            android:id="@+id/arrowBtn_Up"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/button_selector"
+            android:paddingHorizontal="@dimen/arrow_padding"
+            android:rotation="90"
+            android:src="@drawable/ic_arrow"
+            android:contentDescription="@string/up" />
 
-            <Button
-                android:id="@+id/video_Btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="VIDEO"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:background="@drawable/button_selector_mode"
-                android:contentDescription="Video Mode"
-                />
-            <Button
-                android:id="@+id/photo_Btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="PHOTO"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:background="@drawable/button_selector_mode"
-                android:layout_marginStart="15dp"
-                android:contentDescription="Photo Mode"
-                />
-        </LinearLayout> <!--Enf od mode (PHOTO/VIDEO layout)-->
+        <ImageButton
+            android:id="@+id/arrowBtn_Down"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/button_selector"
+            android:paddingHorizontal="@dimen/arrow_padding"
+            android:rotation="270"
+            android:src="@drawable/ic_arrow"
+            android:contentDescription="@string/down" />
 
+        <ImageButton
+            android:id="@+id/arrowBtn_Right"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/button_selector"
+            android:paddingHorizontal="@dimen/arrow_padding"
+            android:rotation="180"
+            android:src="@drawable/ic_arrow"
+            android:contentDescription="@string/right" />
+
+
+    </LinearLayout> <!--End of direction layout. we are not using this-->
         <!--This is just so that the gallery, capture anf flip buttons don't shift up during recording mode.
         We can later use this space to set the recording time -->
         <LinearLayout
-            android:id="@+id/recordingLayout"
+        android:id="@+id/recordingLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="7dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:visibility="gone">
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="1dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Recording in process"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:contentDescription="Recording in process"
-                android:visibility="gone"
-                />
-        </LinearLayout>
-
+            android:text="@string/recording_in_process"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:contentDescription="@string/recording_in_process"
+            />
+    </LinearLayout>
         <LinearLayout
-            android:id="@+id/levelLayout"
+        android:id="@+id/levelLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="5dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/moveDir"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="5dp"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:visibility="gone">
+            android:background="@drawable/button_selector"
+            android:text="@string/left"
+            android:textColor="@color/mint"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/moveDir"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@drawable/button_selector"
-                android:text="LEFT"
-                android:textColor="@color/mint"
-                android:textSize="18dp"
-                android:textStyle="bold" />
+        <Button
+            android:id="@+id/moveLevel1"
+            android:layout_width="55dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/button_selector"
+            android:text="1"
+            android:textSize="20sp" />
 
-            <Button
-                android:id="@+id/moveLevel1"
-                android:layout_width="55dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/button_selector"
-                android:text="1"
-                android:textSize="20dp" />
+        <Button
+            android:id="@+id/moveLevel2"
+            android:layout_width="55dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/button_selector"
+            android:text="2"
+            android:textSize="20sp" />
 
-            <Button
-                android:id="@+id/moveLevel2"
-                android:layout_width="55dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/button_selector"
-                android:text="2"
-                android:textSize="20dp" />
+        <Button
+            android:id="@+id/moveLevel3"
+            android:layout_width="55dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/button_selector"
+            android:text="3"
+            android:textSize="20sp" />
 
-            <Button
-                android:id="@+id/moveLevel3"
-                android:layout_width="55dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/button_selector"
-                android:text="3"
-                android:textSize="20dp" />
+        <Button
+            android:id="@+id/moveLevel4"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/button_selector"
+            android:text="4"
+            android:textSize="20sp" />
 
-            <Button
-                android:id="@+id/moveLevel4"
-                android:layout_width="50dp"
-                android:layout_height="match_parent"
-                android:background="@drawable/button_selector"
-                android:text="4"
-                android:textSize="20dp" />
-
-            <Button
-                android:id="@+id/moveDone"
-                android:layout_width="75dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/button_selector"
-                android:text="done"
-                android:textSize="13dp"
-                android:contentDescription="Done"
-                />
+        <Button
+            android:id="@+id/moveDone"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_selector"
+            android:text="@string/done"
+            android:textSize="13sp"
+            android:contentDescription="@string/done"
+            />
 
 
-        </LinearLayout>
-
+    </LinearLayout>
         <LinearLayout
-            android:id="@+id/orientationLayout"
-            android:layout_width="wrap_content"
+        android:id="@+id/orientationLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="5dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="@id/bottomBar"
+        android:visibility="gone"
+        >
+
+        <TextView
+            android:id="@+id/modeTV"
+            android:layout_width="65dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="5dp"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:visibility="gone"
-            app:layout_constraintTop_toTopOf="@id/bottomBar">
-
-            <TextView
-                android:id="@+id/modeTV"
-                android:layout_width="65dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginRight="@dimen/direction_margin"
-                android:background="@drawable/button_selector"
-                android:text="ROTATE"
-                android:textColor="@color/mint"
-                android:textSize="15dp"
-                android:textStyle="bold" />
+            android:layout_marginEnd="@dimen/direction_margin"
+            android:background="@drawable/button_selector"
+            android:text="@string/rotate_uppercase"
+            android:textColor="@color/mint"
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
 
-            <Button
-                android:id="@+id/clockwiseBtn"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginRight="@dimen/direction_margin"
-                android:background="@drawable/button_selector"
-                android:drawableTop="@drawable/ic_clockwise"
-                android:text="clockwise"
-                android:contentDescription="clockwise"
-                android:textSize="0.1dp" />
+        <Button
+            android:id="@+id/clockwiseBtn"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginEnd="@dimen/direction_margin"
+            android:background="@drawable/button_selector"
+            android:drawableTop="@drawable/ic_clockwise"
+            android:text="@string/clockwise"
+            android:contentDescription="@string/clockwise"
+            android:textSize="0.1sp" />
 
-            <Button
-                android:id="@+id/anticlockwiseBtn"
-                android:layout_width="60dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginRight="@dimen/direction_margin"
-                android:background="@drawable/button_selector"
-                android:drawableTop="@drawable/ic_anticlockwise"
-                android:text="anticlockwise"
-                android:contentDescription="anticlockwise"
-                android:textSize="0.1dp" />
+        <Button
+            android:id="@+id/anticlockwiseBtn"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginEnd="@dimen/direction_margin"
+            android:background="@drawable/button_selector"
+            android:drawableTop="@drawable/ic_anticlockwise"
+            android:text="@string/anticlockwise"
+            android:contentDescription="@string/anticlockwise"
+            android:textSize="0.1sp" />
 
-            <Button
-                android:id="@+id/modeDone"
-                android:layout_width="75dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:background="@drawable/button_selector"
-                android:text="done"
-                android:textSize="13dp"
-                android:contentDescription="Done"/>
-        </LinearLayout>
-
+        <Button
+            android:id="@+id/modeDone"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/button_selector"
+            android:text="@string/back"
+            android:textSize="13sp"
+            android:contentDescription="@string/back"/>
+    </LinearLayout>
         <LinearLayout
             android:id="@+id/bottomCaptureLayout"
             android:layout_width="wrap_content"
@@ -574,19 +613,21 @@
             app:layout_constraintBottom_toBottomOf="@id/bottomBar">
 
             <Button
-                android:id="@+id/galleryBtn"
+                android:id="@+id/flipBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:background="@drawable/button_selector"
-                android:contentDescription="Gallery"
-                android:drawableTop="@drawable/ic_nav_gallery"
-
-                android:elegantTextHeight="false"
-                android:freezesText="false"
-                android:text="Gallery"
-                android:textAlignment="gravity"
+                android:contentDescription="@string/flip"
+                android:drawableTop="@drawable/ic_flip_camera"
+                android:text="@string/flip"
                 android:textColor="@color/mint"
-                android:textSize="17sp" />
+                android:textSize="17sp"
+
+
+
+
+                />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/capture_photo"
@@ -596,7 +637,9 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
                 android:contentDescription="@string/camera_photo_action"
-                android:src="@drawable/ic_nav_camera" />
+                android:src="@drawable/ic_nav_camera"
+                app:layout_constraintBottom_toBottomOf="@id/bottomBar"
+                />
 
             <!-- Ideally this button should be CENTERED and BIGGER than the others-->
 
@@ -607,7 +650,7 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
-                android:contentDescription="START RECORDING"
+                android:contentDescription="@string/start_recording"
                 android:src="@drawable/ic_video_start"
                 android:visibility="gone" />
 
@@ -618,21 +661,24 @@
                 android:layout_gravity="center"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
-                android:contentDescription="STOP RECORDING"
+                android:contentDescription="@string/stop_recording"
                 android:src="@drawable/ic_video_stop"
                 android:visibility="gone" />
-
             <Button
-                android:id="@+id/flipBtn"
+                android:id="@+id/galleryBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:background="@drawable/button_selector"
-                android:contentDescription="Flip"
-                android:drawableTop="@drawable/ic_flip_camera"
-                android:text="flip"
+                android:contentDescription="@string/title_gallery"
+                android:drawableTop="@drawable/ic_nav_gallery"
+                android:drawablePadding="-15dp"
+                android:elegantTextHeight="false"
+                android:freezesText="false"
+                android:text="@string/title_gallery"
+                android:textAlignment="gravity"
                 android:textColor="@color/mint"
                 android:textSize="17sp" />
+
             <!--<Button
                 android:id="@+id/rotateBtn"
                 android:layout_width="wrap_content"

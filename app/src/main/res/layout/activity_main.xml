@@ -27,7 +27,8 @@
             android:text="@string/flash"
             android:textColor="@color/mint"
             android:textSize="11sp"
-            android:contentDescription="@string/flash"/>
+            android:contentDescription="@string/flash"
+            />
         <Button
             android:id="@+id/scanCenterBtn"
             style="?android:attr/borderlessButtonStyle"
@@ -40,7 +41,7 @@
             android:textSize="11sp"
             android:textColor="@color/mint"
             android:text="@string/scan_center"
-            android:contentDescription="@string/scan_center" />
+            android:contentDescription="@string/scan_center"/>
         <!--<Button
             android:id="@+id/zoomBtn"
             android:layout_width="wrap_content"
@@ -298,8 +299,10 @@
             android:text="@string/title_zoom05x"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
-            android:background="@drawable/button_selector"
+            android:background="@drawable/button_selector_zoom"
             android:contentDescription="@string/zoomfactor_05x"
+            app:backgroundTint="@null"
+            android:minHeight="0dp"
             />
         <Button
             android:id="@+id/zoom1_Btn"
@@ -308,9 +311,11 @@
             android:text="@string/title_zoom1x"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
-            android:background="@drawable/button_selector"
+            android:background="@drawable/button_selector_zoom"
             android:contentDescription="@string/zoomfactor_1x"
-
+            app:backgroundTint="@null"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
             />
         <Button
             android:id="@+id/zoom15_Btn"
@@ -319,8 +324,11 @@
             android:text="@string/title_zoom15x"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
-            android:background="@drawable/button_selector"
+            android:background="@drawable/button_selector_zoom"
             android:contentDescription="@string/zoomfactor_15x"
+            app:backgroundTint="@null"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
             />
         <Button
             android:id="@+id/zoom2_Btn"
@@ -329,8 +337,11 @@
             android:text="@string/title_zoom2x"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
-            android:background="@drawable/button_selector"
+            android:background="@drawable/button_selector_zoom"
             android:contentDescription="@string/zoomfactor_2x"
+            app:backgroundTint="@null"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
             />
         <Button
             android:id="@+id/zoom3_Btn"
@@ -339,8 +350,11 @@
             android:text="@string/title_zoom3x"
             android:textAlignment="center"
             android:textColor="#FFFFFF"
-            android:background="@drawable/button_selector"
+            android:background="@drawable/button_selector_zoom"
             android:contentDescription="@string/zoomfactor_3x"
+            app:backgroundTint="@null"
+            android:minHeight="0dp"
+
             />
     </LinearLayout> <!-- End of zoom layout-->
 
@@ -373,6 +387,10 @@
             android:textColor="#FFFFFF"
             android:background="@drawable/button_selector_mode"
             android:contentDescription="@string/video_mode"
+            app:backgroundTint="@null"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+
             />
         <Button
             android:id="@+id/photo_Btn"
@@ -384,6 +402,8 @@
             android:background="@drawable/button_selector_mode"
             android:layout_marginStart="15dp"
             android:contentDescription="@string/photo_mode"
+            app:backgroundTint="@null"
+            android:minHeight="0dp" android:minWidth="0dp"
             />
     </LinearLayout> <!--Enf od mode (PHOTO/VIDEO layout)-->
         <LinearLayout
@@ -602,7 +622,12 @@
                 android:drawableTop="@drawable/ic_flip_camera"
                 android:text="@string/flip"
                 android:textColor="@color/mint"
-                android:textSize="17sp" />
+                android:textSize="17sp"
+
+
+
+
+                />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/capture_photo"
