@@ -818,8 +818,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (lensFacing == CameraSelector.DEFAULT_FRONT_CAMERA) lensFacing = CameraSelector.DEFAULT_BACK_CAMERA;
-                else if (lensFacing == CameraSelector.DEFAULT_BACK_CAMERA) lensFacing = CameraSelector.DEFAULT_FRONT_CAMERA;
-                startCameraX(cameraProvider);
+                else if (lensFacing == CameraSelector.DEFAULT_BACK_CAMERA){
+                    lensFacing = CameraSelector.DEFAULT_FRONT_CAMERA;
+                    flash_Btn.setCompoundDrawablesRelativeWithIntrinsicBounds(null, flashOffImg, null, null);
+
+                } startCameraX(cameraProvider);
             }
         });
 
@@ -1299,18 +1302,25 @@ public class MainActivity extends AppCompatActivity {
 
     // Toggle flash when the flash_Btn is clicked
     private void toggleFlash(){
-        //Toggle flash state
-        isFlashedEnabled=!isFlashedEnabled; // When clicked, becomes the opposite
-        if (isFlashedEnabled){
-            flash_Btn.setCompoundDrawablesRelativeWithIntrinsicBounds(null, flashOnImg, null, null);
+        if (lensFacing == CameraSelector.DEFAULT_BACK_CAMERA) {
+            //Toggle flash state
+            isFlashedEnabled = !isFlashedEnabled; // When clicked, becomes the opposite
+            if (isFlashedEnabled) {
+                flash_Btn.setCompoundDrawablesRelativeWithIntrinsicBounds(null, flashOnImg, null, null);
+            } else {
+                flash_Btn.setCompoundDrawablesRelativeWithIntrinsicBounds(null, flashOffImg, null, null);
+            }
+            ;
         }
         else {
+            isFlashedEnabled=false;
             flash_Btn.setCompoundDrawablesRelativeWithIntrinsicBounds(null, flashOffImg, null, null);
-        };
-        // Set flash mode for the ImageCapture use case
-        imageCapture.setFlashMode(
-                isFlashedEnabled ? ImageCapture.FLASH_MODE_ON:ImageCapture.FLASH_MODE_OFF
-        );
+        }
+
+            // Set flash mode for the ImageCapture use case
+            imageCapture.setFlashMode(
+                    isFlashedEnabled ? ImageCapture.FLASH_MODE_ON:ImageCapture.FLASH_MODE_OFF
+            );
     }
 
     /*private void setVideoMode(){
