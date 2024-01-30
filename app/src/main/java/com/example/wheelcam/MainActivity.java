@@ -9,6 +9,7 @@ import androidx.camera.core.CameraControl;
 import androidx.camera.core.CameraInfo;
 import androidx.camera.core.CameraSelector;
 import androidx.camera.core.CameraX;
+import androidx.camera.core.VideoCapture;
 import androidx.camera.core.ImageCapture;
 import androidx.camera.core.ImageCaptureException;
 import androidx.camera.core.Preview;
@@ -114,9 +115,8 @@ public class MainActivity extends AppCompatActivity {
     //private ArrayList<View> highlightableButtons;
     //private Handler highlightHandler = new Handler();
     private int currentButtonIndex = 0;
-    private float currentZoomLevel=1.0f;
     private CameraControl cameraControl;
-    // private VideoCapture videoCapture;
+    private VideoCapture videoCapture;
     private boolean isRecording = false;
     final private String TAG = "MainActivity";
     private final static int REQUEST_ENABLE_BT = 1;
@@ -142,13 +142,13 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton startVideo_Btn;
     private FloatingActionButton stopVideo_Btn;
     private ImageButton arrowBtnR, arrowBtnUp, arrowBtnDown, arrowBtnL;
-    private Button bluetooth_Btn, scanCenter_Btn, gridCenter_Btn, resetCenter_Btn, moveDoneBtn, orientBtn, modeDoneBtn, flipBtn, galleryBtn, /*settingsBtn,*/ flash_Btn;
+    private Button bluetooth_Btn, scanCenter_Btn, gridCenter_Btn, moveDoneBtn, orientBtn, modeDoneBtn, flipBtn, galleryBtn, /*settingsBtn,*/ flash_Btn;
     private Button grid_A, grid_B, grid_C, grid_D, grid_E, grid_F, grid_G, grid_H, grid_I;
     private Button zoom05_Btn, zoom1_Btn, zoom15_Btn, zoom2_Btn, zoom3_Btn;
     private Button video_Btn, photo_Btn;
     private Button motorBtn_1, motorBtn_2, motorBtn_3, motorBtn_4, clkwiseBtn, antiClkBtn;
     private PreviewView previewView;
-    private LinearLayout directionLO, levelLO, orientLO, gridLO, zoomLO, modeLO, recordingLO;
+    private LinearLayout directionLO, levelLO, orientLO, gridLO,zoomLO, modeLO, recordingLO;
     private TextView moveDirTV;
 
     // camera
@@ -205,13 +205,6 @@ public class MainActivity extends AppCompatActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-        /*zoom05_Btn.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                setZoomLevel(2.0f);
-            }
-        });*/
-
     }
     protected void onDestroy() {
         super.onDestroy();
@@ -345,7 +338,6 @@ public class MainActivity extends AppCompatActivity {
         bluetooth_Btn = findViewById(R.id.bluetooth);
         scanCenter_Btn = findViewById(R.id.scanCenterBtn);
         gridCenter_Btn = findViewById(R.id.gridCenterBtn);
-        resetCenter_Btn = findViewById(R.id.resetCenterBtn);
         flash_Btn = findViewById(R.id.flashBtn);
         //settingsBtn = findViewById(R.id.settingsBtn);
         directionLO = findViewById(R.id.directionLayout);
@@ -408,23 +400,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         startVideo_Btn.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
                 captureVideo();
-                zoomLO.setVisibility(View.GONE);
-                modeLO.setVisibility(View.GONE);
-                flash_Btn.setVisibility(View.GONE);
-                scanCenter_Btn.setVisibility(View.GONE);
-                bluetooth_Btn.setVisibility(View.GONE);
-                gridCenter_Btn.setVisibility(View.GONE);
-                resetCenter_Btn.setVisibility(View.GONE);
-                orientBtn.setVisibility(View.GONE);
-                galleryBtn.setVisibility(View.GONE);
-                flipBtn.setVisibility(View.GONE);
-
             }
-
         });
 
         stopVideo_Btn.setOnClickListener(new View.OnClickListener() {
@@ -436,76 +415,12 @@ public class MainActivity extends AppCompatActivity {
                 modeLO.setVisibility(View.VISIBLE);
                 recordingLO.setVisibility(View.GONE);
 
-                zoomLO.setVisibility(View.VISIBLE);
-                flash_Btn.setVisibility(View.VISIBLE);
-                scanCenter_Btn.setVisibility(View.VISIBLE);
-                bluetooth_Btn.setVisibility(View.VISIBLE);
-                gridCenter_Btn.setVisibility(View.VISIBLE);
-                resetCenter_Btn.setVisibility(View.VISIBLE);
-                orientBtn.setVisibility(View.VISIBLE);
-                galleryBtn.setVisibility(View.VISIBLE);
-                flipBtn.setVisibility(View.VISIBLE);
-
             }
         });
 
         if(isVideoMode == false) {
             photo_Btn.setSelected(true); //By default, start in photo mode
         };
-        zoom1_Btn.setSelected(true);
-
-        zoom05_Btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                zoom05_Btn.setSelected(true);
-                zoom1_Btn.setSelected(false);
-                zoom15_Btn.setSelected(false);
-                zoom2_Btn.setSelected(false);
-                zoom3_Btn.setSelected(false);
-
-            }
-        });
-        zoom1_Btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                zoom05_Btn.setSelected(false);
-                zoom1_Btn.setSelected(true);
-                zoom15_Btn.setSelected(false);
-                zoom2_Btn.setSelected(false);
-                zoom3_Btn.setSelected(false);
-            }
-        });
-        zoom15_Btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                zoom05_Btn.setSelected(false);
-                zoom1_Btn.setSelected(false);
-                zoom15_Btn.setSelected(true);
-                zoom2_Btn.setSelected(false);
-                zoom3_Btn.setSelected(false);
-            }
-        });
-        zoom2_Btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                zoom05_Btn.setSelected(false);
-                zoom1_Btn.setSelected(false);
-                zoom15_Btn.setSelected(false);
-                zoom2_Btn.setSelected(true);
-                zoom3_Btn.setSelected(false);
-
-            }
-        });
-        zoom3_Btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                zoom05_Btn.setSelected(false);
-                zoom1_Btn.setSelected(false);
-                zoom15_Btn.setSelected(false);
-                zoom2_Btn.setSelected(false);
-                zoom3_Btn.setSelected(true);
-            }
-        });
 
         flash_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -541,9 +456,6 @@ public class MainActivity extends AppCompatActivity {
                 video_Btn.setSelected(false);
             }
         });
-
-
-
 
         /*video_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -630,7 +542,6 @@ public class MainActivity extends AppCompatActivity {
                 scanCenter_Btn.setVisibility(View.VISIBLE);
                 bluetooth_Btn.setVisibility(View.VISIBLE);
                 gridCenter_Btn.setVisibility(View.VISIBLE);
-                resetCenter_Btn.setVisibility(View.VISIBLE);
                 orientBtn.setVisibility(View.VISIBLE);
                 galleryBtn.setVisibility(View.VISIBLE);
                 flipBtn.setVisibility(View.VISIBLE);
@@ -648,7 +559,6 @@ public class MainActivity extends AppCompatActivity {
                 scanCenter_Btn.setVisibility(View.GONE);
                 bluetooth_Btn.setVisibility(View.GONE);
                 gridCenter_Btn.setVisibility(View.GONE);
-                resetCenter_Btn.setVisibility(View.GONE);
                 orientBtn.setVisibility(View.GONE);
                 galleryBtn.setVisibility(View.GONE);
                 flipBtn.setVisibility(View.GONE);
@@ -678,7 +588,6 @@ public class MainActivity extends AppCompatActivity {
                 scanCenter_Btn.setVisibility(View.VISIBLE);
                 bluetooth_Btn.setVisibility(View.VISIBLE);
                 gridCenter_Btn.setVisibility(View.VISIBLE);
-                resetCenter_Btn.setVisibility(View.VISIBLE);
                 orientBtn.setVisibility(View.VISIBLE);
                 galleryBtn.setVisibility(View.VISIBLE);
                 flipBtn.setVisibility(View.VISIBLE);
@@ -747,7 +656,6 @@ public class MainActivity extends AppCompatActivity {
                 scanCenter_Btn.setVisibility(View.VISIBLE);
                 bluetooth_Btn.setVisibility(View.VISIBLE);
                 gridCenter_Btn.setVisibility(View.VISIBLE);
-                resetCenter_Btn.setVisibility(View.VISIBLE);
                 orientBtn.setVisibility(View.VISIBLE);
                 galleryBtn.setVisibility(View.VISIBLE);
                 flipBtn.setVisibility(View.VISIBLE);
@@ -769,7 +677,6 @@ public class MainActivity extends AppCompatActivity {
                 scanCenter_Btn.setVisibility(View.VISIBLE);
                 bluetooth_Btn.setVisibility(View.VISIBLE);
                 gridCenter_Btn.setVisibility(View.VISIBLE);
-                resetCenter_Btn.setVisibility(View.VISIBLE);
                 orientBtn.setVisibility(View.VISIBLE);
                 galleryBtn.setVisibility(View.VISIBLE);
                 flipBtn.setVisibility(View.VISIBLE);
@@ -787,7 +694,6 @@ public class MainActivity extends AppCompatActivity {
                     modeLO.setVisibility(View.GONE);
                     flash_Btn.setVisibility(View.GONE);
                     scanCenter_Btn.setVisibility(View.GONE);
-                    resetCenter_Btn.setVisibility(View.GONE);
                     orientBtn.setVisibility(View.GONE);
                     bluetooth_Btn.setVisibility(View.GONE);
                     galleryBtn.setVisibility(View.GONE);
@@ -803,7 +709,6 @@ public class MainActivity extends AppCompatActivity {
                     modeLO.setVisibility(View.VISIBLE);
                     flash_Btn.setVisibility(View.VISIBLE);
                     scanCenter_Btn.setVisibility(View.VISIBLE);
-                    resetCenter_Btn.setVisibility(View.VISIBLE);
                     orientBtn.setVisibility(View.VISIBLE);
                     bluetooth_Btn.setVisibility(View.VISIBLE);
                     galleryBtn.setVisibility(View.VISIBLE);
@@ -818,11 +723,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (lensFacing == CameraSelector.DEFAULT_FRONT_CAMERA) lensFacing = CameraSelector.DEFAULT_BACK_CAMERA;
-                else if (lensFacing == CameraSelector.DEFAULT_BACK_CAMERA){
-                    lensFacing = CameraSelector.DEFAULT_FRONT_CAMERA;
-                    flash_Btn.setCompoundDrawablesRelativeWithIntrinsicBounds(null, flashOffImg, null, null);
-
-                } startCameraX(cameraProvider);
+                else if (lensFacing == CameraSelector.DEFAULT_BACK_CAMERA) lensFacing = CameraSelector.DEFAULT_FRONT_CAMERA;
+                startCameraX(cameraProvider);
             }
         });
 
@@ -853,24 +755,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        resetCenter_Btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String resultReset = "Reset servos";
-                if (bluetoothSocket != null)
-                {
-                    try {
-                        OutputStream outputStream = bluetoothSocket.getOutputStream();
-                        outputStream.write(resultReset.getBytes());
-                    }catch(IOException e){
-                        e.printStackTrace();
-                    }
-                }
-                Toast.makeText(MainActivity.this, "Reset Center", Toast.LENGTH_LONG).show();
-            }
-                                           }
-        );
 
         grid_A.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -1283,44 +1167,20 @@ public class MainActivity extends AppCompatActivity {
         cameraProvider.bindToLifecycle((LifecycleOwner) this, cameraSelector, preview, imageCapture);
 
     }
-
-    /*private void setZoomLevel(float zoomLevel) {
-        if (cameraControl != null) {
-            CameraInfo cameraInfo = cameraControl.getCameraInfo();
-            float maxZoomRatio = cameraInfo.getZoomState().getValue().getMaxZoomRatio();
-
-            // Ensure zoom level is within valid range (1.0f to maxZoomRatio)
-            zoomLevel = Math.max(1.0f, Math.min(zoomLevel, maxZoomRatio));
-
-            // Update the zoom level
-            cameraControl.setZoomRatio(zoomLevel);
-
-            // Save the current zoom level
-            currentZoomLevel = zoomLevel;
-        }
-    }*/
-
     // Toggle flash when the flash_Btn is clicked
     private void toggleFlash(){
-        if (lensFacing == CameraSelector.DEFAULT_BACK_CAMERA) {
-            //Toggle flash state
-            isFlashedEnabled = !isFlashedEnabled; // When clicked, becomes the opposite
-            if (isFlashedEnabled) {
-                flash_Btn.setCompoundDrawablesRelativeWithIntrinsicBounds(null, flashOnImg, null, null);
-            } else {
-                flash_Btn.setCompoundDrawablesRelativeWithIntrinsicBounds(null, flashOffImg, null, null);
-            }
-            ;
+        //Toggle flash state
+        isFlashedEnabled=!isFlashedEnabled; // When clicked, becomes the opposite
+        if (isFlashedEnabled){
+            flash_Btn.setCompoundDrawablesRelativeWithIntrinsicBounds(null, flashOnImg, null, null);
         }
         else {
-            isFlashedEnabled=false;
             flash_Btn.setCompoundDrawablesRelativeWithIntrinsicBounds(null, flashOffImg, null, null);
-        }
-
-            // Set flash mode for the ImageCapture use case
-            imageCapture.setFlashMode(
-                    isFlashedEnabled ? ImageCapture.FLASH_MODE_ON:ImageCapture.FLASH_MODE_OFF
-            );
+        };
+        // Set flash mode for the ImageCapture use case
+        imageCapture.setFlashMode(
+                isFlashedEnabled ? ImageCapture.FLASH_MODE_ON:ImageCapture.FLASH_MODE_OFF
+        );
     }
 
     /*private void setVideoMode(){
