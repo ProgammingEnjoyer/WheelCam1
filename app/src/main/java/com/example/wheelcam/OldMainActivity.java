@@ -125,7 +125,6 @@ public class OldMainActivity extends AppCompatActivity {
     private void startMovingLine(boolean isHorizontal) {
         float startValue = 0;
         float endValue = isHorizontal ? customView.getHeight() : customView.getWidth();
-
         ValueAnimator animator = ValueAnimator.ofFloat(startValue, endValue);
         animator.setDuration(7000); // 7 seconds
         animator.setRepeatCount(ValueAnimator.INFINITE);

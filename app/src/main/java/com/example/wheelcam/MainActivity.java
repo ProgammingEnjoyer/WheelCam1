@@ -71,10 +71,9 @@ import java.util.ArrayList;import android.view.animation.AnimationUtils;
 
 
 public class MainActivity extends AppCompatActivity {
-    public static boolean isFrontCamera = false;
     private boolean isRotating = false;
     private static MainActivity instance;
-    public BluetoothSocket bluetoothSocket;
+    public BluetoothSocket bluetoothSocket; // 确保这是一个成员变量
 
     public static MainActivity getInstance() {
         return instance;
@@ -723,13 +722,8 @@ public class MainActivity extends AppCompatActivity {
         flipBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (lensFacing == CameraSelector.DEFAULT_FRONT_CAMERA) {
-                    lensFacing = CameraSelector.DEFAULT_BACK_CAMERA;
-                    isFrontCamera = false;
-                } else if (lensFacing == CameraSelector.DEFAULT_BACK_CAMERA) {
-                    lensFacing = CameraSelector.DEFAULT_FRONT_CAMERA;
-                    isFrontCamera = true;
-                }
+                if (lensFacing == CameraSelector.DEFAULT_FRONT_CAMERA) lensFacing = CameraSelector.DEFAULT_BACK_CAMERA;
+                else if (lensFacing == CameraSelector.DEFAULT_BACK_CAMERA) lensFacing = CameraSelector.DEFAULT_FRONT_CAMERA;
                 startCameraX(cameraProvider);
             }
         });
@@ -758,11 +752,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, OldMainActivity.class);
-                intent.putExtra("isFrontCamera", isFrontCamera);
                 startActivity(intent);
             }
         });
-
 
         grid_A.setOnClickListener(new View.OnClickListener() {
             @Override
