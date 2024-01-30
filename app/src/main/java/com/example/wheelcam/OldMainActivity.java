@@ -27,6 +27,7 @@ import java.util.concurrent.ExecutionException;import android.view.ViewTreeObser
 
 
 public class OldMainActivity extends AppCompatActivity {
+    private CameraSelector lensFacing;
     private static final int REQUEST_CODE_PERMISSIONS = 1001;
     private CustomView customView;
     private Button controlButton;
@@ -42,7 +43,21 @@ public class OldMainActivity extends AppCompatActivity {
         customView = findViewById(R.id.customView);
         previewView = findViewById(R.id.previewView);
         controlButton = findViewById(R.id.controlButton);
+        boolean isFrontCamera = getIntent().getBooleanExtra("isFrontCamera", false);
+        CameraSelector cameraSelector = isFrontCamera ? CameraSelector.DEFAULT_FRONT_CAMERA : CameraSelector.DEFAULT_BACK_CAMERA;
+        if (isFrontCamera) {
+            //front
+            lensFacing = CameraSelector.DEFAULT_FRONT_CAMERA;
+        } else {
+            // back
+            lensFacing = CameraSelector.DEFAULT_BACK_CAMERA;
+        }
 
+        if (allPermissionsGranted()) {
+            startCamera(cameraSelector);
+        } else {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, REQUEST_CODE_PERMISSIONS);
+        }
         customView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
@@ -55,7 +70,7 @@ public class OldMainActivity extends AppCompatActivity {
 
         // check permission of camera
         if (allPermissionsGranted()) {
-            startCamera();
+            startCamera(lensFacing);
         } else {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, REQUEST_CODE_PERMISSIONS);
         }
@@ -134,30 +149,24 @@ public class OldMainActivity extends AppCompatActivity {
     }
 
 
-    private void startCamera() {
+
+    private void startCamera(CameraSelector cameraSelector) {
         ListenableFuture<ProcessCameraProvider> cameraProviderFuture = ProcessCameraProvider.getInstance(this);
         cameraProviderFuture.addListener(() -> {
             try {
                 ProcessCameraProvider cameraProvider = cameraProviderFuture.get();
-                bindPreview(cameraProvider);
-            } catch (ExecutionException e) {
-                // handle ExecutionException，fail to access CameraProvider
-                Log.e("OldMainActivity", "ExecutionException in startCamera", e);
-            } catch (InterruptedException e) {
-                // handle InterruptedException
-                Log.e("OldMainActivity", "InterruptedException in startCamera", e);
-                // stay disrupted
-                Thread.currentThread().interrupt();
+                bindPreview(cameraProvider, cameraSelector);
+            } catch (ExecutionException | InterruptedException e) {
+                // 处理异常
+                Log.e("OldMainActivity", "Error starting camera", e);
             }
         }, ContextCompat.getMainExecutor(this));
     }
 
 
-    private void bindPreview(@NonNull ProcessCameraProvider cameraProvider) {
-        Preview preview = new Preview.Builder().build();
-        CameraSelector cameraSelector = new CameraSelector.Builder()
-                .requireLensFacing(CameraSelector.LENS_FACING_BACK).build();
 
+    private void bindPreview(@NonNull ProcessCameraProvider cameraProvider, CameraSelector cameraSelector) {
+        Preview preview = new Preview.Builder().build();
         preview.setSurfaceProvider(previewView.getSurfaceProvider());
 
         cameraProvider.unbindAll();
@@ -168,7 +177,7 @@ public class OldMainActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == REQUEST_CODE_PERMISSIONS) {
             if (allPermissionsGranted()) {
-                startCamera();
+                startCamera(lensFacing);
             } else {
                 Toast.makeText(this, "Permissions not granted by the user.", Toast.LENGTH_SHORT).show();
                 finish();
