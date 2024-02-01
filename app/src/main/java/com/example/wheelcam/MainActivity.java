@@ -458,10 +458,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    void setUI(){ //This updates the User Interface
-        if (isBtConnected){
+    void setUI() { //This updates the User Interface
+        if (isBtConnected) {
             bluetooth_Btn.setCompoundDrawablesRelativeWithIntrinsicBounds(null, btOnImg, null, null);
-        }else{
+        } else {
             bluetooth_Btn.setCompoundDrawablesRelativeWithIntrinsicBounds(null, btOffImg, null, null);
         }
 
@@ -515,9 +515,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        if(isVideoMode == false) {
+        if (isVideoMode == false) {
             photo_Btn.setSelected(true); //By default, start in photo mode
-        };
+        }
+        ;
         zoom1_Btn.setSelected(true);
 
         zoom05_Btn.setOnClickListener(new View.OnClickListener() {
@@ -575,7 +576,9 @@ public class MainActivity extends AppCompatActivity {
 
         flash_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {toggleFlash(); }
+            public void onClick(View view) {
+                toggleFlash();
+            }
         });
 
         //If video mode is selected, show the start video icon and activate isVideoMode
@@ -587,7 +590,7 @@ public class MainActivity extends AppCompatActivity {
                 startVideo_Btn.setVisibility(View.VISIBLE);
                 stopVideo_Btn.setVisibility(View.GONE);
                 modeLO.setVisibility(View.VISIBLE);
-                isVideoMode=true;
+                isVideoMode = true;
                 // If the button is now selected, change its background to the selected state
                 video_Btn.setSelected(true);
                 photo_Btn.setSelected(false);
@@ -602,7 +605,7 @@ public class MainActivity extends AppCompatActivity {
                 startVideo_Btn.setVisibility(View.GONE);
                 stopVideo_Btn.setVisibility(View.GONE);
                 modeLO.setVisibility(View.VISIBLE);
-                isVideoMode=false;
+                isVideoMode = false;
                 photo_Btn.setSelected(true);
                 video_Btn.setSelected(false);
             }
@@ -707,7 +710,6 @@ public class MainActivity extends AppCompatActivity {
         orientBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-=======
                 if (isOriginalIcon) {
                     rotateFlashButton(false);
                     rotateScanCenterButton(false);
@@ -856,7 +858,6 @@ public class MainActivity extends AppCompatActivity {
                     galleryBtn.setVisibility(View.GONE);
                     flipBtn.setVisibility(View.GONE);
                     zoomLO.setVisibility(View.GONE);
-
 
 
                 } else {
