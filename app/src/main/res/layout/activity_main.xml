@@ -62,10 +62,10 @@
             android:layout_weight="2"
             android:background="@drawable/button_selector"
             android:drawableTop="@drawable/ic_grid"
-            android:text="@string/scan_center"
+            android:text="@string/grid_center"
             android:textColor="@color/mint"
             android:textSize="11sp"
-            android:contentDescription="@string/scan_center"/>
+            android:contentDescription="@string/grid_center"/>
 
         <Button
             android:id="@+id/rotateBtn"
