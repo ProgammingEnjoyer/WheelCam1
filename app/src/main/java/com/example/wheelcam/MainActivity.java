@@ -71,9 +71,12 @@ import java.util.ArrayList;import android.view.animation.AnimationUtils;
 
 
 public class MainActivity extends AppCompatActivity {
+
+    private boolean isOriginalIcon = false;
+    public static boolean isFrontCamera = false;
     private boolean isRotating = false;
     private static MainActivity instance;
-    public BluetoothSocket bluetoothSocket; // 确保这是一个成员变量
+    public BluetoothSocket bluetoothSocket;
 
     public static MainActivity getInstance() {
         return instance;
@@ -206,9 +209,71 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+    private void rotateFlashButton(boolean clockwise) {
+        Button flashButton = findViewById(R.id.flashBtn);
+        float startRotation = flashButton.getRotation();
+        float endRotation = clockwise ? (startRotation + 90) : (startRotation - 90);
+
+        flashButton.animate()
+                .rotation(endRotation)
+                .setDuration(500) // duration time of animation
+                .start();
+    }
+    private void rotateScanCenterButton(boolean clockwise) {
+        Button flashButton = findViewById(R.id.scanCenterBtn);
+        float startRotation = flashButton.getRotation();
+        float endRotation = clockwise ? (startRotation + 90) : (startRotation - 90);
+
+        flashButton.animate()
+                .rotation(endRotation)
+                .setDuration(500) // duration time of animation
+                .start();
+    }
+    private void rotateGridCenterButton(boolean clockwise) {
+        Button flashButton = findViewById(R.id.gridCenterBtn);
+        float startRotation = flashButton.getRotation();
+        float endRotation = clockwise ? (startRotation + 90) : (startRotation - 90);
+
+        flashButton.animate()
+                .rotation(endRotation)
+                .setDuration(500) // duration time of animation
+                .start();
+    }
+    private void rotateRotateButton(boolean clockwise) {
+        Button flashButton = findViewById(R.id.rotateBtn);
+        float startRotation = flashButton.getRotation();
+        float endRotation = clockwise ? (startRotation + 90) : (startRotation - 90);
+
+        flashButton.animate()
+                .rotation(endRotation)
+                .setDuration(500) // duration time of animation
+                .start();
+    }
+    private void rotateBTButton(boolean clockwise) {
+        Button flashButton = findViewById(R.id.bluetooth);
+        float startRotation = flashButton.getRotation();
+        float endRotation = clockwise ? (startRotation + 90) : (startRotation - 90);
+
+        flashButton.animate()
+                .rotation(endRotation)
+                .setDuration(500) // duration time of animation
+                .start();
+    }
+    private void rotateResetCenterButton(boolean clockwise) {
+        Button flashButton = findViewById(R.id.resetCenterBtn);
+        float startRotation = flashButton.getRotation();
+        float endRotation = clockwise ? (startRotation + 90) : (startRotation - 90);
+
+        flashButton.animate()
+                .rotation(endRotation)
+                .setDuration(500) // duration time of animation
+                .start();
+    }
+
+
     protected void onDestroy() {
         super.onDestroy();
-        instance = null; // 清除引用
+        instance = null; // clear
     }
     /*private void updateHighlightableButtonsForRotation() {
         Log.d(TAG, "Entering rotation mode");
@@ -393,6 +458,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //camera
+
         capturePhoto_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -552,26 +618,23 @@ public class MainActivity extends AppCompatActivity {
         orientBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //directionLO.setVisibility(View.GONE);
-                zoomLO.setVisibility(View.GONE);
-                modeLO.setVisibility(View.GONE);
-                flash_Btn.setVisibility(View.GONE);
-                scanCenter_Btn.setVisibility(View.GONE);
-                bluetooth_Btn.setVisibility(View.GONE);
-                gridCenter_Btn.setVisibility(View.GONE);
-                orientBtn.setVisibility(View.GONE);
-                galleryBtn.setVisibility(View.GONE);
-                flipBtn.setVisibility(View.GONE);
-                modeLO.setVisibility(View.GONE);
+                if (isOriginalIcon) {
+                    rotateFlashButton(false);
+                    rotateScanCenterButton(false);
+                    rotateGridCenterButton(false);
+                    rotateBTButton(false);
+                    rotateRotateButton(false);
+                    rotateResetCenterButton(false);
+                } else {
+                    rotateFlashButton(true);
+                    rotateScanCenterButton(true);
+                    rotateGridCenterButton(true);
+                    rotateBTButton(true);
+                    rotateRotateButton(true);
+                    rotateResetCenterButton(true);
+                }
 
-                orientLO.setVisibility(View.VISIBLE);
-                controlCenter.setBtnClicked("ROTATE");
-
-                //updateHighlightableButtonsForRotation();
-                currentButtonIndex = 0;
-                //highlightButton(currentButtonIndex);
-                //highlightHandler.removeCallbacks(highlightRunnable);
-                //highlightHandler.postDelayed(highlightRunnable, 3000);
+                isOriginalIcon = !isOriginalIcon; // alter state of flag
             }
         });
 
@@ -722,8 +785,13 @@ public class MainActivity extends AppCompatActivity {
         flipBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (lensFacing == CameraSelector.DEFAULT_FRONT_CAMERA) lensFacing = CameraSelector.DEFAULT_BACK_CAMERA;
-                else if (lensFacing == CameraSelector.DEFAULT_BACK_CAMERA) lensFacing = CameraSelector.DEFAULT_FRONT_CAMERA;
+                if (lensFacing == CameraSelector.DEFAULT_FRONT_CAMERA) {
+                    lensFacing = CameraSelector.DEFAULT_BACK_CAMERA;
+                    isFrontCamera = false;
+                } else if (lensFacing == CameraSelector.DEFAULT_BACK_CAMERA) {
+                    lensFacing = CameraSelector.DEFAULT_FRONT_CAMERA;
+                    isFrontCamera = true;
+                }
                 startCameraX(cameraProvider);
             }
         });
@@ -752,9 +820,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, OldMainActivity.class);
+                intent.putExtra("isFrontCamera", isFrontCamera);
                 startActivity(intent);
             }
         });
+
 
         grid_A.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -75,7 +75,7 @@
             android:layout_marginTop="10dp"
             android:layout_weight="1"
             android:background="@drawable/button_selector"
-            android:drawableTop="@drawable/ic_screen_rotate"
+            android:drawableTop="@drawable/ic_portrait"
             android:textSize="11sp"
             android:textColor="@color/mint"
             android:text="@string/title_rotate"
