@@ -881,6 +881,8 @@ public class MainActivity extends AppCompatActivity {
         flipBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                isFlashedEnabled=false;
+                flash_Btn.setCompoundDrawablesRelativeWithIntrinsicBounds(null, flashOffImg, null, null);
                 if (lensFacing == CameraSelector.DEFAULT_FRONT_CAMERA) {
                     lensFacing = CameraSelector.DEFAULT_BACK_CAMERA;
                     isFrontCamera = false;
