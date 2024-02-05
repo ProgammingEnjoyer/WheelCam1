@@ -1358,7 +1358,6 @@ public class MainActivity extends AppCompatActivity {
                 String savedPath = (savedUri != null) ? savedUri.getPath() : "";
                 Log.d(TAG, "Video saved successfully: " + savedPath);
 
-                // 防止尝试扫描空路径
                 if (!savedPath.isEmpty()) {
                     MediaScannerConnection.scanFile(MainActivity.this, new String[] { savedPath }, null, (path, uri) -> {
                         Log.d(TAG, "MediaScanner scanned file: " + path);
