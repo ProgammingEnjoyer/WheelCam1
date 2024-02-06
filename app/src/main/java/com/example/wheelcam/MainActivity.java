@@ -2,6 +2,8 @@ package com.example.wheelcam;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import android.annotation.SuppressLint;
 import android.os.Environment;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -170,11 +172,11 @@ public class MainActivity extends AppCompatActivity {
     ControlCenter controlCenter = ControlCenter.getInstance(this);
 
 
-     @Override
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-         instance = this;
+        instance = this;
         setContentView(R.layout.activity_main);
 
         //initialiseHighlightableButtons();
@@ -905,11 +907,11 @@ public class MainActivity extends AppCompatActivity {
                 intent.setAction(android.content.Intent.ACTION_VIEW);
                 if (ImageUri != null){
                     String url = ImageUri.toString();
-                int trimIndex = url.lastIndexOf("/");
-                url = url.substring(0, trimIndex);
-                ImageUri = Uri.parse(url);
-                //Toast.makeText(getApplicationContext(), url, Toast.LENGTH_LONG).show();
-                intent.setDataAndType(ImageUri, "image/*");
+                    int trimIndex = url.lastIndexOf("/");
+                    url = url.substring(0, trimIndex);
+                    ImageUri = Uri.parse(url);
+                    //Toast.makeText(getApplicationContext(), url, Toast.LENGTH_LONG).show();
+                    intent.setDataAndType(ImageUri, "image/*");
                 }else{
                     intent.setType("image/*");
                 }
@@ -929,20 +931,20 @@ public class MainActivity extends AppCompatActivity {
 
 
         resetCenter_Btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String resultReset = "Reset servos";
-                if (bluetoothSocket != null)
-                {
-                    try {
-                        OutputStream outputStream = bluetoothSocket.getOutputStream();
-                        outputStream.write(resultReset.getBytes());
-                    }catch(IOException e){
-                        e.printStackTrace();
-                    }
-                }
-                Toast.makeText(MainActivity.this, "Reset Center", Toast.LENGTH_LONG).show();
-            }
+                                               @Override
+                                               public void onClick(View view) {
+                                                   String resultReset = "Reset servos";
+                                                   if (bluetoothSocket != null)
+                                                   {
+                                                       try {
+                                                           OutputStream outputStream = bluetoothSocket.getOutputStream();
+                                                           outputStream.write(resultReset.getBytes());
+                                                       }catch(IOException e){
+                                                           e.printStackTrace();
+                                                       }
+                                                   }
+                                                   Toast.makeText(MainActivity.this, "Reset Center", Toast.LENGTH_LONG).show();
+                                               }
                                            }
         );
 
@@ -1332,6 +1334,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+    @SuppressLint("MissingPermission")
     private void startRecording() {
         // 检查外部存储状态
         if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
@@ -1343,7 +1346,6 @@ public class MainActivity extends AppCompatActivity {
         File videoFile = new File(getExternalFilesDir(null), System.currentTimeMillis() + ".mp4");
         Log.d(TAG, "Video file path: " + videoFile.getAbsolutePath());
 
-        // 确保父目录存在
         if (!videoFile.getParentFile().exists() && !videoFile.getParentFile().mkdirs()) {
             Log.e(TAG, "Failed to create directory for video file.");
             runOnUiThread(() -> Toast.makeText(MainActivity.this, "Failed to create directory for video file.", Toast.LENGTH_SHORT).show());
@@ -1352,6 +1354,7 @@ public class MainActivity extends AppCompatActivity {
 
         VideoCapture.OutputFileOptions outputFileOptions = new VideoCapture.OutputFileOptions.Builder(videoFile).build();
         videoCapture.startRecording(outputFileOptions, getExecutor(), new VideoCapture.OnVideoSavedCallback() {
+            @SuppressLint("MissingPermission")
             @Override
             public void onVideoSaved(@NonNull VideoCapture.OutputFileResults outputFileResults) {
                 Uri savedUri = outputFileResults.getSavedUri();
@@ -1453,10 +1456,10 @@ public class MainActivity extends AppCompatActivity {
             flash_Btn.setCompoundDrawablesRelativeWithIntrinsicBounds(null, flashOffImg, null, null);
         }
 
-            // Set flash mode for the ImageCapture use case
-            imageCapture.setFlashMode(
-                    isFlashedEnabled ? ImageCapture.FLASH_MODE_ON:ImageCapture.FLASH_MODE_OFF
-            );
+        // Set flash mode for the ImageCapture use case
+        imageCapture.setFlashMode(
+                isFlashedEnabled ? ImageCapture.FLASH_MODE_ON:ImageCapture.FLASH_MODE_OFF
+        );
     }
 
     /*private void setVideoMode(){
@@ -1495,9 +1498,9 @@ public class MainActivity extends AppCompatActivity {
         );
 
     }
-        Executor getExecutor() {
-            return ContextCompat.getMainExecutor(this);
-        }
+    Executor getExecutor() {
+        return ContextCompat.getMainExecutor(this);
+    }
     private void captureVideo(){
         startVideo_Btn.setVisibility(View.GONE);
         capturePhoto_Btn.setVisibility(View.GONE);
@@ -1564,7 +1567,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 } else {
                     new ProgressAsyncTask(progressBar, btDeviceTV, btConnectBtn).execute();
-                   // ControlCenter.setCenter();
+                    // ControlCenter.setCenter();
                 }
                 btConnectBtn.setText(isBtConnected? "Disconnect" :"Connect");
             }
@@ -1695,7 +1698,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-// for checking and asking for permission
+    // for checking and asking for permission
     private boolean checkPermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED) {
