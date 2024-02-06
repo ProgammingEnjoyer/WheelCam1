@@ -1,8 +1,14 @@
 package com.example.wheelcam;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import android.annotation.SuppressLint;
+import android.os.Environment;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.media.MediaScannerConnection;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 import androidx.camera.core.CameraControl;
@@ -12,6 +18,7 @@ import androidx.camera.core.CameraX;
 import androidx.camera.core.ImageCapture;
 import androidx.camera.core.ImageCaptureException;
 import androidx.camera.core.Preview;
+import androidx.camera.core.VideoCapture;
 import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.camera.view.PreviewView;
 import androidx.core.app.ActivityCompat;
@@ -56,6 +63,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.common.util.concurrent.ListenableFuture;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -119,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
     private int currentButtonIndex = 0;
     private float currentZoomLevel=1.0f;
     private CameraControl cameraControl;
-    // private VideoCapture videoCapture;
+    private VideoCapture videoCapture;
     private boolean isRecording = false;
     final private String TAG = "MainActivity";
     private final static int REQUEST_ENABLE_BT = 1;
@@ -164,11 +172,11 @@ public class MainActivity extends AppCompatActivity {
     ControlCenter controlCenter = ControlCenter.getInstance(this);
 
 
-     @Override
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-         instance = this;
+        instance = this;
         setContentView(R.layout.activity_main);
 
         //initialiseHighlightableButtons();
@@ -901,11 +909,11 @@ public class MainActivity extends AppCompatActivity {
                 intent.setAction(android.content.Intent.ACTION_VIEW);
                 if (ImageUri != null){
                     String url = ImageUri.toString();
-                int trimIndex = url.lastIndexOf("/");
-                url = url.substring(0, trimIndex);
-                ImageUri = Uri.parse(url);
-                //Toast.makeText(getApplicationContext(), url, Toast.LENGTH_LONG).show();
-                intent.setDataAndType(ImageUri, "image/*");
+                    int trimIndex = url.lastIndexOf("/");
+                    url = url.substring(0, trimIndex);
+                    ImageUri = Uri.parse(url);
+                    //Toast.makeText(getApplicationContext(), url, Toast.LENGTH_LONG).show();
+                    intent.setDataAndType(ImageUri, "image/*");
                 }else{
                     intent.setType("image/*");
                 }
@@ -925,20 +933,20 @@ public class MainActivity extends AppCompatActivity {
 
 
         resetCenter_Btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String resultReset = "Reset servos";
-                if (bluetoothSocket != null)
-                {
-                    try {
-                        OutputStream outputStream = bluetoothSocket.getOutputStream();
-                        outputStream.write(resultReset.getBytes());
-                    }catch(IOException e){
-                        e.printStackTrace();
-                    }
-                }
-                Toast.makeText(MainActivity.this, "Reset Center", Toast.LENGTH_LONG).show();
-            }
+                                               @Override
+                                               public void onClick(View view) {
+                                                   String resultReset = "Reset servos";
+                                                   if (bluetoothSocket != null)
+                                                   {
+                                                       try {
+                                                           OutputStream outputStream = bluetoothSocket.getOutputStream();
+                                                           outputStream.write(resultReset.getBytes());
+                                                       }catch(IOException e){
+                                                           e.printStackTrace();
+                                                       }
+                                                   }
+                                                   Toast.makeText(MainActivity.this, "Reset Center", Toast.LENGTH_LONG).show();
+                                               }
                                            }
         );
 
@@ -1328,6 +1336,52 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+    @SuppressLint("MissingPermission")
+    private void startRecording() {
+        // 检查外部存储状态
+        if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+            Log.e(TAG, "External storage is not mounted.");
+            runOnUiThread(() -> Toast.makeText(MainActivity.this, "External storage is not available.", Toast.LENGTH_SHORT).show());
+            return;
+        }
+
+        File videoFile = new File(getExternalFilesDir(null), System.currentTimeMillis() + ".mp4");
+        Log.d(TAG, "Video file path: " + videoFile.getAbsolutePath());
+
+        if (!videoFile.getParentFile().exists() && !videoFile.getParentFile().mkdirs()) {
+            Log.e(TAG, "Failed to create directory for video file.");
+            runOnUiThread(() -> Toast.makeText(MainActivity.this, "Failed to create directory for video file.", Toast.LENGTH_SHORT).show());
+            return;
+        }
+
+        VideoCapture.OutputFileOptions outputFileOptions = new VideoCapture.OutputFileOptions.Builder(videoFile).build();
+        videoCapture.startRecording(outputFileOptions, getExecutor(), new VideoCapture.OnVideoSavedCallback() {
+            @SuppressLint("MissingPermission")
+            @Override
+            public void onVideoSaved(@NonNull VideoCapture.OutputFileResults outputFileResults) {
+                Uri savedUri = outputFileResults.getSavedUri();
+                String savedPath = (savedUri != null) ? savedUri.getPath() : "";
+                Log.d(TAG, "Video saved successfully: " + savedPath);
+
+                if (!savedPath.isEmpty()) {
+                    MediaScannerConnection.scanFile(MainActivity.this, new String[] { savedPath }, null, (path, uri) -> {
+                        Log.d(TAG, "MediaScanner scanned file: " + path);
+                    });
+                } else {
+                    Log.e(TAG, "Saved video path is empty.");
+                }
+
+                runOnUiThread(() -> Toast.makeText(MainActivity.this, "Video saved successfully: " + savedPath, Toast.LENGTH_SHORT).show());
+            }
+
+            @Override
+            public void onError(int videoCaptureError, @NonNull String message, @Nullable Throwable cause) {
+                Log.e(TAG, "Error recording video: " + message, cause);
+                runOnUiThread(() -> Toast.makeText(MainActivity.this, "Error recording video: " + message, Toast.LENGTH_SHORT).show());
+            }
+        });
+    }
+
 
     private void startCameraX(ProcessCameraProvider cameraProvider) {
         cameraProvider.unbindAll();
@@ -1349,6 +1403,23 @@ public class MainActivity extends AppCompatActivity {
         imageCapture = new ImageCapture.Builder()
                 .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
                 .build();
+
+        videoCapture = new VideoCapture.Builder().build();
+
+        // Must unbind the use-cases before rebinding them
+        cameraProvider.unbindAll();
+
+        try {
+            // Bind use cases to camera
+            cameraProvider.bindToLifecycle(
+                    (LifecycleOwner)this,
+                    cameraSelector,
+                    preview,
+                    imageCapture,
+                    videoCapture);
+        } catch(Exception exc) {
+            Log.e(TAG, "Use case binding failed", exc);
+        }
 
         cameraProvider.bindToLifecycle((LifecycleOwner) this, cameraSelector, preview, imageCapture);
 
@@ -1387,10 +1458,10 @@ public class MainActivity extends AppCompatActivity {
             flash_Btn.setCompoundDrawablesRelativeWithIntrinsicBounds(null, flashOffImg, null, null);
         }
 
-            // Set flash mode for the ImageCapture use case
-            imageCapture.setFlashMode(
-                    isFlashedEnabled ? ImageCapture.FLASH_MODE_ON:ImageCapture.FLASH_MODE_OFF
-            );
+        // Set flash mode for the ImageCapture use case
+        imageCapture.setFlashMode(
+                isFlashedEnabled ? ImageCapture.FLASH_MODE_ON:ImageCapture.FLASH_MODE_OFF
+        );
     }
 
     /*private void setVideoMode(){
@@ -1429,15 +1500,22 @@ public class MainActivity extends AppCompatActivity {
         );
 
     }
-        Executor getExecutor() {
-            return ContextCompat.getMainExecutor(this);
-        }
+    Executor getExecutor() {
+        return ContextCompat.getMainExecutor(this);
+    }
     private void captureVideo(){
         startVideo_Btn.setVisibility(View.GONE);
         capturePhoto_Btn.setVisibility(View.GONE);
         stopVideo_Btn.setVisibility(View.VISIBLE);
         modeLO.setVisibility(View.GONE);
         recordingLO.setVisibility(View.VISIBLE);
+        if (!isRecording) {
+            startRecording();
+            isRecording = true; // Add this line to maintain recording state
+        } else {
+            videoCapture.stopRecording(); // Call stopRecording when isRecording is true
+            isRecording = false; // Reset the recording state
+        }
     }
     void showBottomSheetDialog(){
         //for bluetooth connection
@@ -1491,7 +1569,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 } else {
                     new ProgressAsyncTask(progressBar, btDeviceTV, btConnectBtn).execute();
-                   // ControlCenter.setCenter();
+                    // ControlCenter.setCenter();
                 }
                 btConnectBtn.setText(isBtConnected? "Disconnect" :"Connect");
             }
@@ -1622,7 +1700,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-// for checking and asking for permission
+    // for checking and asking for permission
     private boolean checkPermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED) {
