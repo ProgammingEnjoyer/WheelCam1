@@ -714,7 +714,7 @@ public class MainActivity extends AppCompatActivity {
                 modeLO.setVisibility(View.VISIBLE);
             }
         });
-
+String rotate = "rotate";
         orientBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -725,6 +725,17 @@ public class MainActivity extends AppCompatActivity {
                     rotateBTButton(false);
                     rotateRotateButton(false);
                     rotateResetCenterButton(false);
+
+                    if (bluetoothSocket != null)
+                    {
+                        try {
+                            OutputStream outputStream = bluetoothSocket.getOutputStream();
+                            outputStream.write(rotate.getBytes());
+                        }catch(IOException e){
+                            e.printStackTrace();
+                        }
+                    }
+
                 } else {
                     rotateFlashButton(true);
                     rotateScanCenterButton(true);
@@ -732,6 +743,15 @@ public class MainActivity extends AppCompatActivity {
                     rotateBTButton(true);
                     rotateRotateButton(true);
                     rotateResetCenterButton(true);
+                    if (bluetoothSocket != null)
+                    {
+                        try {
+                            OutputStream outputStream = bluetoothSocket.getOutputStream();
+                            outputStream.write(rotate.getBytes());
+                        }catch(IOException e){
+                            e.printStackTrace();
+                        }
+                    }
                 }
 
                 isOriginalIcon = !isOriginalIcon; // alter state of flag
@@ -935,12 +955,12 @@ public class MainActivity extends AppCompatActivity {
         resetCenter_Btn.setOnClickListener(new View.OnClickListener() {
                                                @Override
                                                public void onClick(View view) {
-                                                   String resultReset = "Reset servos";
+                                                   String Reset = "reset";
                                                    if (bluetoothSocket != null)
                                                    {
                                                        try {
                                                            OutputStream outputStream = bluetoothSocket.getOutputStream();
-                                                           outputStream.write(resultReset.getBytes());
+                                                           outputStream.write(Reset.getBytes());
                                                        }catch(IOException e){
                                                            e.printStackTrace();
                                                        }
@@ -1338,7 +1358,7 @@ public class MainActivity extends AppCompatActivity {
     }
     @SuppressLint("MissingPermission")
     private void startRecording() {
-        // 检查外部存储状态
+
         if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
             Log.e(TAG, "External storage is not mounted.");
             runOnUiThread(() -> Toast.makeText(MainActivity.this, "External storage is not available.", Toast.LENGTH_SHORT).show());
