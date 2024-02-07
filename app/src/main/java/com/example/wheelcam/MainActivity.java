@@ -1365,23 +1365,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    @SuppressLint("MissingPermission")
     private void startRecording() {
-
         if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
             Log.e(TAG, "External storage is not mounted.");
             runOnUiThread(() -> Toast.makeText(MainActivity.this, "External storage is not available.", Toast.LENGTH_SHORT).show());
             return;
         }
 
-        File videoFile = new File(getExternalFilesDir(null), System.currentTimeMillis() + ".mp4");
-        Log.d(TAG, "Video file path: " + videoFile.getAbsolutePath());
-
-        if (!videoFile.getParentFile().exists() && !videoFile.getParentFile().mkdirs()) {
+        File storageDir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES), "Recordings");
+        if (!storageDir.exists() && !storageDir.mkdirs()) {
             Log.e(TAG, "Failed to create directory for video file.");
             runOnUiThread(() -> Toast.makeText(MainActivity.this, "Failed to create directory for video file.", Toast.LENGTH_SHORT).show());
             return;
         }
+
+        File videoFile = new File(storageDir, System.currentTimeMillis() + ".mp4");
+        Log.d(TAG, "Video file path: " + videoFile.getAbsolutePath());
 
         VideoCapture.OutputFileOptions outputFileOptions = new VideoCapture.OutputFileOptions.Builder(videoFile).build();
         videoCapture.startRecording(outputFileOptions, getExecutor(), new VideoCapture.OnVideoSavedCallback() {
@@ -1415,6 +1414,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 
 
     private void startCameraX(ProcessCameraProvider cameraProvider) {
