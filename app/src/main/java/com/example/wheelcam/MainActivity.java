@@ -481,45 +481,54 @@ public class MainActivity extends AppCompatActivity {
                 capturePhoto();
             }
         });
-        startVideo_Btn.setOnClickListener(new View.OnClickListener() {
 
+        startVideo_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                captureVideo();
-                zoomLO.setVisibility(View.GONE);
-                modeLO.setVisibility(View.GONE);
-                flash_Btn.setVisibility(View.GONE);
-                scanCenter_Btn.setVisibility(View.GONE);
-                bluetooth_Btn.setVisibility(View.GONE);
-                gridCenter_Btn.setVisibility(View.GONE);
-                resetCenter_Btn.setVisibility(View.GONE);
-                orientBtn.setVisibility(View.GONE);
-                galleryBtn.setVisibility(View.GONE);
-                flipBtn.setVisibility(View.GONE);
-
+                if (!isRecording) {
+                    startRecording();
+                    isRecording = true;
+                    startVideo_Btn.setVisibility(View.GONE);
+                    stopVideo_Btn.setVisibility(View.VISIBLE);
+                    zoomLO.setVisibility(View.GONE);
+                    modeLO.setVisibility(View.GONE);
+                    flash_Btn.setVisibility(View.GONE);
+                    scanCenter_Btn.setVisibility(View.GONE);
+                    bluetooth_Btn.setVisibility(View.GONE);
+                    gridCenter_Btn.setVisibility(View.GONE);
+                    resetCenter_Btn.setVisibility(View.GONE);
+                    orientBtn.setVisibility(View.GONE);
+                    galleryBtn.setVisibility(View.GONE);
+                    flipBtn.setVisibility(View.GONE);
+                }
             }
-
         });
 
         stopVideo_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                capturePhoto_Btn.setVisibility(View.GONE);
-                stopVideo_Btn.setVisibility(View.GONE);
-                startVideo_Btn.setVisibility(View.VISIBLE);
-                modeLO.setVisibility(View.VISIBLE);
-                recordingLO.setVisibility(View.GONE);
+                if (isRecording) {
+                    videoCapture.stopRecording();
+                    isRecording = false;
+                    startVideo_Btn.setVisibility(View.VISIBLE);
+                    stopVideo_Btn.setVisibility(View.GONE);
+                    capturePhoto_Btn.setVisibility(View.GONE);
+                    stopVideo_Btn.setVisibility(View.GONE);
+                    startVideo_Btn.setVisibility(View.VISIBLE);
+                    modeLO.setVisibility(View.VISIBLE);
+                    recordingLO.setVisibility(View.GONE);
 
-                zoomLO.setVisibility(View.VISIBLE);
-                flash_Btn.setVisibility(View.VISIBLE);
-                scanCenter_Btn.setVisibility(View.VISIBLE);
-                bluetooth_Btn.setVisibility(View.VISIBLE);
-                gridCenter_Btn.setVisibility(View.VISIBLE);
-                resetCenter_Btn.setVisibility(View.VISIBLE);
-                orientBtn.setVisibility(View.VISIBLE);
-                galleryBtn.setVisibility(View.VISIBLE);
-                flipBtn.setVisibility(View.VISIBLE);
-
+                    zoomLO.setVisibility(View.VISIBLE);
+                    flash_Btn.setVisibility(View.VISIBLE);
+                    scanCenter_Btn.setVisibility(View.VISIBLE);
+                    bluetooth_Btn.setVisibility(View.VISIBLE);
+                    gridCenter_Btn.setVisibility(View.VISIBLE);
+                    resetCenter_Btn.setVisibility(View.VISIBLE);
+                    orientBtn.setVisibility(View.VISIBLE);
+                    galleryBtn.setVisibility(View.VISIBLE);
+                    flipBtn.setVisibility(View.VISIBLE);
+                    Toast.makeText(MainActivity.this, "Video recording stopped", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -714,7 +723,7 @@ public class MainActivity extends AppCompatActivity {
                 modeLO.setVisibility(View.VISIBLE);
             }
         });
-String rotate = "rotate";
+        String rotate = "rotate";
         orientBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -1380,6 +1389,11 @@ String rotate = "rotate";
             @Override
             public void onVideoSaved(@NonNull VideoCapture.OutputFileResults outputFileResults) {
                 Uri savedUri = outputFileResults.getSavedUri();
+                if (savedUri != null) {
+                    Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+                    mediaScanIntent.setData(savedUri);
+                    sendBroadcast(mediaScanIntent);
+                }
                 String savedPath = (savedUri != null) ? savedUri.getPath() : "";
                 Log.d(TAG, "Video saved successfully: " + savedPath);
 
