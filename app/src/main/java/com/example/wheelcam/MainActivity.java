@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.media.MediaScannerConnection;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
+
+import androidx.camera.core.Camera;
 import androidx.camera.core.CameraControl;
 import androidx.camera.core.CameraInfo;
 import androidx.camera.core.CameraSelector;
@@ -78,7 +80,8 @@ import java.util.ArrayList;import android.view.animation.AnimationUtils;
 
 
 public class MainActivity extends AppCompatActivity {
-
+    private CameraControl cameraControl;
+    private CameraInfo cameraInfo;
     private boolean isOriginalIcon = false;
     public static boolean isFrontCamera = false;
     private boolean isRotating = false;
@@ -126,7 +129,6 @@ public class MainActivity extends AppCompatActivity {
     //private Handler highlightHandler = new Handler();
     private int currentButtonIndex = 0;
     private float currentZoomLevel=1.0f;
-    private CameraControl cameraControl;
     private VideoCapture videoCapture;
     private boolean isRecording = false;
     final private String TAG = "MainActivity";
@@ -463,9 +465,24 @@ public class MainActivity extends AppCompatActivity {
         flashOffImg=this.getResources().getDrawable(R.drawable.ic_flash_off);
         videoStartImg=this.getResources().getDrawable(R.drawable.ic_video_start);
         videoEndImg=this.getResources().getDrawable(R.drawable.ic_video_stop);
-
+        zoom05_Btn.setOnClickListener(v -> setZoom(0.5f));
+        zoom15_Btn.setOnClickListener(v -> setZoom(1.5f));
+        zoom2_Btn.setOnClickListener(v -> setZoom(2f));
+        zoom3_Btn.setOnClickListener(v -> setZoom(3f));
     }
 
+    private void setZoom(float zoomRatio) {
+        Log.d(TAG, "Attempting to set zoom to " + zoomRatio);
+        if (cameraControl != null && cameraInfo != null) {
+            float maxZoomRatio = cameraInfo.getZoomState().getValue().getMaxZoomRatio();
+            float minZoomRatio = cameraInfo.getZoomState().getValue().getMinZoomRatio();
+            zoomRatio = Math.max(minZoomRatio, Math.min(zoomRatio, maxZoomRatio));
+            cameraControl.setZoomRatio(zoomRatio);
+        }
+        else {
+            Log.d(TAG, "cameraControl or cameraInfo is not initialized");
+        }
+    }
     void setUI() { //This updates the User Interface
         if (isBtConnected) {
             bluetooth_Btn.setCompoundDrawablesRelativeWithIntrinsicBounds(null, btOnImg, null, null);
@@ -546,27 +563,36 @@ public class MainActivity extends AppCompatActivity {
                 zoom15_Btn.setSelected(false);
                 zoom2_Btn.setSelected(false);
                 zoom3_Btn.setSelected(false);
+                float minZoomRatio = cameraInfo.getZoomState().getValue().getMinZoomRatio();
+                Log.d(TAG, "Minimum zoom ratio supported: " + minZoomRatio);
+                if (0.5f >= minZoomRatio) {
+                    cameraControl.setZoomRatio(0.5f);
+                } else {
+                    Log.d(TAG, "0.5x zoom ratio is not supported. Using minimum supported ratio: " + minZoomRatio);
+                    cameraControl.setZoomRatio(minZoomRatio);
+                }
+            }
+        });
+        zoom1_Btn.setOnClickListener(v -> {
+            Log.d(TAG, "Zoom 1x Button Clicked");
+            zoom05_Btn.setSelected(false);
+            zoom1_Btn.setSelected(true);
+            zoom15_Btn.setSelected(false);
+            zoom2_Btn.setSelected(false);
+            zoom3_Btn.setSelected(false);
+            setZoom(1f);
+        });
 
-            }
-        });
-        zoom1_Btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                zoom05_Btn.setSelected(false);
-                zoom1_Btn.setSelected(true);
-                zoom15_Btn.setSelected(false);
-                zoom2_Btn.setSelected(false);
-                zoom3_Btn.setSelected(false);
-            }
-        });
         zoom15_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d(TAG, "Zoom 1.5x Button Clicked");
                 zoom05_Btn.setSelected(false);
                 zoom1_Btn.setSelected(false);
                 zoom15_Btn.setSelected(true);
                 zoom2_Btn.setSelected(false);
                 zoom3_Btn.setSelected(false);
+                setZoom(1.5f);
             }
         });
         zoom2_Btn.setOnClickListener(new View.OnClickListener() {
@@ -577,7 +603,7 @@ public class MainActivity extends AppCompatActivity {
                 zoom15_Btn.setSelected(false);
                 zoom2_Btn.setSelected(true);
                 zoom3_Btn.setSelected(false);
-
+                setZoom(2f);
             }
         });
         zoom3_Btn.setOnClickListener(new View.OnClickListener() {
@@ -588,6 +614,7 @@ public class MainActivity extends AppCompatActivity {
                 zoom15_Btn.setSelected(false);
                 zoom2_Btn.setSelected(false);
                 zoom3_Btn.setSelected(true);
+                setZoom(3f);
             }
         });
 
@@ -1440,17 +1467,17 @@ public class MainActivity extends AppCompatActivity {
 
         videoCapture = new VideoCapture.Builder().build();
 
-        // Must unbind the use-cases before rebinding them
-        cameraProvider.unbindAll();
-
         try {
             // Bind use cases to camera
-            cameraProvider.bindToLifecycle(
-                    (LifecycleOwner)this,
+            Camera camera = cameraProvider.bindToLifecycle(
+                    (LifecycleOwner) this,
                     cameraSelector,
                     preview,
                     imageCapture,
                     videoCapture);
+
+            cameraControl = camera.getCameraControl();
+            cameraInfo = camera.getCameraInfo();
         } catch(Exception exc) {
             Log.e(TAG, "Use case binding failed", exc);
         }
@@ -1458,22 +1485,6 @@ public class MainActivity extends AppCompatActivity {
         cameraProvider.bindToLifecycle((LifecycleOwner) this, cameraSelector, preview, imageCapture);
 
     }
-
-    /*private void setZoomLevel(float zoomLevel) {
-        if (cameraControl != null) {
-            CameraInfo cameraInfo = cameraControl.getCameraInfo();
-            float maxZoomRatio = cameraInfo.getZoomState().getValue().getMaxZoomRatio();
-
-            // Ensure zoom level is within valid range (1.0f to maxZoomRatio)
-            zoomLevel = Math.max(1.0f, Math.min(zoomLevel, maxZoomRatio));
-
-            // Update the zoom level
-            cameraControl.setZoomRatio(zoomLevel);
-
-            // Save the current zoom level
-            currentZoomLevel = zoomLevel;
-        }
-    }*/
 
     // Toggle flash when the flash_Btn is clicked
     private void toggleFlash(){

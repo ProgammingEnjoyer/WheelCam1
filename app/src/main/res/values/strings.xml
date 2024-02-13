@@ -72,6 +72,7 @@
     <string name="bluetooth_select">SELECT A DEVICE</string>
     <string name="bluetooth_no_device">NO DEVICES FOUND</string>
     <string name="bluetooth_connect_fail">Connection Failed \n Please try again</string>
+    <string name="capture_photo_description">Photo Taking</string>
 
 
 
