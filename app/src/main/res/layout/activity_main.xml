@@ -368,43 +368,41 @@
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@id/centerLayout">
         <LinearLayout
-        android:id="@+id/modeLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="1dp"
-        android:layout_weight="1"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toTopOf="@id/zoomLayout"
-        app:layout_constraintBottom_toTopOf="@id/bottomCaptureLayout"
-        >
-        <Button
-            android:id="@+id/video_Btn"
+            android:id="@+id/modeLayout"
             android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:text="@string/VIDEO"
-            android:textAlignment="center"
-            android:textColor="#FFFFFF"
-            android:background="@drawable/button_selector_mode"
-            android:contentDescription="@string/video_mode"
-            app:backgroundTint="@null"
-            android:minHeight="0dp"
-            android:minWidth="0dp"
-            />
-        <Button
-            android:id="@+id/photo_Btn"
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:text="@string/PHOTO"
-            android:textAlignment="center"
-            android:textColor="#FFFFFF"
-            android:background="@drawable/button_selector_mode"
-            android:layout_marginStart="15dp"
-            android:contentDescription="@string/photo_mode"
-            app:backgroundTint="@null"
-            android:minHeight="0dp" android:minWidth="0dp"
-            />
-    </LinearLayout> <!--Enf od mode (PHOTO/VIDEO layout)-->
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="1dp"
+            android:orientation="horizontal"
+            android:focusable="true"
+            android:layout_below = "@+id/gridLayout"
+            android:layout_above = "@+id/bottomCaptureLayout"
+            android:descendantFocusability="blocksDescendants">
+
+            <Button
+                android:id="@+id/video_Btn"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:text="@string/VIDEO"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/button_selector_mode"
+                android:contentDescription="@string/video_mode"/>
+
+            <Button
+                android:id="@+id/photo_Btn"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:text="@string/PHOTO"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/button_selector_mode"
+                android:layout_marginStart="15dp"
+                android:contentDescription="@string/photo_mode"/>
+        </LinearLayout>
+        <!--End of mode (PHOTO/VIDEO layout)-->
         <LinearLayout
         android:id="@+id/directionLayout"
         android:layout_width="wrap_content"
@@ -414,194 +412,9 @@
         android:layout_weight="1"
         android:orientation="horizontal"
         android:visibility="gone">
-
-        <ImageButton
-            android:id="@+id/arrowBtn_Left"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginStart="20dp"
-            android:background="@drawable/button_selector"
-            android:paddingHorizontal="@dimen/arrow_padding"
-            android:src="@drawable/ic_arrow"
-            android:contentDescription="@string/left"/>
-
-        <ImageButton
-            android:id="@+id/arrowBtn_Up"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@drawable/button_selector"
-            android:paddingHorizontal="@dimen/arrow_padding"
-            android:rotation="90"
-            android:src="@drawable/ic_arrow"
-            android:contentDescription="@string/up" />
-
-        <ImageButton
-            android:id="@+id/arrowBtn_Down"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@drawable/button_selector"
-            android:paddingHorizontal="@dimen/arrow_padding"
-            android:rotation="270"
-            android:src="@drawable/ic_arrow"
-            android:contentDescription="@string/down" />
-
-        <ImageButton
-            android:id="@+id/arrowBtn_Right"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="@drawable/button_selector"
-            android:paddingHorizontal="@dimen/arrow_padding"
-            android:rotation="180"
-            android:src="@drawable/ic_arrow"
-            android:contentDescription="@string/right" />
-
-
     </LinearLayout> <!--End of direction layout. we are not using this-->
         <!--This is just so that the gallery, capture anf flip buttons don't shift up during recording mode.
         We can later use this space to set the recording time -->
-        <LinearLayout
-        android:id="@+id/recordingLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="1dp"
-        android:layout_marginBottom="7dp"
-        android:layout_weight="1"
-        android:orientation="horizontal"
-        android:visibility="gone">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:text="@string/recording_in_process"
-            android:textAlignment="center"
-            android:textColor="#FFFFFF"
-            android:contentDescription="@string/recording_in_process"
-            />
-    </LinearLayout>
-        <LinearLayout
-        android:id="@+id/levelLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="5dp"
-        android:layout_weight="1"
-        android:orientation="horizontal"
-        android:visibility="gone">
-
-        <TextView
-            android:id="@+id/moveDir"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@drawable/button_selector"
-            android:text="@string/left"
-            android:textColor="@color/mint"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/moveLevel1"
-            android:layout_width="55dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/button_selector"
-            android:text="1"
-            android:textSize="20sp" />
-
-        <Button
-            android:id="@+id/moveLevel2"
-            android:layout_width="55dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/button_selector"
-            android:text="2"
-            android:textSize="20sp" />
-
-        <Button
-            android:id="@+id/moveLevel3"
-            android:layout_width="55dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/button_selector"
-            android:text="3"
-            android:textSize="20sp" />
-
-        <Button
-            android:id="@+id/moveLevel4"
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/button_selector"
-            android:text="4"
-            android:textSize="20sp" />
-
-        <Button
-            android:id="@+id/moveDone"
-            android:layout_width="75dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_selector"
-            android:text="@string/done"
-            android:textSize="13sp"
-            android:contentDescription="@string/done"
-            />
-
-
-    </LinearLayout>
-        <LinearLayout
-        android:id="@+id/orientationLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="5dp"
-        android:layout_weight="1"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toTopOf="@id/bottomBar"
-        android:visibility="gone"
-        >
-
-        <TextView
-            android:id="@+id/modeTV"
-            android:layout_width="65dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginEnd="@dimen/direction_margin"
-            android:background="@drawable/button_selector"
-            android:text="@string/rotate_uppercase"
-            android:textColor="@color/mint"
-            android:textSize="15sp"
-            android:textStyle="bold" />
-
-
-        <Button
-            android:id="@+id/clockwiseBtn"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginEnd="@dimen/direction_margin"
-            android:background="@drawable/button_selector"
-            android:drawableTop="@drawable/ic_clockwise"
-            android:text="@string/clockwise"
-            android:contentDescription="@string/clockwise"
-            android:textSize="0.1sp" />
-
-        <Button
-            android:id="@+id/anticlockwiseBtn"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginEnd="@dimen/direction_margin"
-            android:background="@drawable/button_selector"
-            android:drawableTop="@drawable/ic_anticlockwise"
-            android:text="@string/anticlockwise"
-            android:contentDescription="@string/anticlockwise"
-            android:textSize="0.1sp" />
-
-        <Button
-            android:id="@+id/modeDone"
-            android:layout_width="75dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@drawable/button_selector"
-            android:text="@string/back"
-            android:textSize="13sp"
-            android:contentDescription="@string/back"/>
-    </LinearLayout>
         <LinearLayout
             android:id="@+id/bottomCaptureLayout"
             android:layout_width="wrap_content"
@@ -689,4 +502,151 @@
     </LinearLayout>
 
 
+
+
+
+
+    
+    <LinearLayout
+        android:id="@+id/recordingLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="7dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:visibility="gone">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:text="@string/recording_in_process"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:contentDescription="@string/recording_in_process"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/levelLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="5dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/moveDir"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/button_selector"
+            android:text="@string/left"
+            android:textColor="@color/mint"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/moveLevel1"
+            android:layout_width="55dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/button_selector"
+            android:text="1"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/moveLevel2"
+            android:layout_width="55dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/button_selector"
+            android:text="2"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/moveLevel3"
+            android:layout_width="55dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/button_selector"
+            android:text="3"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/moveLevel4"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/button_selector"
+            android:text="4"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/moveDone"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_selector"
+            android:text="@string/done"
+            android:textSize="13sp"
+            android:contentDescription="@string/done"
+            />
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/orientationLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="5dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="@id/bottomBar"
+        android:visibility="gone"
+        >
+
+        <TextView
+            android:id="@+id/modeTV"
+            android:layout_width="65dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginEnd="@dimen/direction_margin"
+            android:background="@drawable/button_selector"
+            android:text="@string/rotate_uppercase"
+            android:textColor="@color/mint"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/clockwiseBtn"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginEnd="@dimen/direction_margin"
+            android:background="@drawable/button_selector"
+            android:drawableTop="@drawable/ic_clockwise"
+            android:text="@string/clockwise"
+            android:contentDescription="@string/clockwise"
+            android:textSize="0.1sp" />
+
+        <Button
+            android:id="@+id/anticlockwiseBtn"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginEnd="@dimen/direction_margin"
+            android:background="@drawable/button_selector"
+            android:drawableTop="@drawable/ic_anticlockwise"
+            android:text="@string/anticlockwise"
+            android:contentDescription="@string/anticlockwise"
+            android:textSize="0.1sp" />
+
+        <Button
+            android:id="@+id/modeDone"
+            android:layout_width="75dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/button_selector"
+            android:text="@string/back"
+            android:textSize="13sp"
+            android:contentDescription="@string/back"/>
+    </LinearLayout>
 </RelativeLayout>
