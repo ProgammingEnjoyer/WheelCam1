@@ -122,9 +122,9 @@
         android:id="@+id/centerLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@id/modeLayout"
         android:orientation="vertical"
-        android:layout_below="@id/topBar"
-        android:layout_above="@id/bottomBar">
+        android:layout_below="@id/topBar">
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -139,7 +139,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_below="@id/topBar"
-        android:layout_above="@id/bottomBar"
+        android:layout_above="@id/modeLayout"
         android:visibility="visible"
         android:contentDescription="@string/grid">
         <LinearLayout
@@ -358,101 +358,66 @@
             />
     </LinearLayout> <!-- End of zoom layout-->
 
+
+
+    <!-- First row with Video and Photo buttons -->
     <LinearLayout
-        android:id="@+id/bottomBar"
+        android:id="@+id/modeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignBottom="@+id/previewView"
-        android:background="@color/black_halftrans"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@id/centerLayout">
-        <LinearLayout
-            android:id="@+id/modeLayout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="1dp"
-            android:orientation="horizontal"
-            android:focusable="true"
-            android:layout_below = "@+id/gridLayout"
-            android:layout_above = "@+id/bottomCaptureLayout"
-            android:descendantFocusability="blocksDescendants">
-
-            <Button
-                android:id="@+id/video_Btn"
-                android:layout_width="0dp"
-                android:layout_height="48dp"
-                android:text="@string/VIDEO"
-                android:layout_weight="1"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:background="@drawable/button_selector_mode"
-                android:contentDescription="@string/video_mode"/>
-
-            <Button
-                android:id="@+id/photo_Btn"
-                android:layout_width="0dp"
-                android:layout_height="48dp"
-                android:text="@string/PHOTO"
-                android:layout_weight="1"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:background="@drawable/button_selector_mode"
-                android:layout_marginStart="15dp"
-                android:contentDescription="@string/photo_mode"/>
-        </LinearLayout>
-        <!--End of mode (PHOTO/VIDEO layout)-->
-        <LinearLayout
-        android:id="@+id/directionLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="5dp"
-        android:layout_weight="1"
         android:orientation="horizontal"
-        android:visibility="gone">
-    </LinearLayout> <!--End of direction layout. we are not using this-->
-        <!--This is just so that the gallery, capture anf flip buttons don't shift up during recording mode.
-        We can later use this space to set the recording time -->
-        <LinearLayout
-            android:id="@+id/bottomCaptureLayout"
-            android:layout_width="wrap_content"
+        android:layout_above="@+id/bottomCaptureLayout">
+
+        <Button
+            android:id="@+id/video_Btn"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="5dp"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="@id/bottomBar">
+            android:layout_weight="1"
+            android:text="@string/VIDEO"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/button_selector_mode"/>
 
-            <Button
-                android:id="@+id/flipBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/button_selector"
-                android:contentDescription="@string/flip"
-                android:drawableTop="@drawable/ic_flip_camera"
-                android:text="@string/flip"
-                android:textColor="@color/mint"
-                android:textSize="17sp"
-                android:padding="0dp"
-                />
+        <Button
+            android:id="@+id/photo_Btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/PHOTO"
+            android:textAlignment="center"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/button_selector_mode"/>
+    </LinearLayout>
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/capture_photo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:contentDescription="@string/camera_photo_action"
-                android:src="@drawable/ic_nav_camera"
-                app:layout_constraintTop_toTopOf="@id/bottomBar"
 
-                app:layout_constraintBottom_toBottomOf="@id/bottomBar"
-                app:fabCustomSize="75dp" />
+    <LinearLayout
+        android:id="@+id/bottomCaptureLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true">
 
-            <!-- Ideally this button should be CENTERED and BIGGER than the others-->
+        <Button
+            android:id="@+id/flipBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/flip"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/button_selector"/>
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/capture_photo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/ic_nav_camera"
+            app:fabCustomSize="56dp"
+            android:contentDescription="@string/capture_photo_description" />
+
+
+        <!-- Ideally this button should be CENTERED and BIGGER than the others-->
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/startVideo_Btn"
@@ -479,26 +444,14 @@
                 android:src="@drawable/ic_video_stop"
                 app:fabCustomSize="75dp"
                 android:visibility="gone" />
-            <Button
-                android:id="@+id/galleryBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/button_selector"
-                android:contentDescription="@string/title_gallery"
-                android:drawableTop="@drawable/ic_nav_gallery"
-                android:drawablePadding="-15dp"
-                android:elegantTextHeight="false"
-                android:freezesText="false"
-                android:text="@string/title_gallery"
-                android:textAlignment="gravity"
-                android:textColor="@color/mint"
-                android:textSize="17sp"
-                android:padding="0dp"/>
-
-
-        </LinearLayout>
-
+        <Button
+            android:id="@+id/galleryBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/title_gallery"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/button_selector"/>
     </LinearLayout>
 
 
@@ -506,7 +459,19 @@
 
 
 
-    
+
+    <LinearLayout
+        android:id="@+id/directionLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="5dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:visibility="gone">
+    </LinearLayout> <!--End of direction layout. we are not using this-->
+    <!--This is just so that the gallery, capture anf flip buttons don't shift up during recording mode.
+    We can later use this space to set the recording time -->
     <LinearLayout
         android:id="@+id/recordingLayout"
         android:layout_width="wrap_content"

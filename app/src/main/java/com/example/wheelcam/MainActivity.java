@@ -1019,32 +1019,32 @@ public class MainActivity extends AppCompatActivity {
 
                 // calculate height of top and bottom
                 View topBar = findViewById(R.id.topBar);
-                View bottomBar = findViewById(R.id.bottomBar);
+             //   View bottomBar = findViewById(R.id.bottomBar);
 
                 topBar.post(new Runnable() {
                     @Override
                     public void run() {
                         int topBarHeight = topBar.getHeight();
-                        int bottomBarHeight = bottomBar.getHeight(); // 140dp in pixels
+                      //  int bottomBarHeight = bottomBar.getHeight(); // 140dp in pixels
 
                         // Calculate height of grid
-                        int gridHeight = screenHeight - topBarHeight - bottomBarHeight;
+                       // int gridHeight = screenHeight - topBarHeight - bottomBarHeight;
 
                         // calculate central point of gridA
-                        float centerX = ((float) screenWidth / 6) - ((float) screenWidth / 2);
-                        float centerY = ((float) gridHeight / 2) - ((float) gridHeight / 6);
-                        String result = "x" + centerX + "y" + centerY;
+                    //    float centerX = ((float) screenWidth / 6) - ((float) screenWidth / 2);
+                     //   float centerY = ((float) gridHeight / 2) - ((float) gridHeight / 6);
+                     //   String result = "x" + centerX + "y" + centerY;
                         if (bluetoothSocket != null)
                         {
                             try {
                                 OutputStream outputStream = bluetoothSocket.getOutputStream();
-                                outputStream.write(result.getBytes());
+                    //            outputStream.write(result.getBytes());
                             }catch(IOException e){
                                 e.printStackTrace();
                             }
                         }
 
-                        Toast.makeText(MainActivity.this, "Grid A Center: (" + centerX + ", " + centerY + ")", Toast.LENGTH_LONG).show();
+              //          Toast.makeText(MainActivity.this, "Grid A Center: (" + centerX + ", " + centerY + ")", Toast.LENGTH_LONG).show();
                     }
                 });
             }
@@ -1063,31 +1063,31 @@ public class MainActivity extends AppCompatActivity {
 
                 // calculate height of top and bottom
                 View topBar = findViewById(R.id.topBar);
-                View bottomBar = findViewById(R.id.bottomBar);
+               // View bottomBar = findViewById(R.id.bottomBar);
 
                 topBar.post(new Runnable() {
                     @Override
                     public void run() {
                         int topBarHeight = topBar.getHeight();
-                        int bottomBarHeight = bottomBar.getHeight(); // 140dp in pixels
+               //         int bottomBarHeight = bottomBar.getHeight(); // 140dp in pixels
 
                         // Calculate height of grid
-                        int gridHeight = screenHeight - topBarHeight - bottomBarHeight;
+                 //       int gridHeight = screenHeight - topBarHeight - bottomBarHeight;
 
                         // calculate central point of gridB
                         float centerX = 0;
-                        float centerY = ((float) gridHeight / 2) - ((float) gridHeight / 6);
-                        String result = "x" + centerX + "y" + centerY;
+                    //    float centerY = ((float) gridHeight / 2) - ((float) gridHeight / 6);
+                   //     String result = "x" + centerX + "y" + centerY;
                         if (bluetoothSocket != null)
                         {
                             try {
                                 OutputStream outputStream = bluetoothSocket.getOutputStream();
-                                outputStream.write(result.getBytes());
+                //                outputStream.write(result.getBytes());
                             }catch(IOException e){
                                 e.printStackTrace();
                             }
                         }
-                        Toast.makeText(MainActivity.this, "Grid B Center: (" + centerX + ", " + centerY + ")", Toast.LENGTH_LONG).show();
+               //         Toast.makeText(MainActivity.this, "Grid B Center: (" + centerX + ", " + centerY + ")", Toast.LENGTH_LONG).show();
                     }
                 });
             }
@@ -1107,31 +1107,31 @@ public class MainActivity extends AppCompatActivity {
 
                 // calculate height of top and bottom
                 View topBar = findViewById(R.id.topBar);
-                View bottomBar = findViewById(R.id.bottomBar);
+          //      View bottomBar = findViewById(R.id.bottomBar);
 
                 topBar.post(new Runnable() {
                     @Override
                     public void run() {
                         int topBarHeight = topBar.getHeight();
-                        int bottomBarHeight = bottomBar.getHeight(); // 140dp in pixels
+                   //     int bottomBarHeight = bottomBar.getHeight(); // 140dp in pixels
 
                         // Calculate height of grid
-                        int gridHeight = screenHeight - topBarHeight - bottomBarHeight;
+                //        int gridHeight = screenHeight - topBarHeight - bottomBarHeight;
 
                         // calculate central point of gridA
                         float centerX = ((float) screenWidth / 2) - ((float) screenWidth / 6);
-                        float centerY = ((float) gridHeight / 2) - ((float) gridHeight / 6);
-                        String result = "x" + centerX + "y" + centerY;
+                 //       float centerY = ((float) gridHeight / 2) - ((float) gridHeight / 6);
+                 //       String result = "x" + centerX + "y" + centerY;
                         if (bluetoothSocket != null)
                         {
                             try {
                                 OutputStream outputStream = bluetoothSocket.getOutputStream();
-                                outputStream.write(result.getBytes());
+                     //         outputStream.write(result.getBytes());
                             }catch(IOException e){
                                 e.printStackTrace();
                             }
                         }
-                        Toast.makeText(MainActivity.this, "Grid C Center: (" + centerX + ", " + centerY + ")", Toast.LENGTH_LONG).show();
+                //       Toast.makeText(MainActivity.this, "Grid C Center: (" + centerX + ", " + centerY + ")", Toast.LENGTH_LONG).show();
                     }
                 });
             }
@@ -1150,16 +1150,16 @@ public class MainActivity extends AppCompatActivity {
 
                 // calculate height of top and bottom
                 View topBar = findViewById(R.id.topBar);
-                View bottomBar = findViewById(R.id.bottomBar);
+           //     View bottomBar = findViewById(R.id.bottomBar);
 
                 topBar.post(new Runnable() {
                     @Override
                     public void run() {
                         int topBarHeight = topBar.getHeight();
-                        int bottomBarHeight = bottomBar.getHeight(); // 140dp in pixels
+                   //     int bottomBarHeight = bottomBar.getHeight(); // 140dp in pixels
 
                         // Calculate height of grid
-                        int gridHeight = screenHeight - topBarHeight - bottomBarHeight;
+                     //   int gridHeight = screenHeight - topBarHeight - bottomBarHeight;
 
                         // calculate central point of gridA
                         float centerX = ((float) screenWidth / 6) - ((float) screenWidth / 2);
@@ -1192,16 +1192,16 @@ public class MainActivity extends AppCompatActivity {
 
                 // calculate height of top and bottom
                 View topBar = findViewById(R.id.topBar);
-                View bottomBar = findViewById(R.id.bottomBar);
+             //   View bottomBar = findViewById(R.id.bottomBar);
 
                 topBar.post(new Runnable() {
                     @Override
                     public void run() {
                         int topBarHeight = topBar.getHeight();
-                        int bottomBarHeight = bottomBar.getHeight(); // 140dp in pixels
+                  //      int bottomBarHeight = bottomBar.getHeight(); // 140dp in pixels
 
                         // Calculate height of grid
-                        int gridHeight = screenHeight - topBarHeight - bottomBarHeight;
+                    //    int gridHeight = screenHeight - topBarHeight - bottomBarHeight;
 
                         // calculate central point of gridA
                         float centerX = 0;
@@ -1234,16 +1234,16 @@ public class MainActivity extends AppCompatActivity {
 
                 // calculate height of top and bottom
                 View topBar = findViewById(R.id.topBar);
-                View bottomBar = findViewById(R.id.bottomBar);
+        //       View bottomBar = findViewById(R.id.bottomBar);
 
                 topBar.post(new Runnable() {
                     @Override
                     public void run() {
                         int topBarHeight = topBar.getHeight();
-                        int bottomBarHeight = bottomBar.getHeight(); // 140dp in pixels
+              //          int bottomBarHeight = bottomBar.getHeight(); // 140dp in pixels
 
                         // Calculate height of grid
-                        int gridHeight = screenHeight - topBarHeight - bottomBarHeight;
+              //          int gridHeight = screenHeight - topBarHeight - bottomBarHeight;
 
                         // calculate central point of gridA
                         float centerX = ((float) screenWidth / 2) - ((float) screenWidth / 6);
@@ -1276,31 +1276,31 @@ public class MainActivity extends AppCompatActivity {
 
                 // calculate height of top and bottom
                 View topBar = findViewById(R.id.topBar);
-                View bottomBar = findViewById(R.id.bottomBar);
+          //      View bottomBar = findViewById(R.id.bottomBar);
 
                 topBar.post(new Runnable() {
                     @Override
                     public void run() {
                         int topBarHeight = topBar.getHeight();
-                        int bottomBarHeight = bottomBar.getHeight(); // 140dp in pixels
+                //        int bottomBarHeight = bottomBar.getHeight(); // 140dp in pixels
 
                         // Calculate height of grid
-                        int gridHeight = screenHeight - topBarHeight - bottomBarHeight;
+             //           int gridHeight = screenHeight - topBarHeight - bottomBarHeight;
 
                         // calculate central point of gridA
                         float centerX = ((float) screenWidth / 6) - ((float) screenWidth / 2);
-                        float centerY = ((float) gridHeight / 6) - ((float) gridHeight / 2);
-                        String result = "x" + centerX + "y" + centerY;
+               //         float centerY = ((float) gridHeight / 6) - ((float) gridHeight / 2);
+             //           String result = "x" + centerX + "y" + centerY;
                         if (bluetoothSocket != null)
                         {
                             try {
                                 OutputStream outputStream = bluetoothSocket.getOutputStream();
-                                outputStream.write(result.getBytes());
+                //                outputStream.write(result.getBytes());
                             }catch(IOException e){
                                 e.printStackTrace();
                             }
                         }
-                        Toast.makeText(MainActivity.this, "Grid G Center: (" + centerX + ", " + centerY + ")", Toast.LENGTH_LONG).show();
+              //          Toast.makeText(MainActivity.this, "Grid G Center: (" + centerX + ", " + centerY + ")", Toast.LENGTH_LONG).show();
                     }
                 });
             }
@@ -1319,16 +1319,16 @@ public class MainActivity extends AppCompatActivity {
 
                 // calculate height of top and bottom
                 View topBar = findViewById(R.id.topBar);
-                View bottomBar = findViewById(R.id.bottomBar);
+          //      View bottomBar = findViewById(R.id.bottomBar);
 
                 topBar.post(new Runnable() {
                     @Override
                     public void run() {
                         int topBarHeight = topBar.getHeight();
-                        int bottomBarHeight = bottomBar.getHeight(); // 140dp in pixels
+            //            int bottomBarHeight = bottomBar.getHeight(); // 140dp in pixels
 
                         // Calculate height of grid
-                        int gridHeight = screenHeight - topBarHeight - bottomBarHeight;
+           //             int gridHeight = screenHeight - topBarHeight - bottomBarHeight;
 
                         // calculate central point of gridA
                         float centerX = 0;
@@ -1362,31 +1362,31 @@ public class MainActivity extends AppCompatActivity {
 
                 // calculate height of top and bottom
                 View topBar = findViewById(R.id.topBar);
-                View bottomBar = findViewById(R.id.bottomBar);
+       //         View bottomBar = findViewById(R.id.bottomBar);
 
                 topBar.post(new Runnable() {
                     @Override
                     public void run() {
                         int topBarHeight = topBar.getHeight();
-                        int bottomBarHeight = bottomBar.getHeight(); // 140dp in pixels
+          //              int bottomBarHeight = bottomBar.getHeight(); // 140dp in pixels
 
                         // Calculate height of grid
-                        int gridHeight = screenHeight - topBarHeight - bottomBarHeight;
+          //              int gridHeight = screenHeight - topBarHeight - bottomBarHeight;
 
                         // calculate central point of gridA
                         float centerX = ((float) screenWidth / 2) - ((float) screenWidth / 6);
-                        float centerY = ((float) gridHeight / 6) - ((float) gridHeight / 2);
-                        String result = "x" + centerX + "y" + centerY;
+         //               float centerY = ((float) gridHeight / 6) - ((float) gridHeight / 2);
+          //              String result = "x" + centerX + "y" + centerY;
                         if (bluetoothSocket != null)
                         {
                             try {
                                 OutputStream outputStream = bluetoothSocket.getOutputStream();
-                                outputStream.write(result.getBytes());
+         //                       outputStream.write(result.getBytes());
                             }catch(IOException e){
                                 e.printStackTrace();
                             }
                         }
-                        Toast.makeText(MainActivity.this, "Grid I Center: (" + centerX + ", " + centerY + ")", Toast.LENGTH_LONG).show();
+      //                  Toast.makeText(MainActivity.this, "Grid I Center: (" + centerX + ", " + centerY + ")", Toast.LENGTH_LONG).show();
                     }
                 });
             }
