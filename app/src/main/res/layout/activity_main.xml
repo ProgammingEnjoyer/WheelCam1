@@ -292,21 +292,10 @@
         android:layout_alignBottom="@+id/centerLayout"
         android:orientation="horizontal"
         android:gravity="center">
-        <Button
-            android:id="@+id/zoom05_Btn"
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:text="@string/title_zoom05x"
-            android:textAlignment="center"
-            android:textColor="#FFFFFF"
-            android:background="@drawable/button_selector_zoom"
-            android:contentDescription="@string/zoomfactor_05x"
-            app:backgroundTint="@null"
-            android:minHeight="0dp"
-            />
+
         <Button
             android:id="@+id/zoom1_Btn"
-            android:layout_width="wrap_content"
+            android:layout_width="70dp"
             android:layout_height="48dp"
             android:text="@string/title_zoom1x"
             android:textAlignment="center"
@@ -319,7 +308,7 @@
             />
         <Button
             android:id="@+id/zoom15_Btn"
-            android:layout_width="wrap_content"
+            android:layout_width="70dp"
             android:layout_height="48dp"
             android:text="@string/title_zoom15x"
             android:textAlignment="center"
@@ -332,7 +321,7 @@
             />
         <Button
             android:id="@+id/zoom2_Btn"
-            android:layout_width="wrap_content"
+            android:layout_width="70dp"
             android:layout_height="48dp"
             android:text="@string/title_zoom2x"
             android:textAlignment="center"
@@ -345,7 +334,7 @@
             />
         <Button
             android:id="@+id/zoom3_Btn"
-            android:layout_width="wrap_content"
+            android:layout_width="70dp"
             android:layout_height="48dp"
             android:text="@string/title_zoom3x"
             android:textAlignment="center"

@@ -157,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton arrowBtnR, arrowBtnUp, arrowBtnDown, arrowBtnL;
     private Button bluetooth_Btn, scanCenter_Btn, gridCenter_Btn, resetCenter_Btn, moveDoneBtn, orientBtn, modeDoneBtn, flipBtn, galleryBtn, /*settingsBtn,*/ flash_Btn;
     private Button grid_A, grid_B, grid_C, grid_D, grid_E, grid_F, grid_G, grid_H, grid_I;
-    private Button zoom05_Btn, zoom1_Btn, zoom15_Btn, zoom2_Btn, zoom3_Btn;
+    private Button zoom1_Btn, zoom15_Btn, zoom2_Btn, zoom3_Btn, /*zoom05_Btn*/;
     private Button video_Btn, photo_Btn;
     private Button motorBtn_1, motorBtn_2, motorBtn_3, motorBtn_4, clkwiseBtn, antiClkBtn;
     private PreviewView previewView;
@@ -452,7 +452,7 @@ public class MainActivity extends AppCompatActivity {
         grid_G = findViewById(R.id.gridG);
         grid_H = findViewById(R.id.gridH);
         grid_I = findViewById(R.id.gridI);
-        zoom05_Btn=findViewById(R.id.zoom05_Btn);
+        /*zoom05_Btn=findViewById(R.id.zoom05_Btn);*/
         zoom1_Btn=findViewById(R.id.zoom1_Btn);
         zoom15_Btn=findViewById(R.id.zoom15_Btn);
         zoom2_Btn=findViewById(R.id.zoom2_Btn);
@@ -465,7 +465,7 @@ public class MainActivity extends AppCompatActivity {
         flashOffImg=this.getResources().getDrawable(R.drawable.ic_flash_off);
         videoStartImg=this.getResources().getDrawable(R.drawable.ic_video_start);
         videoEndImg=this.getResources().getDrawable(R.drawable.ic_video_stop);
-        zoom05_Btn.setOnClickListener(v -> setZoom(0.5f));
+        /*zoom05_Btn.setOnClickListener(v -> setZoom(0.5f));*/
         zoom15_Btn.setOnClickListener(v -> setZoom(1.5f));
         zoom2_Btn.setOnClickListener(v -> setZoom(2f));
         zoom3_Btn.setOnClickListener(v -> setZoom(3f));
@@ -555,7 +555,7 @@ public class MainActivity extends AppCompatActivity {
         ;
         zoom1_Btn.setSelected(true);
 
-        zoom05_Btn.setOnClickListener(new View.OnClickListener() {
+        /*zoom05_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 zoom05_Btn.setSelected(true);
@@ -572,10 +572,10 @@ public class MainActivity extends AppCompatActivity {
                     cameraControl.setZoomRatio(minZoomRatio);
                 }
             }
-        });
+        });*/
         zoom1_Btn.setOnClickListener(v -> {
             Log.d(TAG, "Zoom 1x Button Clicked");
-            zoom05_Btn.setSelected(false);
+            /*zoom05_Btn.setSelected(false);*/
             zoom1_Btn.setSelected(true);
             zoom15_Btn.setSelected(false);
             zoom2_Btn.setSelected(false);
@@ -587,7 +587,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "Zoom 1.5x Button Clicked");
-                zoom05_Btn.setSelected(false);
+                /*zoom05_Btn.setSelected(false);*/
                 zoom1_Btn.setSelected(false);
                 zoom15_Btn.setSelected(true);
                 zoom2_Btn.setSelected(false);
@@ -598,7 +598,7 @@ public class MainActivity extends AppCompatActivity {
         zoom2_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                zoom05_Btn.setSelected(false);
+                /*zoom05_Btn.setSelected(false);*/
                 zoom1_Btn.setSelected(false);
                 zoom15_Btn.setSelected(false);
                 zoom2_Btn.setSelected(true);
@@ -609,7 +609,7 @@ public class MainActivity extends AppCompatActivity {
         zoom3_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                zoom05_Btn.setSelected(false);
+                /*zoom05_Btn.setSelected(false);*/
                 zoom1_Btn.setSelected(false);
                 zoom15_Btn.setSelected(false);
                 zoom2_Btn.setSelected(false);
