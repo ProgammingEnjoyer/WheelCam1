@@ -47,7 +47,6 @@ public class OldMainActivity extends AppCompatActivity {
         customView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
-
                 customView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                 // starting
                 startMovingLine(true);
@@ -119,7 +118,7 @@ public class OldMainActivity extends AppCompatActivity {
         float startValue = 0;
         float endValue = isHorizontal ? customView.getHeight() : customView.getWidth();
         ValueAnimator animator = ValueAnimator.ofFloat(startValue, endValue);
-        animator.setDuration(7000); // 7 seconds
+        animator.setDuration(15000); // 15 seconds
         animator.setRepeatCount(ValueAnimator.INFINITE);
         animator.setRepeatMode(ValueAnimator.RESTART);
         animator.addUpdateListener(animation -> {

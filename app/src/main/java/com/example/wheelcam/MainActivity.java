@@ -107,7 +107,34 @@ public class MainActivity extends AppCompatActivity {
         //highlightButton(currentButtonIndex);
         //highlightHandler.postDelayed(highlightRunnable, 3000);
     }
+    private void executeGridEClick() {
+        ControlCenter.setGridE();
 
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int screenHeight = displayMetrics.heightPixels;
+        int screenWidth = displayMetrics.widthPixels;
+
+        View topBar = findViewById(R.id.topBar);
+        View bottomBar = findViewById(R.id.bottomBar);
+        int topBarHeight = topBar.getHeight();
+        int bottomBarHeight = bottomBar.getHeight();
+
+        int gridHeight = screenHeight - topBarHeight - bottomBarHeight;
+
+        float centerX = 0;
+        float centerY = 0;
+        String result = "x" + centerX + "y" + centerY;
+
+        if (bluetoothSocket != null) {
+            try {
+                OutputStream outputStream = bluetoothSocket.getOutputStream();
+                outputStream.write(result.getBytes());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
     /*private Runnable highlightRunnable = new Runnable() {
         @Override
         public void run() {
@@ -389,6 +416,7 @@ public class MainActivity extends AppCompatActivity {
         if (cameraProvider != null) {
             startCameraX(cameraProvider);
         }
+        executeGridEClick();
     }
     protected void onPause() {
         super.onPause();
@@ -1179,6 +1207,9 @@ public class MainActivity extends AppCompatActivity {
                 });
             }
         });
+
+
+
         grid_E.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -1332,7 +1363,7 @@ public class MainActivity extends AppCompatActivity {
 
                         // calculate central point of gridA
                         float centerX = 0;
-                        float centerY = ((float) screenWidth / 6) - ((float) screenWidth / 2);
+                        float centerY = ((float) gridHeight / 6) - ((float) gridHeight / 2);
                         String result = "x" + centerX + "y" + centerY;
                         if (bluetoothSocket != null)
                         {
