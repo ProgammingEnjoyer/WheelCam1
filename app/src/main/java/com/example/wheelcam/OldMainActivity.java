@@ -118,7 +118,7 @@ public class OldMainActivity extends AppCompatActivity {
         float startValue = 0;
         float endValue = isHorizontal ? customView.getHeight() : customView.getWidth();
         ValueAnimator animator = ValueAnimator.ofFloat(startValue, endValue);
-        animator.setDuration(15000); // 15 seconds
+        animator.setDuration(30000); // 30 seconds
         animator.setRepeatCount(ValueAnimator.INFINITE);
         animator.setRepeatMode(ValueAnimator.RESTART);
         animator.addUpdateListener(animation -> {
