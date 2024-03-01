@@ -1060,7 +1060,7 @@ public class MainActivity extends AppCompatActivity {
 
                         // calculate central point of gridA
                         float centerX = ((float) screenWidth / 6) - ((float) screenWidth / 2);
-                        float centerY = ((float) gridHeight / 2) - ((float) gridHeight / 6);
+                        float centerY = -(((float) gridHeight / 2) - ((float) gridHeight / 6));
                         String result = "x" + centerX + "y" + centerY;
                         if (bluetoothSocket != null)
                         {
@@ -1104,7 +1104,7 @@ public class MainActivity extends AppCompatActivity {
 
                         // calculate central point of gridB
                         float centerX = 0;
-                        float centerY = ((float) gridHeight / 2) - ((float) gridHeight / 6);
+                        float centerY = -(((float) gridHeight / 2) - ((float) gridHeight / 6));
                         String result = "x" + centerX + "y" + centerY;
                         if (bluetoothSocket != null)
                         {
@@ -1148,7 +1148,7 @@ public class MainActivity extends AppCompatActivity {
 
                         // calculate central point of gridA
                         float centerX = ((float) screenWidth / 2) - ((float) screenWidth / 6);
-                        float centerY = ((float) gridHeight / 2) - ((float) gridHeight / 6);
+                        float centerY = -(((float) gridHeight / 2) - ((float) gridHeight / 6));
                         String result = "x" + centerX + "y" + centerY;
                         if (bluetoothSocket != null)
                         {
@@ -1320,7 +1320,7 @@ public class MainActivity extends AppCompatActivity {
 
                         // calculate central point of gridA
                         float centerX = ((float) screenWidth / 6) - ((float) screenWidth / 2);
-                        float centerY = ((float) gridHeight / 6) - ((float) gridHeight / 2);
+                        float centerY = -(((float) gridHeight / 6) - ((float) gridHeight / 2));
                         String result = "x" + centerX + "y" + centerY;
                         if (bluetoothSocket != null)
                         {
@@ -1363,7 +1363,7 @@ public class MainActivity extends AppCompatActivity {
 
                         // calculate central point of gridA
                         float centerX = 0;
-                        float centerY = ((float) gridHeight / 6) - ((float) gridHeight / 2);
+                        float centerY = -(((float) gridHeight / 6) - ((float) gridHeight / 2));
                         String result = "x" + centerX + "y" + centerY;
                         if (bluetoothSocket != null)
                         {
@@ -1406,7 +1406,7 @@ public class MainActivity extends AppCompatActivity {
 
                         // calculate central point of gridA
                         float centerX = ((float) screenWidth / 2) - ((float) screenWidth / 6);
-                        float centerY = ((float) gridHeight / 6) - ((float) gridHeight / 2);
+                        float centerY = -(((float) gridHeight / 6) - ((float) gridHeight / 2));
                         String result = "x" + centerX + "y" + centerY;
                         if (bluetoothSocket != null)
                         {

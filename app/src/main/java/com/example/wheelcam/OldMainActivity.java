@@ -84,8 +84,8 @@ public class OldMainActivity extends AppCompatActivity {
                             verticalAnimator.cancel(); // stop vertical line
                         }
                         float[] intersection = customView.getIntersectionPoint();
-                        showToast("Intersection X: " + intersection[0] + ", Y: " + intersection[1]);
-                        String result = "x" + intersection[0]+ "y" + intersection[1];
+                        showToast("Intersection X: " + intersection[0] + ", Y: " + -intersection[1]);
+                        String result = "x" + intersection[0]+ "y" + -intersection[1];
                         sendIntersectionPoint(result);
                         finish(); // exit the activity
                         break;
