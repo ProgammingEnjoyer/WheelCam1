@@ -7,9 +7,9 @@
     <string name="BT">BT</string>
     <string name="title_gallery">Gallery</string>
     <string name="flash">Flash</string>
-    <string name="scan_center">Scan Center</string>
-    <string name="grid_center">Grid Center</string>
-    <string name="reset_center">Reset Center</string>
+    <string name="scan_center">Scan Centre</string>
+    <string name="grid_center">Grid Centre</string>
+    <string name="reset_center">Reset Centre</string>
     <string name="title_rotate">Rotate</string>
 
     <string name="letter_A">A</string>
